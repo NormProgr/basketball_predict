@@ -1,0 +1,6 @@
+@Unpublished{bask2023,
+    Title  = {A project for predicting basketball game outcomes with a classification model that uses scraped data.},
+    Author = {Norman Metzinger, Anne Rebecca Ringborg},
+    Year   = {2023},
+    Url    = {https://github.com/NormProgr/bask}
+}
