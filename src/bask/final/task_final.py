@@ -13,7 +13,7 @@ for group in GROUPS:
     kwargs = {
         "group": group,
         "depends_on": {"predictions": BLD / "python" / "predictions" / f"{group}.csv"},
-        "produces": BLD / "python" / "figures" / f"smoking_by_{group}.png",
+        "produces": BLD / "python" / "figures" / f"smoking_by_{group}.pdf",
     }
 
     @pytask.mark.depends_on(
