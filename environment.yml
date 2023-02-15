@@ -29,5 +29,5 @@ dependencies:
       - -e .
       - kaleido
       - requests
-      - beautifulsoup4
+      - bs4
       - lxml
