@@ -1,9 +1,9 @@
 import pandas as pd
 from bs4 import BeautifulSoup
-from scraper import months, today
+from scraper import months, scrapedate
 
 
-def convert_to_df(months=months, scrapedate=today):
+def convert_to_df(months=months, scrapedate=scrapedate):
     """Convert tables from html files to one pandas DataFrame.
 
     Args:
@@ -25,7 +25,7 @@ def convert_to_df(months=months, scrapedate=today):
     return df
 
 
-def produce_data(name=f"data_{today}"):
+def produce_data(name=f"data_{scrapedate}"):
     """Save pandas df with entries from html tables in src folder."""
     df = convert_to_df()
     df.to_pickle(f"./src/bask/data/{name}.pkl")
