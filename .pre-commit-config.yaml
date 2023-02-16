@@ -22,11 +22,15 @@ repos:
       - id: check-toml
       - id: debug-statements
       - id: end-of-file-fixer
+        exclude_types:
+          - html
       - id: fix-byte-order-marker
         types:
           - text
       - id: forbid-submodules
       - id: mixed-line-ending
+        exclude_types:
+          - html
         args:
           - --fix=lf
         description: Forces to replace line ending by the UNIX 'lf' character.
@@ -34,6 +38,8 @@ repos:
         args:
           - --pytest-test-first
       - id: trailing-whitespace
+        exclude_types:
+          - html
       - id: check-ast
       - id: check-docstring-first
   - repo: https://github.com/psf/black
@@ -96,13 +102,15 @@ repos:
           - --wrap
           - '88'
         files: (docs/.)
-   # -  # repo: https://github.com/codespell-project/codespell
-    # rev: v2.2.2
-    # hooks:
-    #  - id: codespell
-    #    args:
-    #      - --skip="**.ipynb"
-    #      - --skip="**.html"
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.2
+    hooks:
+      - id: codespell
+        exclude_types:
+          - html
+        args:
+          - --skip="**.ipynb"
+          - --skip="**.html"
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: v2.2.0
     hooks:
