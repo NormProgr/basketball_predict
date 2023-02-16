@@ -1,23 +1,19 @@
 ---
-data_name: data.csv
-
 columns_to_drop:
-  - nationality
-  - ethnicity
-  - region
-  - amt_weekends
-  - amt_weekdays
-  - type
-  - gross_income
+  - 'Unnamed: 6'
+  - 'Unnamed: 7'
+  - Notes
+  - Start (ET)
 
-categorical_columns:
-  - gender
-  - marital_status
-  - highest_qualification
-  - smoke
+numerical_columns:
+  - PTS
+  - PTS.1
+  - Attend.
 
-column_rename_mapping:
-  highest_qualification: qualification
+column_rename:
+  PTS: pts_visitor
+  PTS.1: pts_home
+  Visitor/Neutral: visitor
+  Home/Neutral: home
 
-outcome: smoke
-outcome_numerical: smoke_numerical  # created during the clean_data step
+outcome: home_wins  # created during the clean_data step
