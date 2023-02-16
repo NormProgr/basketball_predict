@@ -32,3 +32,5 @@ dependencies:
       - bs4
       - lxml
       - datetime
+      - sklearn
+      - os
