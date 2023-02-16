@@ -28,10 +28,13 @@ def transform_date(df):
     return df
 
 
-def clean_data():
+def data_split(df=df_clean):
+    df_past = df[df["pts_home"].notna()]
+    df_future = df[df["pts_home"].isna()]
+    return df_past, df_future
+
+
+def clean_split_data():
     df = transform_date(clean_columns())
     df = win_col(df)
-    return df
-
-
-df = clean_data()
+    return data_split(df)
