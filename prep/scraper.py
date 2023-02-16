@@ -6,7 +6,7 @@ url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html
 months = ["october", "november", "december", "january", "february", "march", "april"]
 
 
-def scraper_by_month(months, url_start):
+def scraper_by_month(months=months, url_start=url_start):
     """Scrape the data by month and save it.
 
     Args:
@@ -22,4 +22,4 @@ def scraper_by_month(months, url_start):
             f.write(data.text)
 
 
-scraper_by_month(months, url_start)
+scraper_by_month()
