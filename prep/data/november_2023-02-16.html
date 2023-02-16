@@ -13,30 +13,30 @@
 	var element = document.createElement('script');
 	var firstScript = document.getElementsByTagName('script')[0];
 	var url = 'https://cmp.quantcast.com'
-	    .concat('/choice/', 'XwNYEpNeFfhfr', '/', host,
+	    .concat('/choice/', 'XwNYEpNeFfhfr', '/', host, 
 		    '/choice.js?tag_version=V2');
 	var uspTries = 0;
 	var uspTriesLimit = 3;
 	element.async = true;
 	element.type = 'text/javascript';
 	element.src = url;
-
+	
 	firstScript.parentNode.insertBefore(element, firstScript);
-
+	
 	function makeStub() {
 	    var TCF_LOCATOR_NAME = '__tcfapiLocator';
 	    var queue = [];
 	    var win = window;
 	    var cmpFrame;
-
+	    
 	    function addFrame() {
 		var doc = win.document;
 		var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
-
+		
 		if (!otherCMP) {
 		    if (doc.body) {
 			var iframe = doc.createElement('iframe');
-
+			
 			iframe.style.cssText = 'display:none';
 			iframe.name = TCF_LOCATOR_NAME;
 			doc.body.appendChild(iframe);
@@ -46,11 +46,11 @@
 		}
 		return !otherCMP;
 	    }
-
+	    
 	    function tcfAPIHandler() {
 		var gdprApplies;
 		var args = arguments;
-
+		
 		if (!args.length) {
 		    return queue;
 		} else if (args[0] === 'setGdprApplies') {
@@ -70,7 +70,7 @@
 			cmpLoaded: false,
 			cmpStatus: 'stub'
 		    };
-
+		    
 		    if (typeof args[2] === 'function') {
 			args[2](retr);
 		    }
@@ -81,11 +81,11 @@
 		    queue.push(args);
 		}
 	    }
-
+	    
 	    function postMessageEventHandler(event) {
 		var msgIsString = typeof event.data === 'string';
 		var json = {};
-
+		
 		try {
 		    if (msgIsString) {
 			json = JSON.parse(event.data);
@@ -93,9 +93,9 @@
 			json = event.data;
 		    }
 		} catch (ignore) {}
-
+		
 		var payload = json.__tcfapiCall;
-
+		
 		if (payload) {
 		    window.__tcfapi(
 			payload.command,
@@ -119,7 +119,7 @@
 		    );
 		}
 	    }
-
+	    
 	    while (win) {
 		try {
 		    if (win.frames[TCF_LOCATOR_NAME]) {
@@ -127,7 +127,7 @@
 			break;
 		    }
 		} catch (ignore) {}
-
+		
 		if (win === window.top) {
 		    break;
 		}
@@ -139,9 +139,9 @@
 		win.addEventListener('message', postMessageEventHandler, false);
 	    }
 	};
-
+	
 	makeStub();
-
+	
 	var uspStubFunction = function() {
 	    var arg = arguments;
 	    if (typeof window.__uspapi !== uspStubFunction) {
@@ -152,7 +152,7 @@
 		}, 500);
 	    }
 	};
-
+	
 	var checkIfUspIsReady = function() {
 	    uspTries++;
 	    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
@@ -161,7 +161,7 @@
 		clearInterval(uspInterval);
 	    }
 	};
-
+	
 	if (typeof window.__uspapi === 'undefined') {
 	    window.__uspapi = uspStubFunction;
 	    var uspInterval = setInterval(checkIfUspIsReady, 6000);
@@ -173,8 +173,8 @@
 
     <title>2022-23 NBA Schedule | Basketball-Reference.com</title>
 
-
-
+    
+    
     <meta name="Description" content="Checkout the complete NBA schedule for the 2022-23 season including match dates, time, arena info, results and more on Basketball-Reference.com">
     <link rel="canonical" href="https://www.basketball-reference.com/leagues/NBA_2023_games.html" />
 
@@ -226,7 +226,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
     <meta name="theme-color" content="#4d4438" />
     <meta name="msapplication-navbutton-color" content="#4d4438" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#4d4438" />
-
+    
 
 
 
@@ -299,7 +299,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
     else {
          freestar.config.enabled_slots.push('div-gpt-ad-160x600-1');
          freestar.config.enabled_slots.push('div-gpt-ad-160x600-2');
-    }
+    } 
 
 </script>
 <script data-cfasync="false" type="text/javascript">
@@ -314,7 +314,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 !function(a,b){
     if (sr_detect_ie || sr_detect_edge || Modernizr.adfree) {
         return;
-    }
+    }  
     var c=b.getElementsByTagName("script")[0],
     d=b.createElement("script"),
     e="https://a.pub.network/basketball-reference";
@@ -332,9 +332,9 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 </head>
 <body class="bbr">
 <div id="wrap">
-
+  
   <div id="header" role="banner">
-
+  
 <ul id="subnav" class="notranslate">
 	<li><a href="https://www.sports-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav"><svg height="15px" width="20px"><use xlink:href="#ic-sr-pennant"></use></svg> Sports&nbsp;Reference&#8239;&reg;</a></li>
 	<li><a href="https://www.baseball-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav">Baseball</a></li>
@@ -343,9 +343,9 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 	<li><a href="https://www.hockey-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav">Hockey</a></li>
 
 
-
-
-
+	
+	
+	
 	<li><a href="https://fbref.com/pt/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav">Futebol</a></li>
 
 	<li><a href="https://www.sports-reference.com/blog/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav">Blog</a></li>
@@ -368,7 +368,7 @@ loadJS( _sr_modern_url, function() { vjs_ready(sr_fire_js); });
 <li id="header_leagues" class="current"><a href="/leagues/">Seasons</a></li>
 <li id="header_leaders" ><a href="/leaders/">Leaders</a></li>
 <li id="header_scores" ><a href="/boxscores/">Scores</a></li>
-<li id="header_wnba" class=""><a href="/wnba/">WNBA</a></li>
+<li id="header_wnba" class=""><a href="/wnba/">WNBA</a></li>	
 <li id="header_draft" class=""><a href="/draft/">Draft</a></li>
 <li id="header_stathead" class=""><a target='_blank' rel='noopener' href="https://stathead.com/sport/basketball/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_topnav_stathead&utm_content=lnk_top">Stathead</a></li>
 <li id="header_newsletter" class=""><a target='_blank' rel='noopener' href="https://www.basketball-reference.com/email/">Newsletter</a></li>
@@ -455,48 +455,48 @@ sr_menus_setupMainNav_button_inline();
 
 <div id="info" class="seasons">
 	<div id="meta">
-
+        
 
 
 	<div class="media-item logo loader">
 		<img class="teamlogo"			src="https://cdn.ssref.net/req/202302143/tlogo/bbr/NBA-2023.png"
 			alt="2023  Logo">
-
+		
 			<p><a href="http://www.sportslogos.net/">via Sports Logos.net</a></p>
 			<p><a href="https://www.sports-reference.com/blog/2016/06/redesign-team-and-league-logos-courtesy-sportslogos-net/">About logos</a></p>
-
+		 
 	</div>
 
 
 
 		<div>
 			<h1>
-
+				
 				<span>2022-23</span> <span>NBA</span> <span class="header_end">Schedule and Results</span>
-
+				
 			</h1>
 			<div class="prevnext">
-
+  
   <a href="/leagues/NBA_2022_games.html" class="button2 prev">2021-22 Schedule and Results</a>
-
-
-
-
+  
+  
+  
+  
 </div>
 
-
-
-
+			
+			
+			
 			<p><strong>PPG Leader</strong>: <a href="/players/d/doncilu01.html">Luka Dončić</a> (33.3)</p><p><strong>RPG Leader</strong>: <a href="/players/a/antetgi01.html">Giannis Antetokounmpo</a> (12.3)</p><p><strong>APG Leader</strong>: <a href="/players/h/hardeja01.html">James Harden</a> (10.8)</p><p><strong>WS Leader</strong>: <a href="/players/j/jokicni01.html">Nikola Jokić</a> (11.3)</p>
-
-
+			
+			
 			<button id="meta_more_button" class="opener" data-type="hide_after" data-class="open" data-id="info">More league info</button>
 <script>
 // see sr.menus.js:sr_menus_checkInfoCookie to explain
 function sr_menus_checkInfoCookie_inline(browserType) {
     var el_info = document.getElementById('info');
     var el_button = document.getElementById('meta_more_button');
-    var bling_len = 0;
+    var bling_len = 0;    
     if (!el_button || !el_info || !el_info.classList) { console.log('no meta_button'); return; }
     var el = el_button;
     var siblingsHidden = 0;
@@ -513,7 +513,7 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 		</div>
 	</div>
-
+	
 <div class="adblock ad300">
 
 <!-- div#fs_fs_300_atf  -->
@@ -630,58 +630,58 @@ var sr_menus_checkInfoCookie_run_inline = true;
 
 			</div>		</li>
 	</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	    
+    
+        
+        
+        
+    
+        
+        
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        
+    
+    
+    
+    
+    
+    
+    
 </div><!-- div#inner_nav -->
 <div id="content" role="main">
+    
 
 
-
-
-
-
-
-
+          
+      
+      
+      
+      
 
 <!-- fs_general_header -->
 <div class="adblock">
@@ -711,9 +711,9 @@ function apiFunction(ApiHandshake)  {
 </div>
 
 
-
-
-
+      
+         
+            
 <div class="filter">
 
 <div class="">
@@ -732,13 +732,13 @@ function apiFunction(ApiHandshake)  {
 	<a href="/leagues/NBA_2023_games-april.html">April</a>
 </div></div>
 
-
-
-
-
-
-
-
+            
+            
+            
+         
+      
+         
+            
 <div id="all_schedule" class="table_wrapper">
 
 <div class="section_heading assoc_schedule" id="schedule_sh">
@@ -746,16 +746,16 @@ function apiFunction(ApiHandshake)  {
       <ul>
       </ul>
     </div>
-
+    		
 </div>
 <div class="table_container" id="div_schedule">
-
+    
     <table class="suppress_glossary sortable stats_table" id="schedule" data-cols-to-freeze=",1">
     <caption>November Schedule Table</caption>
-
+    
 
    <colgroup><col><col><col><col><col><col><col><col><col><col><col></colgroup>
-   <thead>
+   <thead>      
       <tr>
          <th aria-label="Date" data-stat="date_game" scope="col" class=" poptip sort_default_asc center" >Date</th>
          <th aria-label="Start (ET)" data-stat="game_start_time" scope="col" class=" poptip center" >Start (ET)</th>
@@ -1002,11 +1002,11 @@ function apiFunction(ApiHandshake)  {
 
 </div>
 
-
-
-
-
-
+            
+            
+            
+         
+      
 
 <!-- global.nonempty_tables_num: 2, table_count: 2 -->
    <!-- no Local/Partials/NoteBottom.tt2 -->
@@ -1015,7 +1015,7 @@ function apiFunction(ApiHandshake)  {
 <div class="section_content" id="bottom_nav_container">
 
   <p><a href="/leagues/NBA_2023.html"><u>2022-23 NBA Season</u></a></p>
-
+  
         <ul class="">
           <li><a href="NBA_2023_standings.html">Standings</a></li>
         </ul>
@@ -1048,7 +1048,7 @@ function apiFunction(ApiHandshake)  {
           <li><a href="/leagues/NBA_2023_preseason_odds.html">Preseason Odds</a></li>
         </ul></div></div>
 
-
+   
 
 </div><!-- div#content -->
 
@@ -1065,20 +1065,20 @@ function apiFunction(ApiHandshake)  {
 
 	<div id="footer_general">
 		<div id="site_menu" role="navigation" aria-label="complete site index">
-
-
+			
+			
 <div class="section_heading assoc_site_menu" id="site_menu_sh">
   <span class="section_anchor" id="site_menu_link" data-label="Full Site Menu"></span><h2>Full Site Menu</h2>    <div class="section_heading_text">
       <ul><li><a data-scroll href="#header">Return to Top</a></li>
       </ul>
     </div>
-
+    		
 </div>
-
+			
 				<ul>
   <li>
     <a href="/players/">Players</a>
-    <div><strong>In the News</strong>:
+    <div><strong>In the News</strong>: 
       <!-- Begin:In the News -->
 <a title="LeBron James" href="/players/j/jamesle01.html">L. James</a>,
 <a title="Kevin Durant" href="/players/d/duranke01.html">K. Durant</a>,
@@ -1090,7 +1090,7 @@ function apiFunction(ApiHandshake)  {
       <a href="/players/">...</a>
     </div>
 
-	<div><strong>All-Time Greats</strong>:
+	<div><strong>All-Time Greats</strong>: 
       <!-- Begin:All-Time Greats -->
 <a title="Elvin Hayes" href="/players/h/hayesel01.html">E. Hayes</a>,
 <a title="John Stockton" href="/players/s/stockjo01.html">J. Stockton</a>,
@@ -1102,7 +1102,7 @@ function apiFunction(ApiHandshake)  {
       <a href="/players/">...</a>
     </div>
 
-    <div><strong>Active Greats</strong>:
+    <div><strong>Active Greats</strong>: 
       <!-- Begin:Active Greats -->
 <a title="LeBron James" href="/players/j/jamesle01.html">L. James</a>,
 <a title="Giannis Antetokounmpo" href="/players/a/antetgi01.html">G. Antetokounmpo</a>,
@@ -1168,7 +1168,7 @@ function apiFunction(ApiHandshake)  {
       <a href="/teams/SAS/2023.html">San Antonio</a>,
       <a href="/teams/DAL/2023.html">Dallas</a>,
       <a href="/teams/MEM/2023.html">Memphis</a>,
-      <a href="/teams/HOU/2023.html">Houston</a>,
+      <a href="/teams/HOU/2023.html">Houston</a>,      
       <a href="/teams/NOP/2023.html">New Orleans</a>
     </div>
 <!-- End:Teams -->
@@ -1192,10 +1192,10 @@ function apiFunction(ApiHandshake)  {
   <li>
     <a href="/leaders/">Leaders</a>
     <div>
-      <a href="/leaders/pts_season.html">Season Points</a>,
-      <a href="/leaders/trb_career.html">Career Rebounds</a>,
-      <a href="/leaders/ast_active.html">Active Assists</a>,
-      <a href="/leaders/stl_yearly.html">Yearly Steals</a>,
+      <a href="/leaders/pts_season.html">Season Points</a>, 
+      <a href="/leaders/trb_career.html">Career Rebounds</a>, 
+      <a href="/leaders/ast_active.html">Active Assists</a>, 
+      <a href="/leaders/stl_yearly.html">Yearly Steals</a>, 
       <a href="/leaders/blk_progress.html">Progressive Blocks</a>
       ...
     </div>
@@ -1232,21 +1232,21 @@ function apiFunction(ApiHandshake)  {
 
   <li>
     <a target='_blank' rel='noopener' href="https://stathead.com/basketball/?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Stathead</a>
-    <div><strong>Player Finders</strong>:
-      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-season-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Season Finder</a>,
-      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-game-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Game Finder</a>,
+    <div><strong>Player Finders</strong>: 
+      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-season-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Season Finder</a>, 
+      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-game-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Game Finder</a>, 
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-streak-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Streak Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/player-span-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Span Finder</a>
     </div>
-    <div><strong>Team Finders</strong>:
-      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-season-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Season Finder</a>,
-      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-game-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Game Finder</a>,
+    <div><strong>Team Finders</strong>: 
+      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-season-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Season Finder</a>, 
+      <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-game-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Game Finder</a>, 
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-streak-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Streak Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/team-span-finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Span Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/tscore.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Score Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/rivals.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Rivalry Finder</a>
     </div>
-    <div><strong>Other Finders</strong>:
+    <div><strong>Other Finders</strong>: 
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/draft_finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Draft Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/h2h_finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Head-to-Head Finder</a>,
       <a target='_blank' rel='noopener' href="https://stathead.com/basketball/pcm_finder.cgi?utm_medium=sr_xsite&utm_source=bbr&utm_campaign=2023_01_footernav_stathead">Player Comparison Finder</a>
@@ -1256,10 +1256,10 @@ function apiFunction(ApiHandshake)  {
   <li>
     <a href="/coaches/">Coaches</a>
     <div>
-      <a href="/coaches/gueriri01c.html">Richie Guerin</a>,
+      <a href="/coaches/gueriri01c.html">Richie Guerin</a>, 
       <a href="/coaches/tomjaru01c.html">Rudy Tomjanovich</a>,
-      <a href="/coaches/obrieji99c.html">Jim O'Brien</a>,
-      <a href="/coaches/fratemi99c.html">Mike Fratello</a>,
+      <a href="/coaches/obrieji99c.html">Jim O'Brien</a>, 
+      <a href="/coaches/fratemi99c.html">Mike Fratello</a>, 
       <a href="/coaches/gentral99c.html">Alvin Gentry</a>
     </div>
   </li>
@@ -1267,11 +1267,11 @@ function apiFunction(ApiHandshake)  {
   <li>
     <a href="/awards/">Awards</a>
     <div>
-      <a href="/awards/mvp.html">NBA MVP</a>,
-      <a href="/awards/all_league.html">All-NBA</a>,
-      <a href="/awards/dpoy.html">Defensive Player of the Year</a>,
-      <a href="/awards/roy.html">Rookie of the Year</a>,
-      <a href="/awards/all_rookie.html">All-Rookie</a>,
+      <a href="/awards/mvp.html">NBA MVP</a>, 
+      <a href="/awards/all_league.html">All-NBA</a>, 
+      <a href="/awards/dpoy.html">Defensive Player of the Year</a>, 
+      <a href="/awards/roy.html">Rookie of the Year</a>, 
+      <a href="/awards/all_rookie.html">All-Rookie</a>, 
       <a href="/awards/hof.html">Hall of Fame</a>
       ...
     </div>
@@ -1293,10 +1293,10 @@ function apiFunction(ApiHandshake)  {
     <div>
       <a href="/playoffs/NBA_2022.html">2022 NBA Playoffs</a>,
       <a href="/playoffs/NBA_2021.html">2021 NBA Playoffs</a>,
-      <a href="/playoffs/NBA_2020.html">2020 NBA Playoffs</a>,
-      <a href="/playoffs/NBA_2019.html">2019 NBA Playoffs</a>,
-      <a href="/playoffs/NBA_2018.html">2018 NBA Playoffs</a>,
-      <a href="/playoffs/NBA_2017.html">2017 NBA Playoffs</a>,
+      <a href="/playoffs/NBA_2020.html">2020 NBA Playoffs</a>, 
+      <a href="/playoffs/NBA_2019.html">2019 NBA Playoffs</a>, 
+      <a href="/playoffs/NBA_2018.html">2018 NBA Playoffs</a>, 
+      <a href="/playoffs/NBA_2017.html">2017 NBA Playoffs</a>, 
       <a href="/playoffs/">Playoffs Series History</a>
       ...
     </div>
@@ -1305,10 +1305,10 @@ function apiFunction(ApiHandshake)  {
   <li>
     <a href="/allstar/">All-Star Games</a>
     <div>
-      <a href="/allstar/NBA_2022.html">2022 All-Star Game</a>,
-      <a href="/allstar/NBA_2021.html">2021 All-Star Game</a>,
-      <a href="/allstar/NBA_2020.html">2020 All-Star Game</a>,
-      <a href="/allstar/NBA_2019.html">2019 All-Star Game</a>,
+      <a href="/allstar/NBA_2022.html">2022 All-Star Game</a>, 
+      <a href="/allstar/NBA_2021.html">2021 All-Star Game</a>, 
+      <a href="/allstar/NBA_2020.html">2020 All-Star Game</a>, 
+      <a href="/allstar/NBA_2019.html">2019 All-Star Game</a>, 
       <a href="/allstar/NBA_2018.html">2018 All-Star Game</a>
       ...
     </div>
@@ -1319,10 +1319,10 @@ function apiFunction(ApiHandshake)  {
     <div>
       <a href="/draft/NBA_2022.html">2022 Draft</a>,
       <a href="/draft/NBA_2021.html">2021 Draft</a>,
-      <a href="/draft/NBA_2020.html">2020 Draft</a>,
-      <a href="/draft/NBA_2019.html">2019 Draft</a>,
-      <a href="/draft/NBA_2018.html">2018 Draft</a>,
-      <a href="/draft/NBA_2017.html">2017 Draft</a>,
+      <a href="/draft/NBA_2020.html">2020 Draft</a>, 
+      <a href="/draft/NBA_2019.html">2019 Draft</a>, 
+      <a href="/draft/NBA_2018.html">2018 Draft</a>, 
+      <a href="/draft/NBA_2017.html">2017 Draft</a>, 
       ...
     </div>
   </li>
@@ -1425,19 +1425,19 @@ function apiFunction(ApiHandshake)  {
 
 
 
-
-
+			
+   		        
 
       <ul>
-       <li></li>
+       <li></li>      
        <li><a href="https://www.basketball-reference.com/bbr-blog/">Basketball-Reference.com Blog and Articles</a></li>
 
 	        </div><!-- div#site_menu -->
 		<div>
 			<div id="social" class="icon_group noload">
-
+	
 <div class="section_heading assoc_" id="_sh">
-  <span class="section_anchor" id="_link" data-label="We're Social...for Statheads" data-no-inpage="1"></span><h2>We're Social...for Statheads</h2>
+  <span class="section_anchor" id="_link" data-label="We're Social...for Statheads" data-no-inpage="1"></span><h2>We're Social...for Statheads</h2>		
 </div>
 	<a href="tel://888-512-8907" data-tip="Call us on Telephone" data-label="Telephone" aria-label="Telephone" class="poptip"><svg class="icon phone"><use xlink:href="#ic-phone"></use></svg></a>
 	<a href="//www.sports-reference.com/blog/" data-tip="The Sports Reference Blog" data-label="Our Blog" aria-label="Our Blog" class="poptip"><svg class="icon wordpress"><use xlink:href="#ic-wordpress"></use></svg></a>
@@ -1452,7 +1452,7 @@ function apiFunction(ApiHandshake)  {
 	<a href="https://www.paypal.me/sportsref" data-tip="Send us money via PayPal" data-label="PayPal" aria-label="PayPal" class="poptip"><svg class="icon paypal"><use xlink:href="#ic-paypal"></use></svg></a>
 
 <p>Every <a href="https://www.sports-reference.com/blog/sports-reference-social-media/">Sports Reference Social Media Account</a></p>
-<p><strong>Site Last Updated:</strong> Thursday, February 16,  4:30AM
+<p><strong>Site Last Updated:</strong> Thursday, February 16,  4:53AM
 </p>
 <p><a href="https://www.sports-reference.com/feedback/" class="button" style="display: block">Question, Comment, Feedback, or Correction?</a></p>
 
@@ -1468,9 +1468,9 @@ function apiFunction(ApiHandshake)  {
 </div><!-- div#social -->
 
 			<div id="tips_tricks">
-
+   
 <div class="section_heading assoc_tips" id="tips_sh">
-  <span class="section_anchor" id="tips_link" data-label="FAQs, Tip &amp; Tricks" data-no-inpage="1"></span><h2>FAQs, Tip &amp; Tricks</h2>
+  <span class="section_anchor" id="tips_link" data-label="FAQs, Tip &amp; Tricks" data-no-inpage="1"></span><h2>FAQs, Tip &amp; Tricks</h2>		
 </div>
    <ul>
 <!-- no Local/FooterTipsTricks.tt2 -->
@@ -1485,16 +1485,16 @@ function apiFunction(ApiHandshake)  {
 				<p>All logos are the trademark &amp; property of their owners and not Sports Reference LLC.  We present them here for purely educational purposes.
 				<a href="https://www.sports-reference.com/blog/2016/06/redesign-team-and-league-logos-courtesy-sportslogos-net/">Our reasoning for presenting offensive logos.</a></p>
 				<p>
-
+					
 					Logos were compiled by the amazing <a href="http://sportslogos.net/">SportsLogos.net.</a>
 				</p>
-
+				
 <div class="notice">
 <p>Data Provided By
 	<a href="https://www.sportradar.com/" rel="nofollow"><img alt="SportRadar" border=0 width=275 src="https://cdn.ssref.net/req/202302143/images/klecko/sportradar.png"  style="background-color:#666; padding:.5em; border-radius:.25em"></a>
 	the official stats partner of the NBA, NHL and MLB.</p>
-
-
+	
+	
 </div>
 
      <p>Copyright &copy; 2000-2023 <a href="//www.sports-reference.com/">Sports Reference LLC</a>. All rights reserved.</p>
@@ -1505,7 +1505,7 @@ function apiFunction(ApiHandshake)  {
 		</div>
 	</div>
 
-
+	
 <ul id="site_dirs" class="notranslate bullets-inline">
 	<li><a href="https://www.sports-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav_footer"><svg height="15px" width="20px"><use xlink:href="#ic-sr-pennant"></use></svg> Sports&nbsp;Reference&#8239;&reg;</a></li>
 	<li><a href="https://www.baseball-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav_footer">Baseball</a></li>
@@ -1514,9 +1514,9 @@ function apiFunction(ApiHandshake)  {
 	<li><a href="https://www.hockey-reference.com/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav_footer">Hockey</a></li>
 
 
-
-
-
+	
+	
+	
 	<li><a href="https://fbref.com/de/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav_footer">Fußball</a></li>
 
 	<li><a href="https://www.sports-reference.com/blog/?utm_source=bbr&utm_medium=sr_xsite&utm_campaign=2023_01_srnav_footer">Blog</a></li>
@@ -1546,7 +1546,7 @@ Sports Reference Purpose: We will be the trusted source of information and tools
 </div><!-- div#wrap -->
 <!-- yes sticky url:  https://www.basketball-reference.com/leagues/NBA_2023_games.html -->
 <div id="fs-select-footer"></div>
-
+      
 
 
 
@@ -1592,3 +1592,5 @@ Sports Reference Purpose: We will be the trusted source of information and tools
 </body>
 <!-- SR -->
 </html>
+
+
