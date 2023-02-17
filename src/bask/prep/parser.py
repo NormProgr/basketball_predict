@@ -15,7 +15,7 @@ def convert_to_df(months=months, scrapedate=scrapedate):
     """
     dfs = []
     for month in months:
-        with open(f"prep/data/{month}_{scrapedate}.html") as f:
+        with open(f"src/bask/prep/data/{month}_{scrapedate}.html") as f:
             page = f.read()
         soup = BeautifulSoup(page, "html.parser")
         table = soup.find(id="schedule")

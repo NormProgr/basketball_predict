@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # replace october by month string with bracket{}
 
     def _remove_old_scrapes():
-        folder_path = "prep/data"
+        folder_path = "src/bask/prep/data"
         if os.path.exists(folder_path):
             folder_contents = os.listdir(folder_path)
             for item in folder_contents:
@@ -22,7 +22,7 @@ if __name__ == "__main__":
                     os.remove(item_path)
 
     def scraper_by_month(months=months, url_start=url_start, today=scrapedate):
-        """Scrape the data by month and save it.
+        """Scrape the data by month and save it, remove old scrapes.
 
         Args:
             months (list): List of months to be scraped.
@@ -34,7 +34,7 @@ if __name__ == "__main__":
             url = url_start.format(month)
             data = req.get(url)
 
-            with open(f"prep/data/{month}_{today}.html", "w+") as f:
+            with open(f"src/bask/prep/data/{month}_{today}.html", "w+") as f:
                 f.write(data.text)
 
     scraper_by_month()
