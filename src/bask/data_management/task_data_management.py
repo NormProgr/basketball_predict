@@ -5,11 +5,8 @@ import yaml
 from bask.config import BLD, SRC
 from bask.data_management import clean_data
 
-# @pytask.mark.depends_on(
-#    },
-
-
-for time in ["benchmark", "benchmark_pred", "model", "model_pred"]:
+datasets = ["benchmark", "benchmark_pred", "model", "model_pred"]
+for time in datasets:
 
     @pytask.mark.depends_on(
         {
@@ -18,15 +15,8 @@ for time in ["benchmark", "benchmark_pred", "model", "model_pred"]:
         },
     )
     @pytask.mark.task
-    @pytask.mark.produces(BLD / "python" / "data" / f"data_{time}.csv")
+    @pytask.mark.produces(BLD / "python" / "data" / f"data_{time}.pkl")
     def task_clean_split_data_python(depends_on, produces, time=time):
         data_info = yaml.safe_load(open(depends_on["data_info"]))
-        if time == "benchmark":
-            df = clean_data(data_info)[0]
-        elif time == "benchmark_pred":
-            df = clean_data(data_info)[1]
-        elif time == "model":
-            df = clean_data(data_info)[2]
-        else:
-            df = clean_data(data_info)[3]
-        df.to_csv(produces)
+        df = clean_data(data_info)[datasets.index(time)]
+        df.to_pickle(produces)
