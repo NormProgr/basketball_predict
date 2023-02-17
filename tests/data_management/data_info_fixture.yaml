@@ -1,13 +1,14 @@
 ---
 columns_to_drop:
-  - col2
+  - col4
 
-categorical_columns:
-  - col0
-  - col1
+point_columns:
+  - pts1
+  - pts2
 
-column_rename_mapping:
-  col1: column_1
+column_rename:
+  pts1: pts_home
+  pts2: pts_visitor
+  col0: date
 
-outcome: col0
-outcome_numerical: col0_numerical
+outcome: home_wins  # created during the clean_data step

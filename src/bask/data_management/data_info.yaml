@@ -5,15 +5,15 @@ columns_to_drop:
   - Notes
   - Start (ET)
 
-numerical_columns:
+point_columns:
   - PTS
   - PTS.1
-  - Attend.
 
 column_rename:
   PTS: pts_visitor
   PTS.1: pts_home
   Visitor/Neutral: visitor
   Home/Neutral: home
+  Date: date
 
 outcome: home_wins  # created during the clean_data step
