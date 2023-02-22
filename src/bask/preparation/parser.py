@@ -6,10 +6,11 @@ def parser(months, scrapedate):
     """Convert tables from html files to one pandas DataFrame.
 
     Args:
-        months (list): list of months to be added to combined dataframe.
+        months (list): List of months to be added to combined dataframe.
+        scrapedate (pandas datetime): Date of the last scrape.
 
     Returns:
-        df (pandas DataFrame): Concatenated df with all entries from html tables.
+        df (pandas DataFrame): Concatenated df with entries from html tables for all months.
 
     """
     dfs = []
