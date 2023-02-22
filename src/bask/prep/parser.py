@@ -26,7 +26,15 @@ def convert_to_df(months=months, scrapedate=scrapedate):
 
 
 def produce_data(name=f"data_{scrapedate}"):
-    """Save pandas df with entries from html tables in src folder."""
+    """Save pandas df with entries from html tables in src folder.
+
+    Args:
+        name (list): list of months to be added to combined dataframe.
+
+    Returns:
+        df (pandas DataFrame): Concatenated df with all entries from html tables.
+
+    """
     df = convert_to_df()
     df.to_pickle(f"./src/bask/data/{name}.pkl")
 
