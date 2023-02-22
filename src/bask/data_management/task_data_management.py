@@ -5,7 +5,7 @@ import yaml
 
 from bask.config import BLD, SRC
 from bask.data_management import clean_data
-from bask.prep.scraper import scrapedate
+from bask.preparation.scraper import scrapedate
 
 datasets = ["benchmark", "benchmark_pred", "model", "model_pred"]
 

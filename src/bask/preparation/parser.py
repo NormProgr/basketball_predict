@@ -1,9 +1,8 @@
 import pandas as pd
 from bs4 import BeautifulSoup
-from scraper import months, scrapedate
 
 
-def convert_to_df(months=months, scrapedate=scrapedate):
+def parser(months, scrapedate):
     """Convert tables from html files to one pandas DataFrame.
 
     Args:
@@ -15,7 +14,7 @@ def convert_to_df(months=months, scrapedate=scrapedate):
     """
     dfs = []
     for month in months:
-        with open(f"src/bask/prep/data/{month}_{scrapedate}.html") as f:
+        with open(f"src/bask/preparation/data/{month}_{scrapedate}.html") as f:
             page = f.read()
         soup = BeautifulSoup(page, "html.parser")
         table = soup.find(id="schedule")
@@ -23,17 +22,3 @@ def convert_to_df(months=months, scrapedate=scrapedate):
         dfs.append(table_pd)
     df = pd.concat(dfs)
     return df
-
-
-def produce_data(name=f"data_{scrapedate}"):
-    """Save pandas df with entries from html tables in src folder.
-
-    Args:
-        name (list): list of months to be added to combined dataframe.
-
-    """
-    df = convert_to_df()
-    df.to_pickle(f"./src/bask/data/{name}.pkl")
-
-
-produce_data()

@@ -34,7 +34,7 @@ if __name__ == "__main__":
             url = url_start.format(month)
             data = req.get(url)
 
-            with open(f"src/bask/prep/data/{month}_{today}.html", "w+") as f:
+            with open(f"src/bask/preparation/data/{month}_{today}.html", "w+") as f:
                 f.write(data.text)
 
     scraper_by_month()
