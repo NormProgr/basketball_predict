@@ -25,7 +25,7 @@ dependencies:
   - setuptools_scm
   - statsmodels
   - toml
-  - sklearn
+  - scikit-learn
   - pip:
       - -e .
       - kaleido
@@ -34,3 +34,4 @@ dependencies:
       - lxml
       - datetime
       - os
+      - scikit-learn
