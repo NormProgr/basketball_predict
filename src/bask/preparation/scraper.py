@@ -11,6 +11,7 @@ if __name__ == "__main__":
     # replace october by month string with bracket{}
 
     def _remove_old_scrapes():
+        """Delete old scrapes to save memory."""
         folder_path = "src/bask/preparation/data"
         if os.path.exists(folder_path):
             folder_contents = os.listdir(folder_path)
