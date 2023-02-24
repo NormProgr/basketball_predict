@@ -16,4 +16,8 @@ column_rename:
   Home/Neutral: home
   Date: date
 
-outcome: home_wins  # created during the clean_data step
+column_dummy:
+  - pts_home
+  - pts_visitor
+
+outcome: homewin  # created during the clean_data step

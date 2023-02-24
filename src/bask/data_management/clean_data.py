@@ -30,7 +30,7 @@ def _win_col(df):
         df (pandas DataFrame): DataFrame has now a dummy variable column indicating wins and losses.
 
     """
-    df["home_wins"] = np.where(
+    df["homewin"] = np.where(
         df[["pts_home", "pts_visitor"]].isna().any(axis=1),
         np.nan,
         np.where(df["pts_home"] > df["pts_visitor"], 1, 0),
@@ -64,7 +64,7 @@ def _produce_model_data(data):
     """
     data.loc[data["date"] >= "2023-02-16", "pts_home"] = np.nan
     data.loc[data["date"] >= "2023-02-16", "pts_visitor"] = np.nan
-    data.loc[data["date"] >= "2023-02-16", "home_wins"] = np.nan
+    data.loc[data["date"] >= "2023-02-16", "homewin"] = np.nan
     return data
 
 
@@ -76,13 +76,24 @@ def _data_split(df):
         df (pandas DataFrame): Data manipulated by previous functions.
 
     Returns:
-        df_past (pandas DataFrame): DataFrame that includes all data including the scraping data.
-        df_future(pandas DataFrame): DataFrame that includes all data after the scraping data.
+        list:
+            df_past (pandas DataFrame): DataFrame that includes all data including the scraping data.
+            df_future(pandas DataFrame): DataFrame that includes all data after the scraping data.
 
     """
     df_past = df[df["pts_home"].notna()]
     df_future = df[df["pts_home"].isna()]
     return df_past, df_future
+
+
+def _dummy_teams(df):
+    """Create dummy variables for team names.
+
+    WRITE TEST!
+
+    """
+    new_df = pd.get_dummies(df, columns=["home", "visitor"], drop_first=False)
+    return new_df
 
 
 def clean_data(data_info, data):
@@ -93,10 +104,11 @@ def clean_data(data_info, data):
         data_info (yaml): Contains a configuration of column names.
 
     Returns:
-        _data_split(df) (list): List that contains two DataFrames with data before and after the scraping date.
-        _data_split(_produce_model_data(df)) (list): List that contains two DataFrames with data before and after the cutoff date.
+        list:
+            _data_split(df) (list): List that contains two DataFrames with data before and after the scraping date.
+            _data_split(_produce_model_data(df)) (list): List that contains two DataFrames with data before and after the cutoff date.
 
     """
     df = _transform_date(clean_columns(data_info, data))
-    df = _win_col(df)
+    df = _dummy_teams(_win_col(df))
     return _data_split(df) + _data_split(_produce_model_data(df))
