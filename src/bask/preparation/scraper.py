@@ -4,8 +4,6 @@ from datetime import date
 import requests as req
 
 months = ["october", "november", "december", "january", "february", "march", "april"]
-scrapedate = date.today()
-# put in dictionary!
 
 if __name__ == "__main__":
 
@@ -21,7 +19,7 @@ if __name__ == "__main__":
                 if os.path.isfile(item_path) and item_path.endswith(".html"):
                     os.remove(item_path)
 
-    def scraper_by_month(months=months, url_start=url_start, today=scrapedate):
+    def scraper_by_month(months=months, url_start=url_start, today=date.today()):
         """Scrape the data by month and save it, remove old scrapes.
 
         Args:
