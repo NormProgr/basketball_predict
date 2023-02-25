@@ -86,13 +86,19 @@ def _data_split(df):
     return df_past, df_future
 
 
-def _dummy_teams(df):
+def _dummy_teams(data_info, df):
     """Create dummy variables for team names.
 
-    WRITE TEST!
+    Args:
+        df (data frame): Data frame with team name columns.
+
+
+    Return:
+        new_df (pandas DataFrame): df with 2 dummy variables per team (home/visitor).
+            We do NOT remove the first dummy, so we have perfect multicollinearity.
 
     """
-    new_df = pd.get_dummies(df, columns=["home", "visitor"], drop_first=False)
+    new_df = pd.get_dummies(df, columns=data_info["dummy_columns"], drop_first=False)
     return new_df
 
 
@@ -110,5 +116,5 @@ def clean_data(data_info, data):
 
     """
     df = _transform_date(clean_columns(data_info, data))
-    df = _dummy_teams(_win_col(df))
+    df = _dummy_teams(data_info, _win_col(df))
     return _data_split(df) + _data_split(_produce_model_data(df))

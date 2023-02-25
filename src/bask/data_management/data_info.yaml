@@ -4,6 +4,7 @@ columns_to_drop:
   - 'Unnamed: 7'
   - Notes
   - Start (ET)
+  - Arena
 
 point_columns:
   - PTS
@@ -16,8 +17,8 @@ column_rename:
   Home/Neutral: home
   Date: date
 
-column_dummy:
-  - pts_home
-  - pts_visitor
+dummy_columns:
+  - home
+  - visitor
 
 outcome: homewin  # created during the clean_data step

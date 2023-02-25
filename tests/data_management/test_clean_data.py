@@ -3,6 +3,7 @@ import pytest
 import yaml
 from bask.config import TEST_DIR
 from bask.data_management.clean_data import (
+    _dummy_teams,
     _produce_model_data,
     _transform_date,
     _win_col,
@@ -56,7 +57,7 @@ def test_win_col_ex(data_info, data):
 
     """
     data_win_col = _win_col(clean_columns(data_info, data))
-    assert "home_wins" in data_win_col.columns, "Error: Column not created."
+    assert "homewin" in data_win_col.columns, "Error: Column not created."
 
 
 def test_win_col_val(data_info, data):
@@ -71,11 +72,9 @@ def test_win_col_val(data_info, data):
 
     """
     df = _win_col(clean_columns(data_info, data))
-    assert all(
-        elem in [0, 1] for elem in df[~df["home_wins"].isna()]["home_wins"]
-    ) & all(
-        df[df["pts_home"].isna()]["home_wins"].isna(),
-    ), "Error: Invalid value in home_wins col for past games."
+    assert all(elem in [0, 1] for elem in df[~df["homewin"].isna()]["homewin"]) & all(
+        df[df["pts_home"].isna()]["homewin"].isna(),
+    ), "Error: Invalid value in homewin col for past games."
 
 
 def test_transform_date(data_info, data):
@@ -115,7 +114,7 @@ def test_produce_model_data(data_info, data):
     assert (
         processed_data.loc[
             processed_data["date"] < "2023-02-16",
-            ["pts_home", "pts_visitor", "home_wins"],
+            ["pts_home", "pts_visitor", "homewin"],
         ]
         .isna()
         .sum()
@@ -125,7 +124,7 @@ def test_produce_model_data(data_info, data):
     assert (
         processed_data.loc[
             processed_data["date"] >= "2023-02-16",
-            ["pts_home", "pts_visitor", "home_wins"],
+            ["pts_home", "pts_visitor", "homewin"],
         ]
         .isna()
         .all()
@@ -155,6 +154,20 @@ def test_data_split(data):
     ), "Error: Not all original data entries included in new sets."
 
 
+def test_dummy_teams(data_info, data):
+    """Check ..."""
+    data = clean_columns(data_info, data)
+    df = _dummy_teams(data_info, data)
+    home_col = [col for col in df if col.startswith("home_")]
+    visitor_col = [col for col in df if col.startswith("visitor_")]
+    assert (
+        df[home_col + visitor_col].isin([0, 1]).all().all()
+    ), "Error: Not allowed number in dummy column."
+    assert (
+        len(data["home"].unique()) == len(data["visitor"].unique()) == len(home_col)
+    ), "Error: Too many or too few dummy variables."
+
+
 def test_clean_data(data_info, data):
     """Check that output is list of 4 entries and that dimensions fit.
 
@@ -168,4 +181,4 @@ def test_clean_data(data_info, data):
     """
     assert (
         len(clean_data(data_info, data)) == 4
-    ), "Error: The list df does not have 4 entries."
+    ), "Error: The list of data frames does not have 4 entries."

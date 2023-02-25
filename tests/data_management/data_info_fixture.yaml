@@ -7,8 +7,14 @@ point_columns:
   - pts2
 
 column_rename:
+  col1: home
+  col2: visitor
   pts1: pts_home
   pts2: pts_visitor
   col0: date
+
+dummy_columns:
+  - home
+  - visitor
 
 outcome: home_wins  # created during the clean_data step

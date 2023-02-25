@@ -1,12 +1,9 @@
 """Functions for fitting the regression model."""
-import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV, KFold, train_test_split
-
-data_model = pd.read_pickle("bld/python/data/data_model.pkl")
+from sklearn.model_selection import train_test_split
 
 
-def split(data=data_model):
+def split(data):
     """Split data into test and train data.
 
     Args:
@@ -33,55 +30,22 @@ def split(data=data_model):
         test_size=0.3,
         shuffle=True,
     )
-    # das hier behalten train_data = pd.concat([X_train, y_train], axis=1)
-    # das auch test_data = pd.concat([X_test, y_test], axis=1)
-    return X_train, y_train, X_test, y_test  # train_data, test_data
+    return X_train, y_train, X_test, y_test
 
 
-blub = split()
-
-
-def naive_model(data=split(data_model)):
-    X_train = data[0]
-    y_train = data[1]
-    X_test = data[2]
-    y_test = data[3]
+def _naive_model_fit(data):
+    X_train, y_train, _, _ = split(data)
     logisticRegr = LogisticRegression()
-    logisticRegr.fit(X_train, y_train)
-    logisticRegr.predict(X_test)
-    score = logisticRegr.score(X_test, y_test)
-    return print(score)  #  print(y_pred),
+    fit = logisticRegr.fit(X_train, y_train)
+    return fit
 
 
-naive_model()
+def _naive_model_test(data):
+    _, _, X_test, y_test = split(data)
+    fit = _naive_model_fit(data)
+    score = fit.score(X_test, y_test)
+    return fit, score
 
 
-def cross_val():
-    """Choose the cross-validation subsets.
-
-    Return:
-        k_fold ():
-
-    """
-    k_fold = KFold(n_splits=10, shuffle=True, random_state=42)
-    return k_fold
-
-
-def model_fit(k_fold, data=split(data_model)):
-    param_grid = {"C": [0.1, 1, 10, 100], "penalty": ["l2"]}
-    model = LogisticRegression(random_state=42)
-    grid = GridSearchCV(model, param_grid, cv=k_fold)
-    model_fit = grid.fit(data[0], data[1])
-    return model_fit
-
-
-# Create a logistic regression classifier
-
-# Train the classifier on the training set
-
-
-# Predict the classes of the test set
-
-# Evaluate the accuracy of the classifier
-
-# see example of other branch
+def naive_model(data):
+    return _naive_model_fit(data), _naive_model_test(data)
