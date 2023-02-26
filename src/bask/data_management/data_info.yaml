@@ -5,6 +5,7 @@ columns_to_drop:
   - Notes
   - Start (ET)
   - Arena
+  - Attend.
 
 point_columns:
   - PTS

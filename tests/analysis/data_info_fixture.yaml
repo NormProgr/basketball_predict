@@ -1,0 +1,14 @@
+---
+point_columns:
+  - pts1
+  - pts2
+
+column_rename:
+  col1: home
+  col2: visitor
+  pts1: pts_home
+  pts2: pts_visitor
+  col4: home_wins
+
+
+outcome: home_wins  # created during the clean_data step

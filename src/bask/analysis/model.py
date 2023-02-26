@@ -34,6 +34,15 @@ def split(data):
 
 
 def _naive_model_fit(data):
+    """Fit the logistic regression on training data.
+
+    Args:
+        data (pandas DataFrame): Input dataset that contains the split in training and test.
+
+    Return:
+        fit (LogisticRegression): Fitted logit regression model to predict new data.
+
+    """
     X_train, y_train, _, _ = split(data)
     logisticRegr = LogisticRegression()
     fit = logisticRegr.fit(X_train, y_train)
@@ -41,11 +50,31 @@ def _naive_model_fit(data):
 
 
 def _naive_model_test(data):
+    """Test the logistic regression model on test data.
+
+    Args:
+        data (pandas DataFrame): Input dataset that contains the split in training and test.
+
+    Returns:
+        score (float): The accuracy score of the trained logistic regression model.
+
+    """
     _, _, X_test, y_test = split(data)
     fit = _naive_model_fit(data)
     score = fit.score(X_test, y_test)
-    return fit, score
+    return score
 
 
 def naive_model(data):
+    """Test the logistic regression model on test data.
+
+    Args:
+        data (pandas DataFrame): Input dataset that contains the split in training and test.
+
+    Returns:
+        Tuple:
+            _naive_model_fit(data) (function): Returns a fitted logit regression model to predict new data.
+            _naive_model_test(data) (function): Returns accuracy score of the trained logistic regression model.
+
+    """
     return _naive_model_fit(data), _naive_model_test(data)

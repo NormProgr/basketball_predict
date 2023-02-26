@@ -1,0 +1,9 @@
+date,col1,pts1,col2,pts2,home_wins
+"Thu, Feb 2, 2023",team1,100,team2,90,1
+"Fri, Jan 10, 2023",team2,72,team8,80,0
+"Thu, Feb 16, 2023",team3,88,team9,101,1
+"Fri, Dec 16, 2022",team4,60,team2,50,0
+"Wed, Feb 15, 2023",team1,81,team4,50,0
+"Wed, Apr 5, 2023",team9,NA,team10,NA,0
+"Fri, Apr 7, 2023",team9,NA,team8,NA,1
+"Mon, Apr 10, 2023",team1,NA,team10,NA,0
