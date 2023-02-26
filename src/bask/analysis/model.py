@@ -46,7 +46,7 @@ def _naive_model_fit(data):
     X_train, y_train, _, _ = split(data)
     logisticRegr = LogisticRegression()
     fit = logisticRegr.fit(X_train, y_train)
-    return fit
+    return fit, print(_naive_model_fit(data))
 
 
 def _naive_model_test(data):
