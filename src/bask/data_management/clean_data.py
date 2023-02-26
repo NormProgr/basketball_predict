@@ -99,6 +99,9 @@ def _dummy_teams(data_info, df):
 
     """
     new_df = pd.get_dummies(df, columns=data_info["dummy_columns"], drop_first=False)
+    new_df["home"] = df["home"]
+    new_df["visitor"] = df["visitor"]
+
     return new_df
 
 

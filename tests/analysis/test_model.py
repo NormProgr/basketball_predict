@@ -1,7 +1,8 @@
 """Tests for the regression model."""
+import numpy as np
 import pandas as pd
 import pytest
-from bask.analysis.model import split
+from bask.analysis.model import _naive_model_fit, _naive_model_test, naive_model, split
 from bask.config import TEST_DIR
 
 
@@ -22,10 +23,10 @@ def test_naive_model_fit(data):
     assert np.count_nonzero(used_fit.coef_) > 0, "The fit object has zero coefficients"
 
 
-def test__naive_model_test(data):
+def test_naive_model_test(data):
     # RecursionError: maximum recursion depth exceeded while calling a Python object
 
-    score = _naive_model_fit(data)
+    score = _naive_model_test(data)
     assert 0 <= score <= 1, "Error: Score takes a not possible value."
 
 

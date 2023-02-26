@@ -34,17 +34,57 @@ data_model = pd.read_pickle("bld/python/data/data_model.pkl")
 data_model_pred = pd.read_pickle("bld/python/data/data_model_pred.pkl")
 
 
-def team_df(data_model_pred, data_model, conferences):
-    data_model_pred = pred_naive(data_model_pred, data_model)
-    df = conferences
-    df["past_wins"] = 0
-    for name in df["team_name"]:
-        for game in range(len(data_model)):
-            if (
-                data_model.loc[game, f"home_{name}"] == 1
-            ):  # & data_model.loc[game, "homewin"] == 1:
-                df.loc[name, "past_wins"] = df.loc[name, "past_wins"] + 1
-    return df
+def team_win_pred(data_pred=data_model_pred, data=data_model):
+    """Predict total number of wins per team."""
+    data_pred = pred_naive(data_pred, data)
+    past_wins = (
+        data.groupby("home")["homewin"].sum()
+        + data.groupby("visitor").size()
+        - data.groupby("visitor")["homewin"].sum()
+    )
+    pred_wins = (
+        data_pred.groupby("home")["homewin_pred"].sum()
+        + data_pred.groupby("visitor").size()
+        - data_pred.groupby("visitor")["homewin_pred"].sum()
+    )
+    wins = past_wins + pred_wins
+    return wins
 
 
 # def conferences():
+
+
+def _team_win_prob_home(data_pred, data):
+    """Predict win probability for home games.
+
+    data_pred is already predicted data! Good to have test if column homewin_pred is
+    empty
+
+    """
+    win_prob_home = data_pred.groupby("home")["homewin_pred_prob"].mean()
+    return win_prob_home
+
+
+def _team_win_prob_vis(data_pred, data):
+    """Predict win probability for visitor games.
+
+    data_pred is already predicted data!
+
+    """
+    win_prob_vis = 1 - data_pred.groupby("visitor")["homewin_pred_prob"].mean()
+    return win_prob_vis
+
+
+def team_win_prob(data_pred=data_model_pred, data=data_model):
+    """Predict winning probability for each team."""
+    data_pred = pred_naive(data_pred, data)
+    win_prob_home = _team_win_prob_home(data_pred, data)
+    win_prob_vis = _team_win_prob_vis(data_pred, data)
+    win_prob = (
+        win_prob_home * data_pred.groupby("home").size()
+        + win_prob_vis * data_pred.groupby("visitor").size()
+    )
+    win_prob = win_prob / (
+        data_pred.groupby("home").size() + data_pred.groupby("visitor").size()
+    )
+    return win_prob
