@@ -37,7 +37,10 @@ def parser(months, scrapedate):
     """
     dfs = []
     for month in months:
-        with open(f"src/bask/preparation/data/{month}_{scrapedate}.html") as f:
+        with open(
+            f"src/bask/preparation/data/{month}_{scrapedate}.html",
+            encoding="utf8",
+        ) as f:  # added encoding, does it lead to failure?
             page = f.read()
         soup = BeautifulSoup(page, "html.parser")
         table = soup.find(id="schedule")
