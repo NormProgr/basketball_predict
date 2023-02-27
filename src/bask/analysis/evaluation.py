@@ -12,7 +12,7 @@ def concatenate_dfs(data_model, data_model_pred, data_benchmark, data_benchmark_
     df_bm = pd.concat([data_benchmark, data_benchmark_pred])
     df_mod[["pts_visitor", "pts_home", "homewin"]] = df_bm[
         ["pts_visitor", "pts_home", "homewin"]
-    ]
+    ].values
     return df_mod
 
 

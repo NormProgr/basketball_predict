@@ -5,6 +5,7 @@ import pytest
 from bask.analysis.predict import (
     _pred_cols,
     pred_naive,
+    team_win_prob,
 )
 from bask.config import TEST_DIR
 
@@ -17,6 +18,9 @@ def data():
 @pytest.fixture()
 def data_pred():
     return pd.read_csv(TEST_DIR / "analysis" / "data_fixture_pred.csv")
+
+
+data_model_pred = pred_naive(data_model_pred=data_pred, data_model=data)
 
 
 def test_pred_cols(data):
@@ -58,3 +62,14 @@ def test_pred_naive(data_pred, data):
     assert all(
         (df["homewin_pred_prob"] >= 0) & (df["homewin_pred_prob"] <= 1),
     ), "Error: homewin_pred_prob column contains values outside the range (0, 1)"
+
+
+def test_team_win_prob(data_model_pred, data):
+    win_prob = team_win_prob(data_model_pred, data)
+    assert len(win_prob) == 30
+    assert (win_prob >= 0).all() and (win_prob <= 1).all()
+
+
+def test_team_win_prob_home(data_pred, data):
+    prob = _team_win_prob_home(data_pred, data)
+    assert len(prob["homewin_pred"]) != 0, "Error"
