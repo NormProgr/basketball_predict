@@ -40,8 +40,8 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
         Assert: Raises an error if the shape of the concatenated DataFrames does not match the expected shape.
 
     """
-    data_model_pred = pred_naive(data_model=data, data_model_pred=data_pred)
-    data_shape = pd.concat([data, data_model_pred]).shape
+    data_pred = pred_naive(data_model=data, data_model_pred=data_pred)
+    data_shape = pd.concat([data, data_pred]).shape
     df = concatenate_dfs(
         data_model=data,
         data_model_pred=data_pred,
@@ -51,6 +51,9 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
     assert (
         data_shape == df.shape
     ), f"Error: Expected shape {data_shape} but got {df.shape}"
+    assert (
+        data["homewin"][0 : len(data)] == df["homewin"][0 : len(data)]
+    ).all(), "Error: Past results changed by concatenating."
 
     # ValueError: Can only compare identically-labeled Series objects
 
