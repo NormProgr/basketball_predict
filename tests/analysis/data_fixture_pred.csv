@@ -1,6 +1,5 @@
-date,home_team1,pts_visitor,visitor_team2,pts_home,homewin,home_team3,visitor_team4
-"Fri, Mar 12, 2023",0,NaN,1,NaN,NaN,0,1
-"Thu, Mar 16, 2023",0,NaN,1,NaN,NaN,1,0
-"Thu, Mar 17, 2023",0,NaN,1,NaN,NaN,0,1
-"Fri, Mar 23, 2023",0,NaN,1,NaN,NaN,1,0
-"Thu, Apr 2, 2023",1,NaN,0,NaN,NaN,1,0
+date,home,visitor,home_team1,home_team2,home_team3,home_team4,pts_home,visitor_team1,visitor_team2,visitor_team3,visitor_team4,pts_visitor,homewin
+"Fri, Mar 12, 2023",team4,team1,0,0,0,1,NaN,1,0,0,0,NaN,NaN
+"Thu, Mar 16, 2023",team1,team4,1,0,0,0,NaN,0,0,0,1,NaN,NaN
+"Thu, Mar 17, 2023",team3,team2,0,0,1,0,NaN,0,1,0,0,NaN,NaN
+"Fri, Mar 23, 2023",team4,team2,0,0,0,1,NaN,0,1,0,0,NaN,NaN

@@ -54,37 +54,43 @@ def team_win_pred(data_pred=data_model_pred, data=data_model):
 # def conferences():
 
 
-def _team_win_prob_home(data_pred, data):
+def _team_win_prob_home(data_pred):
     """Predict win probability for home games.
 
     data_pred is already predicted data! Good to have test if column homewin_pred is
     empty
 
     """
+    if "homewin_pred" not in data_pred.columns:
+        raise ValueError("Input for future games should be already predicted data.")
     win_prob_home = data_pred.groupby("home")["homewin_pred_prob"].mean()
     return win_prob_home
 
 
-def _team_win_prob_vis(data_pred, data):
+def _team_win_prob_vis(data_pred):
     """Predict win probability for visitor games.
 
     data_pred is already predicted data!
 
     """
+    if "homewin_pred" not in data_pred.columns:
+        raise ValueError("Input for future games should be already predicted data.")
     win_prob_vis = 1 - data_pred.groupby("visitor")["homewin_pred_prob"].mean()
     return win_prob_vis
 
 
-def team_win_prob(data_pred=data_model_pred, data=data_model):
+def team_win_prob(data_pred, data):
     """Predict winning probability for each team."""
     data_pred = pred_naive(data_pred, data)
-    win_prob_home = _team_win_prob_home(data_pred, data)
-    win_prob_vis = _team_win_prob_vis(data_pred, data)
-    win_prob = (
-        win_prob_home * data_pred.groupby("home").size()
-        + win_prob_vis * data_pred.groupby("visitor").size()
-    )
+    win_prob_home = _team_win_prob_home(data_pred)
+    win_prob_vis = _team_win_prob_vis(data_pred)
+
+    home_scaled = win_prob_home * data_pred.groupby("home").size()
+    vis_scaled = win_prob_vis * data_pred.groupby("visitor").size()
+    win_prob = (home_scaled).add(vis_scaled, fill_value=0)
     win_prob = win_prob / (
-        data_pred.groupby("home").size() + data_pred.groupby("visitor").size()
+        data_pred.groupby("home")
+        .size()
+        .add(data_pred.groupby("visitor").size(), fill_value=0)
     )
     return win_prob

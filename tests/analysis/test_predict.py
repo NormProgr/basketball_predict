@@ -4,6 +4,8 @@ import pandas as pd
 import pytest
 from bask.analysis.predict import (
     _pred_cols,
+    _team_win_prob_home,
+    _team_win_prob_vis,
     pred_naive,
     team_win_prob,
 )
@@ -18,9 +20,6 @@ def data():
 @pytest.fixture()
 def data_pred():
     return pd.read_csv(TEST_DIR / "analysis" / "data_fixture_pred.csv")
-
-
-data_model_pred = pred_naive(data_model_pred=data_pred, data_model=data)
 
 
 def test_pred_cols(data):
@@ -61,15 +60,40 @@ def test_pred_naive(data_pred, data):
     ), "Error: homewin_pred column contains values other than 0 or 1"
     assert all(
         (df["homewin_pred_prob"] >= 0) & (df["homewin_pred_prob"] <= 1),
-    ), "Error: homewin_pred_prob column contains values outside the range (0, 1)"
-
-
-def test_team_win_prob(data_model_pred, data):
-    win_prob = team_win_prob(data_model_pred, data)
-    assert len(win_prob) == 30
-    assert (win_prob >= 0).all() and (win_prob <= 1).all()
+    ), "Error: homewin_pred_prob column contains values outside the range [0, 1]"
 
 
 def test_team_win_prob_home(data_pred, data):
-    prob = _team_win_prob_home(data_pred, data)
-    assert len(prob["homewin_pred"]) != 0, "Error"
+    """Test that homewin_pred column has no NAs and that the probabilities are valid."""
+    data_pred = pred_naive(data_pred, data)
+    prob = _team_win_prob_home(data_pred)
+    assert not data_pred["homewin_pred"].isna().any(), "Error"
+    assert len(prob) == len(
+        data_pred["home"].unique(),
+    ), "Error: Not all teams considered."
+    assert (prob >= 0).all() and (
+        prob <= 1
+    ).all(), "Error: Invalid probability numbers."
+
+
+def test_team_win_prob_vis(data_pred, data):
+    """Test that homewin_pred column has no NAs and that the probabilities are valid."""
+    data_pred = pred_naive(data_pred, data)
+    prob = _team_win_prob_vis(data_pred)
+    assert not data_pred["homewin_pred"].isna().any(), "Error"
+    assert len(prob) == len(
+        data_pred["visitor"].unique(),
+    ), "Error: Not all teams considered."
+    assert (prob >= 0).all() and (
+        prob <= 1
+    ).all(), "Error: Invalid probability numbers."
+
+
+def test_team_win_prob(data_pred, data):
+    win_prob = team_win_prob(data_pred, data)
+    assert len(win_prob) == len(
+        pd.unique(data_pred[["home", "visitor"]].values.ravel()),
+    ), "Error: Not all teams considered."
+    assert (win_prob >= 0).all() and (
+        win_prob <= 1
+    ).all(), "Error: Invalid probability numbers."
