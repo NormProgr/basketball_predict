@@ -199,15 +199,17 @@ def test_df_pred_results(data_model, data_model_pred, conferences):
 
 
     Raises:
-        Assert:
+        Assert: Raises an error if the function produces not the right playoff teams.
 
     ------------------
     Note: This is tested with the real data to see if the concetanation of results works.
 
     """
-    # idea: call playoff pred and compare names to those that have true
-    df = df_pred_results(data_model, data_model_pred, conferences)
-    assert sum(df["pred_in_playoffs"]) == 16, "Error. Wrong amount of playoff teams"
-
-
-#    assert other statement, for example check if the teams with true are the same as in output of playoff_pred
+    df = playoff_pred(data_model, data_model_pred, conferences)
+    pred = df_pred_results(data_model, data_model_pred, conferences)
+    pred = pred[pred["pred_in_playoffs"] is True]
+    df_str = df["team_name"]
+    pred = pred["team_name"]
+    pred = sorted(pred, key=str.lower)
+    df_str = sorted(df_str, key=str.lower)
+    assert pred == df_str, "Error: Incorrect top 8 teams are produced by the function."

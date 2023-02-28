@@ -18,7 +18,7 @@ from bask.config import BLD, SRC
     },
 )
 @pytask.mark.task
-@pytask.mark.produces(BLD / "python" / "data" / "concatenated_pred.csv")
+@pytask.mark.produces(BLD / "python" / "predictions" / "concatenated_pred.csv")
 def task_produce_data(depends_on, produces):
     data_model = pd.read_pickle(depends_on["data_model"])
     data_model_pred = pd.read_pickle(depends_on["data_model_pred"])
@@ -43,7 +43,7 @@ def task_produce_data(depends_on, produces):
     },
 )
 @pytask.mark.task
-@pytask.mark.produces(BLD / "python" / "data" / "prediction_scores.csv")
+@pytask.mark.produces(BLD / "python" / "predictions" / "prediction_scores.csv")
 def task_produce_data(depends_on, produces):
     data_model = pd.read_pickle(depends_on["data_model"])
     data_model_pred = pd.read_pickle(depends_on["data_model_pred"])
@@ -63,7 +63,7 @@ def task_produce_data(depends_on, produces):
     },
 )
 @pytask.mark.task
-@pytask.mark.produces(BLD / "python" / "data" / "result_prediction.csv")
+@pytask.mark.produces(BLD / "python" / "predictions" / "result_prediction.csv")
 def task_produce_data(depends_on, produces):
     data_model = pd.read_pickle(depends_on["data_model"])
     data_model_pred = pd.read_pickle(depends_on["data_model_pred"])
