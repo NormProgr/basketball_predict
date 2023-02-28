@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import pytest
-from bask.analysis.model import _naive_model_fit, _naive_model_test, naive_model, split
+from bask.analysis.model import _model_fit, _model_test, model, split
 from bask.config import TEST_DIR
 
 
@@ -27,7 +27,7 @@ def test_split(data):
     ), "Error: There is not the right amount of test and training data sets."
 
 
-def test_naive_model_fit(data):
+def test_model_fit(data):
     """Test if the fitted model produce coefficients.
 
     Args:
@@ -38,11 +38,13 @@ def test_naive_model_fit(data):
         Assert: Raises an error if there is not even one coefficient in the fitted model.
 
     """
-    used_fit = _naive_model_fit(data)
-    assert np.count_nonzero(used_fit.coef_) > 0, "The fit object has zero coefficients"
+    used_fit = _model_fit(data)
+    assert (
+        np.count_nonzero(used_fit.coef_) > 0
+    ), "Error: The fit object has zero coefficients"
 
 
-def test_naive_model_test(data):
+def test_model_test(data):
     """Test if the score has a meaningful value.
 
     Args:
@@ -53,11 +55,11 @@ def test_naive_model_test(data):
         Assert: Raises an error if the score is outside a 0/1 boundary.
 
     """
-    score = _naive_model_test(data)
+    score = _model_test(data)
     assert 0 <= score <= 1, "Error: Score takes a not possible value."
 
 
-def test_naive_model(data):
+def test_model(data):
     """Test if the function returns two outputs.
 
     Args:
@@ -68,4 +70,4 @@ def test_naive_model(data):
         Assert: Raises an error if the function does not returns two outputs. If there are not two returns, the pytask function fails.
 
     """
-    assert isinstance(naive_model(data), tuple), "Error: variable is not a tuple"
+    assert isinstance(model(data), tuple), "Error: Variable is not a tuple."

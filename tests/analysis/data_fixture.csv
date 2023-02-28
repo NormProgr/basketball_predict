@@ -1,9 +1,7 @@
 date,home,visitor,home_team1,home_team2,home_team3,home_team4,pts_home,visitor_team1,visitor_team2,visitor_team3,visitor_team4,pts_visitor,homewin
-"Fri, Dec 7, 2022",team1,team2,1,0,0,0,60,0,1,0,0,80,0
-"Fri, Dec 16, 2022",team2,team1,0,1,0,0,60,1,0,0,0,50,1
-"Wed, Jan 5, 2023",team1,team3,1,0,0,0,100,0,0,1,0,70,1
-"Fri, Jan 10, 2023",team2,team3,0,1,0,0,60,0,0,1,0,100,0
-"Thu, Feb 2, 2023",team4,team3,0,0,0,1,100,0,0,1,0,90,1
-"Wed, Feb 15, 2023",team2,team4,0,1,0,0,81,0,0,0,1,50,1
-"Thu, Feb 16, 2023",team3,team4,0,0,1,0,88,0,0,0,1,101,0
-"Mon, Mar 10, 2023",team3,team1,0,0,1,0,120,1,0,0,0,100,1
+2022-12-07,team1,team2,1,0,0,0,60,0,1,0,0,80,0
+2022-12-16,team2,team1,0,1,0,0,60,1,0,0,0,50,1
+2023-01-05,team1,team3,1,0,0,0,100,0,0,1,0,70,1
+2023-01-10,team2,team3,0,1,0,0,60,0,0,1,0,100,0
+2023-02-02,team4,team3,0,0,0,1,100,0,0,1,0,90,1
+2023-02-15,team2,team4,0,1,0,0,81,0,0,0,1,50,1

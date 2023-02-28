@@ -33,7 +33,7 @@ def split(data):
     return X_train, y_train, X_test, y_test
 
 
-def _naive_model_fit(data):
+def _model_fit(data):
     """Fit the logistic regression on training data.
 
     Args:
@@ -49,7 +49,7 @@ def _naive_model_fit(data):
     return fit
 
 
-def _naive_model_test(data):
+def _model_test(data):
     """Test the logistic regression model on test data.
 
     Args:
@@ -60,12 +60,12 @@ def _naive_model_test(data):
 
     """
     _, _, X_test, y_test = split(data)
-    fit = _naive_model_fit(data)
+    fit = _model_fit(data)
     score = fit.score(X_test, y_test)
     return score
 
 
-def naive_model(data):
+def model(data):
     """Test the logistic regression model on test data.
 
     Args:
@@ -73,8 +73,8 @@ def naive_model(data):
 
     Returns:
         Tuple:
-            _naive_model_fit(data) (function): Returns a fitted logit regression model to predict new data.
-            _naive_model_test(data) (function): Returns accuracy score of the trained logistic regression model.
+            _model_fit(data) (function): Returns a fitted logit regression model to predict new data.
+            _model_test(data) (function): Returns accuracy score of the trained logistic regression model.
 
     """
-    return _naive_model_fit(data), _naive_model_test(data)
+    return _model_fit(data), _model_test(data)

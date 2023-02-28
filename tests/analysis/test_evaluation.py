@@ -2,8 +2,8 @@
 
 import pandas as pd
 import pytest
-from bask.analysis.evaluation import concatenate_dfs
-from bask.analysis.predict import pred_naive
+from bask.analysis.evaluation import concatenate_dfs, pred_accuracy, score_df
+from bask.analysis.predict import prediction
 from bask.config import TEST_DIR
 
 
@@ -40,7 +40,7 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
         Assert: Raises an error if the shape of the concatenated DataFrames does not match the expected shape.
 
     """
-    data_pred = pred_naive(data_model=data, data_model_pred=data_pred)
+    data_pred = prediction(data_model=data, data_model_pred=data_pred)
     data_shape = pd.concat([data, data_pred]).shape
     df = concatenate_dfs(
         data_model=data,
@@ -57,23 +57,37 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
 
     # ValueError: Can only compare identically-labeled Series objects
 
-    # def test_pred_score(data,data_pred,data_benchmark):
+
+def test_pred_accuracy(data, data_pred, data_benchmark):
     """Test if concatenated data frame has correct dimensions.
 
     Args:
         data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
         data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
         data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
-        data_benchmark_pred(pandas DataFrame): Remaining basketball games DataFrame.
 
     Raises:
-        Assert: Raises an error if the shape of the concatenated DataFrames does not match the expected shape.
+        Assert: Raises an error if the score is outside the 0/1 boundaries.
 
     """
-    # assert score_percent > 0
+    score_acc = pred_accuracy(data, data_pred, data_benchmark)
+    assert 1 >= score_acc >= 0, "Error: Score not between 0 and 1."
 
 
 # ValueError: Can only compare identically-labeled Series objects
 
 
-# def test_score_df(data,data_pred,data_benchmark):
+def test_score_df(data, data_pred, data_benchmark):
+    """Test if the correct length of columns is returned.
+
+    Args:
+        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+
+    Raises:
+        Assert: Raises an error if the wrong amount of columns is returned.
+
+    """
+    df = score_df(data, data_pred, data_benchmark)
+    assert df.shape[1] == 2, f"Error: Returns {len(df.shape[1])}, but expects: {2}."
