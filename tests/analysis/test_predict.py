@@ -212,5 +212,4 @@ def test_df_pred_results(data_model, data_model_pred, conferences):
     pred = pred["team_name"]
     pred = sorted(pred, key=str.lower)
     df_str = sorted(df_str, key=str.lower)
-    true = pred == df_str
-    assert true is True, "Error: Incorrect top 8 teams are produced by the function."
+    assert pred == df_str, "Error: Incorrect top 8 teams are produced by the function."
