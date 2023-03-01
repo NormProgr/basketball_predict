@@ -207,9 +207,10 @@ def test_df_pred_results(data_model, data_model_pred, conferences):
     """
     df = playoff_pred(data_model, data_model_pred, conferences)
     pred = df_pred_results(data_model, data_model_pred, conferences)
-    pred = pred.loc[(pred["pred_in_playoffs"] is True)]
+    pred = pred.loc[pred["pred_in_playoffs"].__eq__(True)]
     df_str = df["team_name"]
     pred = pred["team_name"]
     pred = sorted(pred, key=str.lower)
     df_str = sorted(df_str, key=str.lower)
-    assert pred == df_str, "Error: Incorrect top 8 teams are produced by the function."
+    true = pred == df_str
+    assert true is True, "Error: Incorrect top 8 teams are produced by the function."
