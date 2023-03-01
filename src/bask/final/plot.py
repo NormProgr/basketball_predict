@@ -10,6 +10,7 @@ data_pred = pd.read_csv("bld/python/predictions/result_prediction.csv")
 data_benchmark = pd.read_pickle("bld/python/data/data_benchmark.pkl")
 pred_score = pd.read_csv("bld/python/predictions/prediction_scores.csv")
 score = pred_score["score"][1]
+res_pred = pd.read_csv("bld/python/predictions/result_prediction.csv")
 
 
 def confusion_matrix(concat_pred=concat_pred, data_benchmark=data_benchmark):
@@ -51,3 +52,28 @@ def plot_roc_curve(data_benchmark=data_benchmark, concat_pred=concat_pred):
     plt.ylabel("True Positive Rate")
     plt.xlabel("False Positive Rate")
     plt.show()
+
+
+def generate_prediction_table(res_pred=res_pred):
+    res_pred.sort_values(
+        ["conference", "pred_win_prob"],
+        ascending=[True, False],
+        inplace=True,
+    )
+
+    eastern = res_pred[res_pred["conference"] == "East"].reset_index(drop=True)
+    western = res_pred[res_pred["conference"] == "West"].reset_index(drop=True)
+
+    final_df = pd.concat(
+        [
+            eastern[
+                ["team_name", "pred_win_prob", "pred_total_wins", "pred_in_playoffs"]
+            ].reset_index(drop=True),
+            western[
+                ["team_name", "pred_win_prob", "pred_total_wins", "pred_in_playoffs"]
+            ].reset_index(drop=True),
+        ],
+        axis=1,
+        keys=["Eastern Conference", "Western Conference"],
+    )
+    return final_df
