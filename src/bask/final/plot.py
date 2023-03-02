@@ -4,7 +4,6 @@ import pandas as pd
 import seaborn as sns
 from sklearn import metrics
 
-data = pd.read_csv("bld/python/predictions/prediction_scores.csv")
 concat_pred = pd.read_csv("bld/python/predictions/concatenated_pred.csv")
 data_pred = pd.read_csv("bld/python/predictions/result_prediction.csv")
 data_benchmark = pd.read_pickle("bld/python/data/data_benchmark.pkl")
