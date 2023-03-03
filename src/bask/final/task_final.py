@@ -28,7 +28,8 @@ from bask.final.plot import generate_prediction_table
 def task_create_results_table_python(depends_on, produces):
     """Store a table in LaTeX format with the estimation results (Python version)."""
     res_pred = pd.read_csv(depends_on["res_pred"])
-    model = generate_prediction_table(res_pred=res_pred)
+    model = generate_prediction_table(res_pred=res_pred, playoff=False)
+    generate_prediction_table(res_pred=res_pred, playoff=True)
     table = model.style.hide(axis="index").to_latex()
     with open(produces, "w") as f:
         f.write(table)
