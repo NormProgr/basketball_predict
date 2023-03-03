@@ -9,7 +9,7 @@ from bask.config import BLD, SRC
 names = ["concatenated_pred", "prediction_scores", "team_result_pred"]
 
 for name in names:
-    # 1
+
     @pytask.mark.depends_on(
         {
             "eval": ["evaluation.py"],
