@@ -76,3 +76,26 @@ def score_df(data_model, data_model_pred, data_benchmark):
     data = {"score_type": names, "score": scores}
     df = pd.DataFrame(data)
     return df
+
+
+import pandas as pd
+import statsmodels.api as sm
+
+data = pd.read_csv("bld/python/data/data_benchmark.csv")
+team_ids = data[["home", "visitor"]].stack().unique()
+common_ids = pd.Series(range(len(team_ids)), index=team_ids)
+data["Team1ID"] = data["home"].map(common_ids)
+data["Team2ID"] = data["visitor"].map(common_ids)
+
+
+X = data["Team2ID"]
+y = data["homewin"]
+result = sm.Logit(y, X).fit()
+result.summary()
+
+
+def inference(data=data):
+    X = data["Team2ID"]
+    y = data["homewin"]
+    result = sm.Logit(y, X).fit()
+    return result.summary()
