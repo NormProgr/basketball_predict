@@ -88,7 +88,7 @@ data["Team1ID"] = data["home"].map(common_ids)
 data["Team2ID"] = data["visitor"].map(common_ids)
 
 
-X = data["Team2ID"]
+X = data["Team1ID"]
 y = data["homewin"]
 result = sm.Logit(y, X).fit()
 result.summary()
