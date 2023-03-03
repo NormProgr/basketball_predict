@@ -27,6 +27,7 @@ dependencies:
   - toml
   - scikit-learn
   - seaborn
+  - matplotlib
   - pip:
       - -e .
       - kaleido

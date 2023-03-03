@@ -4,14 +4,8 @@ import pandas as pd
 import seaborn as sns
 from sklearn import metrics
 
-concat_pred = pd.read_csv("bld/python/predictions/concatenated_pred.csv")
-data_benchmark = pd.read_pickle("bld/python/data/data_benchmark.pkl")
-pred_score = pd.read_csv("bld/python/predictions/prediction_scores.csv")
-score = pred_score["score"][1]
-res_pred = pd.read_csv("bld/python/predictions/result_prediction.csv")
 
-
-def confusion_matrix(concat_pred=concat_pred, data_benchmark=data_benchmark):
+def confusion_matrix(concat_pred, data_benchmark):
     latest_date_bm = data_benchmark["date"].max()
     concat_pred["date"] = pd.to_datetime(concat_pred["date"])
     cond = (concat_pred["date"] > "2023-02-15") & (
@@ -24,7 +18,7 @@ def confusion_matrix(concat_pred=concat_pred, data_benchmark=data_benchmark):
     return cm
 
 
-def create_heatmap(concat_pred=concat_pred, data_benchmark=data_benchmark, score=score):
+def create_heatmap(concat_pred, data_benchmark, score):
     cm = confusion_matrix(concat_pred, data_benchmark)
     plt.figure(figsize=(9, 9))
     sns.heatmap(cm, annot=True, fmt=".3f", linewidths=0.5, square=True, cmap="Blues_r")
@@ -35,7 +29,7 @@ def create_heatmap(concat_pred=concat_pred, data_benchmark=data_benchmark, score
     plt.show()
 
 
-def plot_roc_curve(data_benchmark=data_benchmark, concat_pred=concat_pred):
+def plot_roc_curve(data_benchmark, concat_pred):
     latest_date_bm = data_benchmark["date"].max()
     concat_pred["date"] = pd.to_datetime(concat_pred["date"])
     cond = (concat_pred["date"] > "2023-02-15") & (
@@ -52,7 +46,7 @@ def plot_roc_curve(data_benchmark=data_benchmark, concat_pred=concat_pred):
     plt.show()
 
 
-def generate_prediction_table(res_pred=res_pred, playoff=False):
+def generate_prediction_table(res_pred, playoff=False):
     res_pred.sort_values(
         ["conference", "pred_win_prob"],
         ascending=[True, False],
@@ -61,9 +55,9 @@ def generate_prediction_table(res_pred=res_pred, playoff=False):
 
     eastern = res_pred[res_pred["conference"] == "East"].reset_index(drop=True)
     western = res_pred[res_pred["conference"] == "West"].reset_index(drop=True)
-    if playoff is True:
-        eastern = eastern[eastern["pred_in_playoffs"] is True]
-        western = western[western["pred_in_playoffs"] is True]
+    if playoff:
+        eastern = eastern[eastern["pred_in_playoffs"]]  # == True]
+        western = western[western["pred_in_playoffs"]]  # == True]
 
     final_df = pd.concat(
         [
