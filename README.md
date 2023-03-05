@@ -8,13 +8,13 @@
 - Anne Rebecca Ringborg
 
 ## About
-This is a project that aims to predict the probability of a team winning or losing a game in the 2022/23 NBA season using logistic regression and web scraping. The project utilizes data from [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html) to collect the necessary information for each game such as points, teams, viewer attendance, etc.
+This is a project that aims to predict the probability of a team winning or losing a game in the 2022/23 NBA season using logistic regression and web scraping. The project utilizes data from [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html) to collect the necessary information for each game such as points, teams, viewer attendance, etc. The data is summarized in an information sheet.
 
-To obtain the required data for the analysis, the project utilizes web scraping techniques to extract up to date information. The collected data is then cleaned, pre-processed, and fed into the logistic regression model for analysis.
+To obtain the required data for the analysis, the project utilizes web scraping techniques to extract up-to-date information. The collected data is then cleaned, pre-processed, and fed into the logistic regression model for analysis.
 
-The project is implemented in Python, utilizing various libraries such as Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web scraping respectively. The code is well documented and organized with pytask for ease of understanding and modification. In the following we describe how to replicate the whole project.
+The project is implemented in Python, utilizing various libraries such as Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web scraping respectively. The code is well documented and organized with Pytask for ease of understanding and modification. In the following, we describe how to replicate the whole project.
 
-The goal of this project is to provide an automized prediction tool for NBA fans and enthusiasts to make informed decisions when betting or discussing on NBA games. The predictions are updated every time the code is run, ensuring that users have access to the latest and most accurate information when making their predictions.
+The goal of this project is to provide an automated prediction tool for NBA fans and enthusiasts to make informed decisions when betting or discussing NBA games. The predictions are updated every time the code is run, ensuring that users have access to the latest and most accurate information when making their predictions.
 
 ## Usage
 
