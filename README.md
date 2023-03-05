@@ -31,6 +31,21 @@ To build the project, type
 $ pytask
 ```
 
+For further developing the code
+For runnning tests
+
+```console
+$pytest
+```
+
+Set-up Workflow Hooks
+
+```console
+$pre-commit install
+```
+
+
+
 ## Credits
 
 This project was created with [cookiecutter](https://github.com/audreyr/cookiecutter)
