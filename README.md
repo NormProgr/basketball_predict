@@ -31,7 +31,7 @@ To build the project, type
 $ pytask
 ```
 
-### To develope the code
+### For code development
 
 To run tests
 
@@ -39,7 +39,7 @@ To run tests
 $ pytest
 ```
 
-Set-up Workflow Hooks
+To set-up workflow hooks
 
 ```console
 $ pre-commit install
