@@ -18,7 +18,7 @@ The goal of this project is to provide an automated prediction tool for NBA fans
 
 ## Usage
 
-<sub> To run this project a Python and LaTex distribution is required. The project was tested on windows 11 and macOS 10.15.7 with Python 3.11.0.</sub>
+To run this project a Python and LaTex distribution is required. The project was tested on windows 11 and macOS 10.15.7 with Python 3.11.0.
 
 To get started, create and activate the environment with
 
