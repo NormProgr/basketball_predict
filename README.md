@@ -51,11 +51,22 @@ $ pre-commit install
 
 Within the *src/bask* directory all relevant code files can be found. They are structured as follows:
 - *analysis*
-  - dawd 
+  - *evaluation.py*
+  - *model.py*
+  - *predict.py*
+  - *task_analysis.py* 
 - *data*
+  - all not build source files
 - *data_management*
+  - *clean_data.py*
+  - *task_data_management.py*
 - *final*
+  - *plot.py*
+  - *task_final.py*
 - *preparation*
+  - *parser.py*
+  - *scraper.py*
+  - *task_preparation.py*
 
 ## Credits
 
