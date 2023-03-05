@@ -31,7 +31,7 @@ To build the project, type
 $ pytask
 ```
 
-###### For further developing the code
+### For further developing the code
 
 For runnning tests
 
