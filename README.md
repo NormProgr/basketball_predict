@@ -49,9 +49,13 @@ $ pre-commit install
 
 ## Project structure
 
-Within the *src* directory all relevant code files can be found. They are structured as follows:
-> awefda
-
+Within the *src/bask* directory all relevant code files can be found. They are structured as follows:
+- *analysis*
+  - dawd 
+- *data*
+- *data_management*
+- *final*
+- *preparation*
 
 ## Credits
 
