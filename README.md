@@ -1,5 +1,8 @@
 # Scraping basketball data to predict future game outcomes
 
+## Authors
+Norman Metzinger
+Anne Rebecca Ringborg
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://results.pre-commit.ci/latest/github/NormProgr/bask/main)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
