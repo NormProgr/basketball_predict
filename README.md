@@ -32,18 +32,19 @@ $ pytask
 ```
 
 For further developing the code
+<sub>
 For runnning tests
 
 ```console
-$pytest
+$ pytest
 ```
 
 Set-up Workflow Hooks
 
 ```console
-$pre-commit install
+$ pre-commit install
 ```
-
+</sub>
 
 
 ## Credits
