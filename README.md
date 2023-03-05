@@ -50,23 +50,24 @@ $ pre-commit install
 ## Project structure
 
 Within the *src/bask* directory all relevant code files can be found. They are structured as follows:
-- *analysis*
-  - *evaluation.py*
-  - *model.py*
-  - *predict.py*
-  - *task_analysis.py* 
-- *data*
-  - all not build source files
-- *data_management*
-  - *clean_data.py*
-  - *task_data_management.py*
-- *final*
-  - *plot.py*
-  - *task_final.py*
-- *preparation*
-  - *parser.py*
-  - *scraper.py*
-  - *task_preparation.py*
+- *analysis*: Summary of all analysis files.
+  - *evaluation.py*: Benchmark analysis of NBA games.
+  - *model.py*: Build the logistic regression model.
+  - *predict.py*: Predict the future games outcomes.
+  - *task_analysis.py*: Run all analysis files. 
+- *data*: all not build source files
+- *data_management*: Summary data pre-processes.
+  - *clean_data.py*: Data pre-processing.
+  - *task_data_management.py*: Run the clean data file.
+- *final*: Summary of data visualizations and tables.
+  - *plot.py*: Produce all plots.
+  - *task_final.py*: Produce final prediciton and model results.
+- *preparation*: Contains the web-scraper.
+  - *parser.py*: Translates html to pickle.
+  - *scraper.py*: Scrapes the data from the website.
+  - *task_preparation.py*: Runs all preparation files.
+
+Additionally the *paper/task_paper.py* is producing the NBA prediction infromation sheet.
 
 ## Credits
 
