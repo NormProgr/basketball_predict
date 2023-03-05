@@ -31,9 +31,9 @@ To build the project, type
 $ pytask
 ```
 
-### For further developing the code
+### To develope the code
 
-For runnning tests
+To run tests
 
 ```console
 $ pytest
