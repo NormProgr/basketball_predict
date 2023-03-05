@@ -32,6 +32,7 @@ $ pytask
 ```
 
 ###### For further developing the code
+
 For runnning tests
 
 ```console
