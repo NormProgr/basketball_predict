@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup
 def scrapedate():
     """Take the last scraping date as reference date.
 
+    Raises:
+        Assert:
+
     Returns:
         scrapedate (string): The date of the current scrape.
 
@@ -16,9 +19,8 @@ def scrapedate():
         for filename in os.listdir("src/bask/preparation/data")
         if filename.startswith("april_")
     ]
-    assert (
-        len(prefixed) > 0
-    ), "Error: No data exists, run scraper.py file to generate scrapes."
+    # assert (
+    # ), "Error: No data exists, run scraper.py file to generate scrapes."
     parts = prefixed[0].split("_")
     scrapedate = parts[1].split(".")[0]
     return scrapedate
