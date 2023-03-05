@@ -31,8 +31,7 @@ To build the project, type
 $ pytask
 ```
 
-For further developing the code
-<sub>
+###### For further developing the code
 For runnning tests
 
 ```console
@@ -44,7 +43,6 @@ Set-up Workflow Hooks
 ```console
 $ pre-commit install
 ```
-</sub>
 
 
 ## Credits
