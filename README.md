@@ -7,6 +7,11 @@
 - Norman Metzinger
 - Anne Rebecca Ringborg
 
+## About
+<sub>
+hallo
+</sub>
+
 ## Usage
 
 To get started, create and activate the environment with
