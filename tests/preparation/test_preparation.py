@@ -27,7 +27,7 @@ def test_scraper_by_month():
     """
     prefixed = [
         filename
-        for filename in os.listdir("src/bask/preparation/data")
+        for filename in os.listdir("bld/python/scrapes")
         if filename.endswith(".html")
     ]
     assert len(prefixed) == 7, "Error: Not the right number of .html files."

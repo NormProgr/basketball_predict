@@ -25,7 +25,7 @@ def scrapedate():
         return scrapedate
 
 
-def parser(months, scrapedate):
+def parser(months, scrapedate, path):
     """Convert tables from html files to one pandas DataFrame.
 
     Args:
@@ -39,9 +39,9 @@ def parser(months, scrapedate):
     dfs = []
     for month in months:
         with open(
-            f"bld/python/scrapes/{month}_{scrapedate}.html",
+            path / f"{month}_{scrapedate}.html",
             encoding="utf8",
-        ) as f:  # added encoding, does it lead to failure?
+        ) as f:
             page = f.read()
         soup = BeautifulSoup(page, "html.parser")
         table = soup.find(id="schedule")

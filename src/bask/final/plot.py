@@ -75,3 +75,16 @@ def generate_prediction_table(res_pred, playoff=False):
 
 
 # summary table
+
+
+def reg_plot(concat_pred):
+    data = concat_pred
+    x = data["pts_visitor"]
+    y = data["homewin_pred"]
+    sns.set_style("whitegrid")
+    sns.set_palette("husl")
+    ax = sns.regplot(x=x, y=y, data=data, logistic=True, ci=None)
+    ax.set_xlabel("Points Visitor", fontsize=14)
+    ax.set_ylabel("Home Team Winning", fontsize=14)
+    plt.title("Home Team Winning Probability vs. Points Visitor", fontsize=16)
+    ax.tick_params(labelsize=12)

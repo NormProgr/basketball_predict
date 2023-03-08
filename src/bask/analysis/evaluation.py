@@ -90,3 +90,16 @@ def inference(data):
     y = data["homewin"]
     result = sm.Logit(y, X).fit()
     return result.summary()
+
+
+def inference(data):
+    new = ["d", "l"]
+    new["d"] = data["visitor_Chicago Bulls"] + data["home_Chicago Bulls"]
+    new["l"] = data["home_Denver Nuggets"] + data["visitor_Denver Nuggets"]
+    X = new["d", "l"]
+    y = data["homewin"]
+    result = sm.Logit(y, X).fit()
+    return result.summary()
+
+
+# keep   print(inference(data=data))

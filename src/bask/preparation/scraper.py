@@ -1,15 +1,20 @@
 import os
 import socket
+from datetime import date
 
 import requests as req
+
+from bask.preparation.parser import scrapedate
 
 months = ["october", "november", "december", "january", "february", "march", "april"]
 
 
-def _remove_old_scrapes():
+def _remove_old_scrapes(folder_path):
     """Delete old scrapes to save memory and for overview."""
-    folder_path = "bld/python/scrapes"
-    if os.path.exists(folder_path):
+    dir = os.listdir(folder_path)
+    if len(dir) == 7 and scrapedate() == date.today():
+        True
+    else:
         folder_contents = os.listdir(folder_path)
         for item in folder_contents:
             item_path = os.path.join(folder_path, item)
@@ -34,7 +39,7 @@ def _check_internet():
         return False
 
 
-def scraper_by_month(months, url_start, today):
+def scraper_by_month(path, month, url_start):
     """Scrape the data by month and save it, remove old scrapes.
 
     Args:
@@ -43,14 +48,15 @@ def scraper_by_month(months, url_start, today):
 
     """
     if _check_internet():
-        _remove_old_scrapes()
-        for month in months:
-            url = url_start.format(month)
-            data = req.get(url)
+        _remove_old_scrapes(path)
+        if len(os.listdir(path)) != 7:
+            for month in months:
+                url = url_start.format(month)
+                data = req.get(url)
 
-            with open(
-                f"bld/python/scrapes/{month}_{today}.html",
-                "w+",
-                encoding="utf8",
-            ) as f:
-                f.write(data.text)
+                with open(
+                    path / f"{month}_{date.today()}.html",
+                    "w+",
+                    encoding="utf8",
+                ) as f:
+                    f.write(data.text)
