@@ -15,7 +15,7 @@ for time in datasets:
         {
             "scripts": ["clean_data.py"],
             "data_info": SRC / "data_management" / "data_info.yaml",
-            "data": SRC / "data" / f"data_{scrapedate()}.pkl",
+            "data": BLD / "python" / "scrapes" / f"data_{scrapedate()}.pkl",
         },
     )
     @pytask.mark.task

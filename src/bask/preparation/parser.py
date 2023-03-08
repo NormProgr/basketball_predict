@@ -8,22 +8,21 @@ def scrapedate():
     """Take the last scraping date as reference date.
 
     Raises:
-        Assert:
+            Assert:
 
     Returns:
         scrapedate (string): The date of the current scrape.
 
     """
-    prefixed = [
-        filename
-        for filename in os.listdir("src/bask/preparation/data")
-        if filename.startswith("april_")
-    ]
-    # assert (
-    # ), "Error: No data exists, run scraper.py file to generate scrapes."
-    parts = prefixed[0].split("_")
-    scrapedate = parts[1].split(".")[0]
-    return scrapedate
+    path = "bld/python/scrapes"
+    dir = os.listdir(path)
+    if len(dir) != 0:
+        prefixed = [filename for filename in dir if filename.startswith("april_")]
+        # assert (
+        # ), "Error: No data exists, run scraper.py file to generate scrapes."
+        parts = prefixed[0].split("_")
+        scrapedate = parts[1].split(".")[0]
+        return scrapedate
 
 
 def parser(months, scrapedate):
@@ -40,7 +39,7 @@ def parser(months, scrapedate):
     dfs = []
     for month in months:
         with open(
-            f"src/bask/preparation/data/{month}_{scrapedate}.html",
+            f"bld/python/scrapes/{month}_{scrapedate}.html",
             encoding="utf8",
         ) as f:  # added encoding, does it lead to failure?
             page = f.read()

@@ -1,18 +1,14 @@
 import os
 import socket
-from datetime import date
 
 import requests as req
 
 months = ["october", "november", "december", "january", "february", "march", "april"]
 
-url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
-# replace october by month string with bracket{}
-
 
 def _remove_old_scrapes():
     """Delete old scrapes to save memory and for overview."""
-    folder_path = "src/bask/preparation/data"
+    folder_path = "bld/python/scrapes"
     if os.path.exists(folder_path):
         folder_contents = os.listdir(folder_path)
         for item in folder_contents:
@@ -38,7 +34,7 @@ def _check_internet():
         return False
 
 
-def scraper_by_month(months=months, url_start=url_start, today=date.today()):
+def scraper_by_month(months, url_start, today):
     """Scrape the data by month and save it, remove old scrapes.
 
     Args:
@@ -53,11 +49,8 @@ def scraper_by_month(months=months, url_start=url_start, today=date.today()):
             data = req.get(url)
 
             with open(
-                f"src/bask/preparation/data/{month}_{today}.html",
+                f"bld/python/scrapes/{month}_{today}.html",
                 "w+",
                 encoding="utf8",
             ) as f:
                 f.write(data.text)
-
-
-scraper_by_month()
