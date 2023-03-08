@@ -1,12 +1,11 @@
 """Tasks for managing the data."""
-from datetime import date
-
 import pandas as pd
 import pytask
 import yaml
 
 from bask.config import BLD, SRC
 from bask.data_management import clean_data
+from bask.preparation.parser import scrapedate
 
 datasets = ["benchmark", "benchmark_pred", "model", "model_pred"]
 
@@ -16,7 +15,7 @@ for time in datasets:
         {
             "scripts": ["clean_data.py"],
             "data_info": SRC / "data_management" / "data_info.yaml",
-            "data": SRC / "data" / f"data_{date.today()}.pkl",
+            "data": SRC / "data" / f"data_{scrapedate()}.pkl",
         },
     )
     @pytask.mark.task

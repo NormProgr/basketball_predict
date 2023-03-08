@@ -21,7 +21,7 @@ def _remove_old_scrapes():
                 os.remove(item_path)
 
 
-def check_internet():
+def _check_internet():
     """Check whether or not there is a internet connection.
 
     Return:
@@ -46,7 +46,7 @@ def scraper_by_month(months=months, url_start=url_start, today=date.today()):
         url_start (url): Source url to scrape data.
 
     """
-    if check_internet():
+    if _check_internet():
         _remove_old_scrapes()
         for month in months:
             url = url_start.format(month)
