@@ -1,5 +1,4 @@
 """Tasks for running the scraper."""
-import os
 from datetime import date
 
 import pytask
@@ -13,7 +12,7 @@ url_source = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.htm
 date = date.today()
 
 
-@pytask.mark.try_first
+# @pytask.mark.try_first
 @pytask.mark.depends_on(
     {
         "scripts": ["scraper.py"],
@@ -37,26 +36,22 @@ def task_produce_scrape(produces):
     scraper(produces["scrapes"], months, url_start)
 
 
-folder_path = "bld/python/scrapes"
-dir = os.listdir(folder_path)
-if len(dir) != 0:
-    # @pytask.mark.try_second
-    @pytask.mark.depends_on(
-        {
-            "scripts": ["parser.py"],
-            "scrapes": BLD / "python" / "scrapes",
-            "oct": BLD / "python" / "scrapes" / f"october_{date}.html",
-            "nov": BLD / "python" / "scrapes" / f"november_{date}.html",
-            "dec": BLD / "python" / "scrapes" / f"december_{date}.html",
-            "jan": BLD / "python" / "scrapes" / f"january_{date}.html",
-            "feb": BLD / "python" / "scrapes" / f"february_{date}.html",
-            "mar": BLD / "python" / "scrapes" / f"march_{date}.html",
-            "apr": BLD / "python" / "scrapes" / f"april_{date}.html",
-        },
-    )
-    @pytask.mark.task
-    # later try this @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{scrapedate()}.pkl")
-    @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{date}.pkl")
-    def task_produce_data(depends_on, produces):
-        df = parser(months, date.today(), depends_on["scrapes"])
-        df.to_pickle(produces)
+@pytask.mark.depends_on(
+    {
+        "scripts": ["parser.py"],
+        "scrapes": BLD / "python" / "scrapes",
+        "oct": BLD / "python" / "scrapes" / f"october_{date}.html",
+        "nov": BLD / "python" / "scrapes" / f"november_{date}.html",
+        "dec": BLD / "python" / "scrapes" / f"december_{date}.html",
+        "jan": BLD / "python" / "scrapes" / f"january_{date}.html",
+        "feb": BLD / "python" / "scrapes" / f"february_{date}.html",
+        "mar": BLD / "python" / "scrapes" / f"march_{date}.html",
+        "apr": BLD / "python" / "scrapes" / f"april_{date}.html",
+    },
+)
+@pytask.mark.task
+# later try this @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{scrapedate()}.pkl")
+@pytask.mark.produces(BLD / "python" / "parsed" / f"data_{date}.pkl")
+def task_produce_data(depends_on, produces):
+    df = parser(months, date.today(), depends_on["scrapes"])
+    df.to_pickle(produces)

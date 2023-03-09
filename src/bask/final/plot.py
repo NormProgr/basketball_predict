@@ -27,6 +27,7 @@ def create_heatmap(concat_pred, data_benchmark, score):
     all_sample_title = f"Benchmark Accuracy Score: {score}"
     plt.title(all_sample_title, size=15)
     plt.show()
+    return plt
 
 
 def plot_roc_curve(data_benchmark, concat_pred):
@@ -44,6 +45,7 @@ def plot_roc_curve(data_benchmark, concat_pred):
     plt.ylabel("True Positive Rate")
     plt.xlabel("False Positive Rate")
     plt.show()
+    return plt
 
 
 def generate_prediction_table(res_pred, playoff=False):
@@ -88,6 +90,8 @@ def reg_plot(concat_pred):
     ax.set_ylabel("Home Team Winning", fontsize=14)
     plt.title("Home Team Winning Probability vs. Points Visitor", fontsize=16)
     ax.tick_params(labelsize=12)
+    plt.show()
+    return plt
 
 
 def naive_inf_table(inferencemodel):
