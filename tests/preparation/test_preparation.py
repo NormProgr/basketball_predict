@@ -1,9 +1,9 @@
 import os
-import socket
 from datetime import date, datetime
 
 import pandas as pd
 import pytest
+import requests as req
 from bask.config import BLD, TEST_DIR
 from bask.preparation.parser import parser, scrapedate
 from bask.preparation.scraper import _check_internet, months
@@ -68,8 +68,13 @@ def test_scrapedate():
     ), f"Error: scrapedate {scrape} is not a valid date."
 
 
-def test_check_internet():
+def test_check_internet(url="https://github.com/", timeout=5):
     """Check whether there is an internet connection.
+
+    Args:
+        url (string): The URL to be used for the connectivity test. Default value is "https://github.com/".
+        timeout (integer): The maximum time, in seconds, allowed for the request to complete. Default value is 5 seconds.
+
 
     Raises:
         Assert: Raises an error if there is an internet connection to the one url but not to the other.
@@ -77,8 +82,7 @@ def test_check_internet():
     """
     check = _check_internet()
     try:
-        conn = socket.create_connection(("google.com", 53))
-        conn.close()
+        _ = req.head(url, timeout=timeout)
         snd_check = True
     except OSError:
         snd_check = False
