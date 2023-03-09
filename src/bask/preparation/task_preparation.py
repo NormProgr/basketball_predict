@@ -37,7 +37,7 @@ if len(dir) != 0:
         },
     )
     @pytask.mark.task
-    @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{scrapedate()}.pkl")
+    @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{date.today()}.pkl")
     def task_produce_data(depends_on, produces):
         df = parser(months, scrapedate(), depends_on["scrapes"])
         df.to_pickle(produces)

@@ -11,15 +11,11 @@ months = ["october", "november", "december", "january", "february", "march", "ap
 
 def _remove_old_scrapes(folder_path):
     """Delete old scrapes to save memory and for overview."""
-    dir = os.listdir(folder_path)
-    if len(dir) == 7 and scrapedate() == date.today():
-        True
-    else:
-        folder_contents = os.listdir(folder_path)
-        for item in folder_contents:
-            item_path = os.path.join(folder_path, item)
-            if os.path.isfile(item_path) and item_path.endswith(".html"):
-                os.remove(item_path)
+    folder_contents = os.listdir(folder_path)
+    for item in folder_contents:
+        item_path = os.path.join(folder_path, item)
+        if os.path.isfile(item_path) and item_path.endswith(".html"):
+            os.remove(item_path)
 
 
 def _check_internet():
@@ -39,7 +35,7 @@ def _check_internet():
         return False
 
 
-def scraper_by_month(path, month, url_start):
+def scraper_by_month(path, months, url_start):
     """Scrape the data by month and save it, remove old scrapes.
 
     Args:
@@ -48,7 +44,10 @@ def scraper_by_month(path, month, url_start):
 
     """
     if _check_internet():
-        _remove_old_scrapes(path)
+        if len(os.listdir(path)) != 7:
+            _remove_old_scrapes(path)
+        elif scrapedate() != date.today():
+            _remove_old_scrapes(path)
         if len(os.listdir(path)) != 7:
             for month in months:
                 url = url_start.format(month)
@@ -60,3 +59,9 @@ def scraper_by_month(path, month, url_start):
                     encoding="utf8",
                 ) as f:
                     f.write(data.text)
+
+
+months = ["october", "november", "december", "january", "february", "march", "april"]
+url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
+folder_path = "bld/python/scrapes"
+# or like this BLD / "python" / "scrapes"
