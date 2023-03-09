@@ -1,10 +1,10 @@
 import os
 import socket
-from datetime import datetime
+from datetime import date, datetime
 
 import pandas as pd
 import pytest
-from bask.config import TEST_DIR
+from bask.config import BLD, TEST_DIR
 from bask.preparation.parser import parser, scrapedate
 from bask.preparation.scraper import _check_internet, months
 
@@ -17,7 +17,7 @@ def html_files():
 
 
 # Loop over months?
-def test_scraper_by_month():
+def test_scraper():
     """Test whether the correct amount of files is generated.
 
     Raises:
@@ -40,7 +40,9 @@ def test_parser():
         Assert: Raises an error if not the 7 months by name are represented in the data.
 
     """
-    df = parser(months, scrapedate())
+    path = BLD / "python" / "scrapes"
+    # which one? df = parser(months, scrapedate(), path)
+    df = parser(months, date.today(), path)
     parts = []
     for date_str in df["Date"]:
         mon = date_str.split(" ")[1]

@@ -1,6 +1,7 @@
 """Evaluate the regression model."""
 #####benchmark
 import pandas as pd
+import statsmodels.api as sm
 
 from bask.analysis.model import model
 from bask.analysis.predict import prediction
@@ -78,28 +79,27 @@ def score_df(data_model, data_model_pred, data_benchmark):
     return df
 
 
-# Keep! data = pd.read_csv("bld/python/data/data_benchmark.pkl")
-# Keep! team_ids = data[["home", "visitor"]].stack().unique()
-# Keep! common_ids = pd.Series(range(len(team_ids)), index=team_ids)
-# Kep! data["Team1ID"] = data["home"].map(common_ids)
-# Keep! data["Team2ID"] = data["visitor"].map(common_ids)
+def naive_inference(data_benchmark):
+    """Perform logistic regression on the scores of each team.
 
+    Args:
+        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
 
-def inference(data):
-    X = data["Team2ID"]
-    y = data["homewin"]
+    Returns:
+        statsmodels.iolib.summary.Summary: A summary of the logistic regression model.
+
+    """
+    team_names = {
+        col.split("_")[1]
+        for col in data_benchmark.columns
+        if "visitor_" in col or "home_" in col
+    }
+    team_scores = {team_name: 0 for team_name in team_names}
+    for team_name in team_names:
+        team_scores[team_name] = (
+            data_benchmark[f"home_{team_name}"] + data_benchmark[f"visitor_{team_name}"]
+        )
+    X = pd.DataFrame.from_dict(team_scores)
+    y = data_benchmark["homewin"]
     result = sm.Logit(y, X).fit()
-    return result.summary()
-
-
-def inference(data):
-    new = ["d", "l"]
-    new["d"] = data["visitor_Chicago Bulls"] + data["home_Chicago Bulls"]
-    new["l"] = data["home_Denver Nuggets"] + data["visitor_Denver Nuggets"]
-    X = new["d", "l"]
-    y = data["homewin"]
-    result = sm.Logit(y, X).fit()
-    return result.summary()
-
-
-# keep   print(inference(data=data))
+    return result

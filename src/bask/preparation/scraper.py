@@ -1,10 +1,7 @@
 import os
-import socket
 from datetime import date
 
 import requests as req
-
-from bask.preparation.parser import scrapedate
 
 months = ["october", "november", "december", "january", "february", "march", "april"]
 
@@ -18,8 +15,12 @@ def _remove_old_scrapes(folder_path):
             os.remove(item_path)
 
 
-def _check_internet():
+def _check_internet(url="https://github.com/", timeout=5):
     """Check whether or not there is a internet connection.
+
+    Args:
+        url (string): The URL to be used for the connectivity test. Default value is "https://github.com/".
+        timeout (integer): The maximum time, in seconds, allowed for the request to complete. Default value is 5 seconds.
 
     Return:
         True (boolean): There is a internet connection.
@@ -27,15 +28,14 @@ def _check_internet():
 
     """
     try:
-        # Attempt to create a connection to the Cloudflare public DNS server
-        conn = socket.create_connection(("1.1.1.1", 53))
-        conn.close()
+        _ = req.head(url, timeout=timeout)
         return True
-    except OSError:
-        return False
+    except req.ConnectionError:
+        pass
+    return False
 
 
-def scraper_by_month(path, months, url_start):
+def scraper(path, months, url_start):
     """Scrape the data by month and save it, remove old scrapes.
 
     Args:
@@ -45,8 +45,6 @@ def scraper_by_month(path, months, url_start):
     """
     if _check_internet():
         if len(os.listdir(path)) != 7:
-            _remove_old_scrapes(path)
-        elif scrapedate() != date.today():
             _remove_old_scrapes(path)
         if len(os.listdir(path)) != 7:
             for month in months:
