@@ -22,6 +22,7 @@ date = date.today()
 @pytask.mark.task
 @pytask.mark.produces(
     {
+        "scrapes": BLD / "python" / "scrapes",
         "oct": BLD / "python" / "scrapes" / f"october_{date}.html",
         "nov": BLD / "python" / "scrapes" / f"november_{date}.html",
         "dec": BLD / "python" / "scrapes" / f"december_{date}.html",
@@ -29,12 +30,11 @@ date = date.today()
         "feb": BLD / "python" / "scrapes" / f"february_{date}.html",
         "mar": BLD / "python" / "scrapes" / f"march_{date}.html",
         "apr": BLD / "python" / "scrapes" / f"april_{date}.html",
-        "folder": BLD / "python" / "scrapes",
     },
 )
 def task_produce_scrape(produces):
     url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
-    scraper(produces["folder"], months, url_start)
+    scraper(produces["scrapes"], months, url_start)
 
 
 folder_path = "bld/python/scrapes"
@@ -58,5 +58,5 @@ if len(dir) != 0:
     # later try this @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{scrapedate()}.pkl")
     @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{date}.pkl")
     def task_produce_data(depends_on, produces):
-        df = parser(months, date, depends_on["scrapes"])
+        df = parser(months, date.today(), depends_on["scrapes"])
         df.to_pickle(produces)
