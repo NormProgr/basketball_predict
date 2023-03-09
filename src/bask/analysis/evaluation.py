@@ -102,5 +102,4 @@ def naive_inference(data_benchmark):
     X = pd.DataFrame.from_dict(team_scores)
     y = data_benchmark["homewin"]
     result = sm.Logit(y, X).fit()
-    out = result.summary().tables[1]
-    return out
+    return result

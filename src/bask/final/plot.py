@@ -88,3 +88,7 @@ def reg_plot(concat_pred):
     ax.set_ylabel("Home Team Winning", fontsize=14)
     plt.title("Home Team Winning Probability vs. Points Visitor", fontsize=16)
     ax.tick_params(labelsize=12)
+
+
+def naive_inf_table(inferencemodel):
+    return inferencemodel.summary()

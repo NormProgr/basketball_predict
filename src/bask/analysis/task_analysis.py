@@ -6,7 +6,22 @@ from bask.analysis.evaluation import concatenate_dfs, naive_inference, score_df
 from bask.analysis.predict import df_pred_results
 from bask.config import BLD, SRC
 
-names = ["concatenated_pred", "prediction_scores", "team_result_pred", "naive_inf_res"]
+names = ["concatenated_pred", "prediction_scores", "team_result_pred"]
+
+
+@pytask.mark.depends_on(
+    {
+        "eval": ["evaluation.py"],
+        "data_benchmark": BLD / "python" / "data" / "data_benchmark.pkl",
+    },
+)
+@pytask.mark.task
+@pytask.mark.produces(BLD / "python" / "predictions" / "inferencemodel.pkl")
+def task_produce_inf(depends_on, produces):
+    data_benchmark = pd.read_pickle(depends_on["data_benchmark"])
+    result = naive_inference(data_benchmark)
+    result.save(produces)
+
 
 for name in names:
 
@@ -40,6 +55,4 @@ for name in names:
             result = score_df(data_model, data_model_pred, data_benchmark)
         elif name == "team_result_pred":
             result = df_pred_results(data_model, data_model_pred, conferences)
-        elif name == "naive_inf_res":
-            result = naive_inference(data_benchmark)
         result.to_csv(produces)
