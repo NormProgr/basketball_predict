@@ -3,7 +3,7 @@ from datetime import date
 
 import requests as req
 
-months = ["october", "november", "december", "january", "february", "march", "april"]
+from bask.config import BLD
 
 
 def _remove_old_scrapes(folder_path):
@@ -35,8 +35,29 @@ def _check_internet(url="https://github.com/", timeout=5):
     return False
 
 
+def scrapedate():
+    """Take the last scraping date as reference date.
+
+    Raises:
+            Assert: If not 7 scrapes exist.
+
+    Returns:
+        scrapedate (string): The date of the current scrapes.
+
+    """
+    path = BLD / "python" / "scrapes"
+    dir = os.listdir(path)
+    assert (
+        len(dir) == 7
+    ), "Error: Scrapes don't exists, run scraper.py file to generate scrapes."
+    prefixed = [file for file in dir if file.startswith("april_")]
+    parts = prefixed[0].split("_")
+    scrapedate = parts[1].split(".")[0]
+    return scrapedate
+
+
 def scraper(path, months, url_start):
-    """Scrape the data by month and save it, remove old scrapes.
+    """Scrape the data by month if there are no scrapes from today, remove old scrapes.
 
     Args:
         months (list): List of months to be scraped.
@@ -45,6 +66,8 @@ def scraper(path, months, url_start):
     """
     if _check_internet():
         if len(os.listdir(path)) != 7:
+            _remove_old_scrapes(path)
+        elif date.today().strftime("%Y-%m-%d") != scrapedate():
             _remove_old_scrapes(path)
         if len(os.listdir(path)) != 7:
             for month in months:
@@ -57,9 +80,3 @@ def scraper(path, months, url_start):
                     encoding="utf8",
                 ) as f:
                     f.write(data.text)
-
-
-months = ["october", "november", "december", "january", "february", "march", "april"]
-url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
-folder_path = "bld/python/scrapes"
-# or like this BLD / "python" / "scrapes"

@@ -1,30 +1,5 @@
-import os
-
 import pandas as pd
 from bs4 import BeautifulSoup
-
-from bask.config import BLD
-
-
-def scrapedate():
-    """Take the last scraping date as reference date.
-
-    Raises:
-            Assert:
-
-    Returns:
-        scrapedate (string): The date of the current scrape.
-
-    """
-    path = BLD / "python" / "scrapes"
-    dir = os.listdir(path)
-    if len(dir) != 0:
-        prefixed = [filename for filename in dir if filename.startswith("april_")]
-        # assert (
-        # ), "Error: No data exists, run scraper.py file to generate scrapes."
-        parts = prefixed[0].split("_")
-        scrapedate = parts[1].split(".")[0]
-        return scrapedate
 
 
 def parser(months, scrapedate, path):

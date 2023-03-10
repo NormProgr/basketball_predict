@@ -1,12 +1,12 @@
 import os
-from datetime import date, datetime
+from datetime import datetime
 
 import pandas as pd
 import pytest
 import requests as req
 from bask.config import BLD, TEST_DIR
-from bask.preparation.parser import parser, scrapedate
-from bask.preparation.scraper import _check_internet, months
+from bask.preparation.parser import parser
+from bask.preparation.scraper import _check_internet, scrapedate
 
 
 @pytest.fixture()
@@ -41,8 +41,16 @@ def test_parser():
 
     """
     path = BLD / "python" / "scrapes"
-    # which one? df = parser(months, scrapedate(), path)
-    df = parser(months, date.today(), path)
+    months = [
+        "october",
+        "november",
+        "december",
+        "january",
+        "february",
+        "march",
+        "april",
+    ]
+    df = parser(months, scrapedate(), path)
     parts = []
     for date_str in df["Date"]:
         mon = date_str.split(" ")[1]
