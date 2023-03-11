@@ -2,7 +2,13 @@
 
 import pandas as pd
 import pytest
-from bask.analysis.evaluation import concatenate_dfs, pred_accuracy, score_df
+import statsmodels.api as sm
+from bask.analysis.evaluation import (
+    concatenate_dfs,
+    naive_inference,
+    pred_accuracy,
+    score_df,
+)
 from bask.analysis.predict import prediction
 from bask.config import TEST_DIR
 
@@ -55,8 +61,6 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
         data["homewin"][0 : len(data)] == df["homewin"][0 : len(data)]
     ).all(), "Error: Past results changed by concatenating."
 
-    # ValueError: Can only compare identically-labeled Series objects
-
 
 def test_pred_accuracy(data, data_pred, data_benchmark):
     """Test if concatenated data frame has correct dimensions.
@@ -74,9 +78,6 @@ def test_pred_accuracy(data, data_pred, data_benchmark):
     assert 1 >= score_acc >= 0, "Error: Score not between 0 and 1."
 
 
-# ValueError: Can only compare identically-labeled Series objects
-
-
 def test_score_df(data, data_pred, data_benchmark):
     """Test if the correct length of columns is returned.
 
@@ -91,3 +92,20 @@ def test_score_df(data, data_pred, data_benchmark):
     """
     df = score_df(data, data_pred, data_benchmark)
     assert df.shape[1] == 2, f"Error: Returns {len(df.shape[1])}, but expects: {2}."
+
+
+def test_naive_inference(data_benchmark):
+    """Test if the inference function produces correct results and is the correct type.
+
+    Args:
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+
+    Raises:
+        Assert: Raises an error if the p-values are out of the possible values.
+        Assert: Raises an error if summary of the fit is not the correct type.
+
+    """
+    result = naive_inference(data_benchmark)
+    for pvalue in result.pvalues:
+        assert pvalue >= 0 and pvalue <= 1
+    assert isinstance(result.summary(), sm.iolib.summary.Summary)

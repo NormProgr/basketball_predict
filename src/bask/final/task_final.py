@@ -55,6 +55,7 @@ def task_produce_inf(depends_on, produces):
 pics = ["heatmap"]
 for pic in pics:
 
+    @pytask.mark.skip
     @pytask.mark.depends_on(
         {
             "plot": ["plot.py"],
@@ -80,12 +81,10 @@ for pic in pics:
             graph.savefig(produces)
 
 
-#########
-
-"""
-pics = ["heatmap", "roc_curve", "reg_plot"] #, "reg_plot"
+pics = ["heatmap", "roc_curve", "reg_plot"]  # , "reg_plot"
 
 for pic in pics:
+
     @pytask.mark.skip
     @pytask.mark.depends_on(
         {
@@ -98,6 +97,7 @@ for pic in pics:
     @pytask.mark.task
     @pytask.mark.produces(BLD / "python" / "tables" / f"basketball_pics_{pic}.pdf")
     def task_create_results_pics_python(depends_on, produces, pic=pic):
+        """Produce multiple descriptive graphs in pdf format based on analysis."""
         data_benchmark = pd.read_pickle(depends_on["data_benchmark"])
         concat_pred = pd.read_csv(depends_on["concat_pred"])
         score = pd.read_pickle(depends_on["scores"])
@@ -111,5 +111,3 @@ for pic in pics:
             graph = reg_plot(concat_pred)
         with open(produces, "w"):
             graph.write_image(produces)
-"""
-# """Produce multiple descriptive graphs in pdf format based on the basketball data analysis."""
