@@ -35,7 +35,7 @@ def create_heatmap(concat_pred, data_benchmark, score):
     Args:
         concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
         data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
-        score (pandas.DataFrame): The benchmark accuracy score for the predictions.
+        score (float): The benchmark accuracy score for the predictions.
 
     Returns:
         plt (matplotlib.pyplot): A heatmap visualization of the confusion matrix.
@@ -44,11 +44,10 @@ def create_heatmap(concat_pred, data_benchmark, score):
     cm = confusion_matrix(concat_pred, data_benchmark)
     plt.figure(figsize=(9, 9))
     sns.heatmap(cm, annot=True, fmt=".3f", linewidths=0.5, square=True, cmap="Blues_r")
-    plt.ylabel("Actual label")
-    plt.xlabel("Predicted label")
-    all_sample_title = f"Benchmark Accuracy Score: {score}"
-    plt.title(all_sample_title, size=15)
-    plt.show()
+    plt.ylabel("Actual values")
+    plt.xlabel("Predicted values")
+    title = f"Benchmark Accuracy Score: {round(score.iloc[0], 4)}"
+    plt.title(title, size=15)
     return plt
 
 

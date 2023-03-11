@@ -107,5 +107,10 @@ def test_naive_inference(data_benchmark):
     """
     result = naive_inference(data_benchmark)
     for pvalue in result.pvalues:
-        assert pvalue >= 0 and pvalue <= 1
-    assert isinstance(result.summary(), sm.iolib.summary.Summary)
+        assert (
+            pvalue >= 0 and pvalue <= 1
+        ), "Error: p-values are out of the possible space."
+    assert isinstance(
+        result.summary(),
+        sm.iolib.summary.Summary,
+    ), "Error: It is not statsmodel  type."
