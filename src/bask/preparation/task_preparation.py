@@ -31,6 +31,7 @@ date = date.today() if _check_internet() else scrapedate()
     },
 )
 def task_produce_scrape(produces):
+    """Produce multiple basketball data .html scrapes and save them."""
     url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
     scraper(produces["scrapes"], months, url_start)
 
@@ -51,5 +52,6 @@ def task_produce_scrape(produces):
 @pytask.mark.task
 @pytask.mark.produces(BLD / "python" / "parsed" / f"data_{date}.pkl")
 def task_produce_data(depends_on, produces):
+    """Convert the .html scrapes to one data file."""
     df = parser(months, date, depends_on["scrapes"])
     df.to_pickle(produces)

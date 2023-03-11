@@ -22,6 +22,7 @@ for time in datasets:
     @pytask.mark.task
     @pytask.mark.produces(BLD / "python" / "data" / f"data_{time}.pkl")
     def task_clean_split_data(depends_on, produces, time=time):
+        """Split the cleaned data into four data sets for analysis."""
         data_info = yaml.safe_load(open(depends_on["data_info"]))
         data = pd.read_pickle(depends_on["data"])
         df = clean_data(data_info, data)[datasets.index(time)]
