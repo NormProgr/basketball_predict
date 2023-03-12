@@ -16,6 +16,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{subcaption}
 \usepackage{minibox}
+\usepackage{adjustbox}
 % \usepackage{pdf14} % Enable for Manuscriptcentral -- can't handle pdf 1.5
 % \usepackage{endfloat} % Enable to move tables / figures to the end. Useful for some
 % submissions.
@@ -34,8 +35,7 @@
 \AtBeginDocument{\toggletrue{blx@useprefix}}
 \AtBeginBibliography{\togglefalse{blx@useprefix}}
 \setlength{\bibitemsep}{1.5ex}
-%\addbibresource{../../paper/refs.bib}
-\addbibresource{refs.bib}
+\bibliography{refs.bib}
 
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
@@ -60,7 +60,7 @@
 
 \begin{document}
 
-\title{Scraping basketball data to predict future game outcomes\thanks{Norman Metzinger, Anne Rebecca Charlotte Ringborg, University of Bonn. Email: \href{mailto:norman.metzinger@gmx.de}{\nolinkurl{norman [dot] metzinger [at] gmx [dot] de}}.}}
+\title{Scraping basketball data to predict future game outcomes\thanks{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg, University of Bonn. Email: \href{mailto:norman.metzinger@gmx.de}{\nolinkurl{norman [dot] metzinger [at] gmx [dot] de}}.}}
 
 \author{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg}
 
@@ -72,7 +72,11 @@
 
 
 \begin{abstract}
-    Some abstract here.
+    This project utilizes Python to scrape data from Basketball Reference and predict the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression model.
+    The impact of team quality and location on expected results is evaluated, and the results are summarized in this paper.
+    The implementation uses Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively, and is documented and organized with pytask.
+    The project is replicable by running pytask, provided the url source remains accurate.
+    The predictions and evaluations are displayed by graphics and tables, and the quality of predictions can be evaluated even after the end of the NBA season.\footcite{The content of this abstract was generated with the assistance of OpenAI's ChatGPT language model.}
 \end{abstract}
 
 \clearpage
@@ -80,9 +84,6 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-
-If you are using this template, please cite this item from the references:
-\citet{GaudeckerEconProjectTemplates}.
 
 This project predicts the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression. The goal is to provide an overview on the impact of team quality and location (that is, home or visitor) on expected results.\\
 
@@ -95,67 +96,87 @@ The code is documented and organized with pytask for a intuitive and elegant wor
 The regression uses game results up to the 16th February 2023. The fit is then applied to predict the following games, validating the predictions by comparing it to the actual results up to the current scrape.\\
 In the following, our predictions and evaluations are displayed by graphics and tables, and we make some notes on replicability of the project.
 
-\section{Information Sheet}
+We followed the project template from \citet{GaudeckerEconProjectTemplates}.
+
+
+\section{Notes on Implementation and Reproducibility}
 
 We implemented the project on macOS Ventura 13.0.1 and Windows 11 using Visual Studio Code. The packages required for this project can be found in the file environment.yaml.
 Since the data is scraped within the code, our results are replicable by running pytask, as long as the url source remains accurate.
 After the end of the NBA season (9th April 2023), the project can still be used to evaluate the quality of predictions, even if no future games remain.\\
+To reproduce our project, one can follow these steps:
+\begin{enumerate}
+    \item Install Anaconda and Visual Code Studio (tutorial links!!)
+    \item Clone the repository
+    \item Create and activate the project environment with
+        \begin{itemize}
+            \item befehl furs erstellen
+            \item conda activate bask
+        \end{itemize}
+    \item Run the command pytask in a terminal
+\end{enumerate}
+
+
+\section{Information Sheet}
 
 We now introduce our predictions:
 
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
+\caption{\emph{Python:} The winning probability of the home team by visitor team scoring.}
 \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_reg_plot}
-\caption{\emph{Python:} Model predictions of the smoking probability over the lifetime. Each colored line represents a case where marital status is fixed to one of the values present in the data set.}
     \label{fig:python-reg_plot}
 
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 
     \centering
+    \caption{\emph{Python:} The probability of the logit model to predict correctly.}
     \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_heatmap}
-
-    \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate. One can see that the models performs better than 0.5.}
     \label{fig:python-heatmap}
 
 \end{figure}
 
 \begin{table}[!h]
-    \input{../python/tables/inference_model.tex}
     \caption{\label{tab:python-inference_model}\emph{Python:} Estimation results of the
-        linear Logistic regression.}
+    linear Logistic regression.}
+    \input{../python/tables/inference_model.tex}
 \end{table}
 
+In the NBA, teams are divied into two conferences, east and west. The best 8 teams from each conference enter the playoff phase, in which the best teams compete within their own conference until the NBA final.
+\ref{tab:python-table_playoffs} shows the 16 teams which are expected to enter the playoffs, based on our prediction. Thus, a naive result prediction would be to assume that the best team from each conference will face each other in the final.
 
 \begin{table}[!h]
+    \caption{\label{tab:python-table_playoffs}\emph{Python:} Predicted winning probabilities for the predicted best 8 teams per conference.}
     \input{../python/tables/basketball_results_table_playoffs.tex}
-    \caption{\label{tab:python-table_playoffs}\emph{Python:} Estimation results of the
-        linear Logistic regression.}
 \end{table}
-
 
 
 
 
 \section{Additional Information}
 
-\begin{figure}[H]
+\ref{fig:python-roc_curve} plots the true positive rate to the false positive rate. One can see that the model performs better than 0.5.
 
-    \centering
+\begin{figure}[!h]
+   \centering
+    \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate.}
     \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_roc_curve}
-
-    \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate. One can see that the models performs better than 0.5.}
     \label{fig:python-roc_curve}
 
 \end{figure}
-
-\begin{table}[!h]
-    \input{../python/tables/basketball_results_table.tex}
-    \caption{\label{tab:python-results_table}\emph{Python:} Probability of all teams to enter the playoffs.}
-\end{table}
 \setstretch{1}
+Figure \ref{tab:python-results_table} provides an overview over all NBA teams. The top 8 from each conference are expected to enter the playoffs.
+
+\begin{tabular}[!h]
+    \caption{\label{tab:python-results_table}\emph{Python:} Predicted winning probabilities for all NBA teams.}
+    \input{../python/tables/basketball_results_table.tex}
+\end{tabular}
+
+
+
 \printbibliography
 \setstretch{1.5}
 

@@ -102,22 +102,41 @@ def generate_prediction_table(res_pred, playoff=False):
 
     eastern = res_pred[res_pred["conference"] == "East"].reset_index(drop=True)
     western = res_pred[res_pred["conference"] == "West"].reset_index(drop=True)
-    if playoff:
-        eastern = eastern[eastern["pred_in_playoffs"]]  # == True]
-        western = western[western["pred_in_playoffs"]]  # == True]
-
-    final_df = pd.concat(
+    df = pd.concat(
         [
             eastern[
-                ["team_name", "pred_win_prob", "pred_total_wins", "pred_in_playoffs"]
+                [
+                    "team_name",
+                    "conference",
+                    "pred_win_prob",
+                    "pred_total_wins",
+                    "pred_in_playoffs",
+                ]
             ].reset_index(drop=True),
             western[
-                ["team_name", "pred_win_prob", "pred_total_wins", "pred_in_playoffs"]
+                [
+                    "team_name",
+                    "conference",
+                    "pred_win_prob",
+                    "pred_total_wins",
+                    "pred_in_playoffs",
+                ]
             ].reset_index(drop=True),
         ],
-        axis=1,
-        keys=["Eastern Conference", "Western Conference"],
+        axis=0,
     )
+    final_df = df.rename(
+        columns={
+            "team_name": "Team Name",
+            "conference": "Conference",
+            "pred_win_prob": "Pred. Win Probability",
+            "pred_total_wins": "Pred. Total Wins",
+            "pred_in_playoffs": "Pred. in Playoffs",
+        },
+    )
+    if playoff:
+        final_df = final_df[final_df["Pred. in Playoffs"]]
+        final_df = final_df.drop("Pred. in Playoffs", axis=1)
     return final_df
 
 
