@@ -76,7 +76,7 @@
     The impact of team quality and location on expected results is evaluated, and the results are summarized in this paper.
     The implementation uses Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively, and is documented and organized with pytask.
     The project is replicable by running pytask, provided the url source remains accurate.
-    The predictions and evaluations are displayed by graphics and tables, and the quality of predictions can be evaluated even after the end of the NBA season.\footcite{The content of this abstract was generated with the assistance of OpenAI's ChatGPT language model.}
+    The predictions and evaluations are displayed by graphics and tables, and the quality of predictions can be evaluated even after the end of the NBA season.\footnote{The content of this abstract was generated with the assistance of OpenAI's ChatGPT language model.}
 \end{abstract}
 
 \clearpage
@@ -122,7 +122,7 @@ To reproduce our project, one can follow these steps:
 We now introduce our predictions:
 
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \caption{\emph{Python:} The winning probability of the home team by visitor team scoring.}
 \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_reg_plot}
@@ -130,7 +130,7 @@ We now introduce our predictions:
 
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[H]
 
     \centering
     \caption{\emph{Python:} The probability of the logit model to predict correctly.}
@@ -139,7 +139,7 @@ We now introduce our predictions:
 
 \end{figure}
 
-\begin{table}[!h]
+\begin{table}[H]
     \caption{\label{tab:python-inference_model}\emph{Python:} Estimation results of the
     linear Logistic regression.}
     \input{../python/tables/inference_model.tex}
@@ -148,7 +148,7 @@ We now introduce our predictions:
 In the NBA, teams are divied into two conferences, east and west. The best 8 teams from each conference enter the playoff phase, in which the best teams compete within their own conference until the NBA final.
 \ref{tab:python-table_playoffs} shows the 16 teams which are expected to enter the playoffs, based on our prediction. Thus, a naive result prediction would be to assume that the best team from each conference will face each other in the final.
 
-\begin{table}[!h]
+\begin{table}[H]
     \caption{\label{tab:python-table_playoffs}\emph{Python:} Predicted winning probabilities for the predicted best 8 teams per conference.}
     \input{../python/tables/basketball_results_table_playoffs.tex}
 \end{table}
@@ -160,7 +160,7 @@ In the NBA, teams are divied into two conferences, east and west. The best 8 tea
 
 \ref{fig:python-roc_curve} plots the true positive rate to the false positive rate. One can see that the model performs better than 0.5.
 
-\begin{figure}[!h]
+\begin{figure}[H]
    \centering
     \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate.}
     \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_roc_curve}
@@ -168,12 +168,13 @@ In the NBA, teams are divied into two conferences, east and west. The best 8 tea
 
 \end{figure}
 \setstretch{1}
+
 Figure \ref{tab:python-results_table} provides an overview over all NBA teams. The top 8 from each conference are expected to enter the playoffs.
 
-\begin{tabular}[!h]
+\begin{table}[H]
     \caption{\label{tab:python-results_table}\emph{Python:} Predicted winning probabilities for all NBA teams.}
     \input{../python/tables/basketball_results_table.tex}
-\end{tabular}
+\end{table}
 
 
 
