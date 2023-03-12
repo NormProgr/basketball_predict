@@ -34,7 +34,8 @@
 \AtBeginDocument{\toggletrue{blx@useprefix}}
 \AtBeginBibliography{\togglefalse{blx@useprefix}}
 \setlength{\bibitemsep}{1.5ex}
-\addbibresource{../../paper/refs.bib}
+%\addbibresource{../../paper/refs.bib}
+\addbibresource{refs.bib}
 
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
@@ -59,13 +60,11 @@
 
 \begin{document}
 
-\title{Scraping basketball data to predict future game outcomes\thanks{Norman Metzinger, Anne Rebecca Ringborg, University of Bonn. Email: \href{mailto:norman.metzinger@gmx.de}{\nolinkurl{norman [dot] metzinger [at] gmx [dot] de}}.}}
+\title{Scraping basketball data to predict future game outcomes\thanks{Norman Metzinger, Anne Rebecca Charlotte Ringborg, University of Bonn. Email: \href{mailto:norman.metzinger@gmx.de}{\nolinkurl{norman [dot] metzinger [at] gmx [dot] de}}.}}
 
-\author{Norman Metzinger, Anne Rebecca Ringborg}
+\author{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg}
 
 \date{
-    {\bf Preliminary -- please do not quote}
-    \\[1ex]
     \today
 }
 
@@ -85,54 +84,82 @@
 If you are using this template, please cite this item from the references:
 \citet{GaudeckerEconProjectTemplates}.
 
-The data set for the example project is taken from
-\url{https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools}.
-It contains data on smoking habits in the UK, with 1691 observations and 12 variables.
-We consider only 4 of the 12 features for the prediction of the variable
-\texttt{smoking}: \texttt{marital\_status}, \texttt{highest\_qualification},
-\texttt{gender} and \texttt{age}. We model the dependence using a Logistic model. All
-numerical features are included linearly, while categorical features are expanded into
-dummy variables. Figures below illustrate the model predictions over the lifetime. You
-will find one figure and one estimation summary table for each installed programming
-language.
+This project predicts the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression. The goal is to provide an overview on the impact of team quality and location (that is, home or visitor) on expected results.\\
+
+The project scrapes data from Basketball Reference (www.basketball-reference.com) to collect the required information for each game such as points, teams, date, etc.
+The collected data is then cleaned, pre-processed, and fed into the logistic regression model for analysis. The results are summarized in this paper.\\
+
+The project is implemented in Python, utilizing various libraries such as Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively.
+The code is documented and organized with pytask for a intuitive and elegant work-flow management.\\
+
+The regression uses game results up to the 16th February 2023. The fit is then applied to predict the following games, validating the predictions by comparing it to the actual results up to the current scrape.\\
+In the following, our predictions and evaluations are displayed by graphics and tables, and we make some notes on replicability of the project.
+
+\section{Information Sheet}
+
+We implemented the project on macOS Ventura 13.0.1 and Windows 11 using Visual Studio Code. The packages required for this project can be found in the file environment.yaml.
+Since the data is scraped within the code, our results are replicable by running pytask, as long as the url source remains accurate.
+After the end of the NBA season (9th April 2023), the project can still be used to evaluate the quality of predictions, even if no future games remain.\\
+
+We now introduce our predictions:
 
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_reg_plot}
+\caption{\emph{Python:} Model predictions of the smoking probability over the lifetime. Each colored line represents a case where marital status is fixed to one of the values present in the data set.}
+    \label{fig:python-reg_plot}
+
+\end{figure}
 
 \begin{figure}[H]
 
     \centering
-    \includegraphics[width=0.85\textwidth]{../python/figures/smoking_by_marital_status}
+    \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_heatmap}
 
-    \caption{\emph{Python:} Model predictions of the smoking probability over the
-        lifetime. Each colored line represents a case where marital status is fixed to one
-        of the values present in the data set.}
-    \label{fig:python-predictions}
+    \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate. One can see that the models performs better than 0.5.}
+    \label{fig:python-heatmap}
 
 \end{figure}
 
+\begin{table}[!h]
+    \input{../python/tables/inference_model.tex}
+    \caption{\label{tab:python-inference_model}\emph{Python:} Estimation results of the
+        linear Logistic regression.}
+\end{table}
+
 
 \begin{table}[!h]
-    \input{../python/tables/estimation_results.tex}
-    \caption{\label{tab:python-summary}\emph{Python:} Estimation results of the
+    \input{../python/tables/basketball_results_table_playoffs.tex}
+    \caption{\label{tab:python-table_playoffs}\emph{Python:} Estimation results of the
         linear Logistic regression.}
 \end{table}
 
 
 
 
-% section introduction (end)
 
+\section{Additional Information}
 
+\begin{figure}[H]
 
+    \centering
+    \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_roc_curve}
+
+    \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate. One can see that the models performs better than 0.5.}
+    \label{fig:python-roc_curve}
+
+\end{figure}
+
+\begin{table}[!h]
+    \input{../python/tables/basketball_results_table.tex}
+    \caption{\label{tab:python-results_table}\emph{Python:} Probability of all teams to enter the playoffs.}
+\end{table}
 \setstretch{1}
 \printbibliography
 \setstretch{1.5}
 
 
-% \appendix
 
-% The chngctr package is needed for the following lines.
-% \counterwithin{table}{section}
-% \counterwithin{figure}{section}
 
 \end{document}

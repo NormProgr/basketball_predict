@@ -1,5 +1,6 @@
 """Functions plotting results."""
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn import metrics
@@ -75,7 +76,9 @@ def plot_roc_curve(data_benchmark, concat_pred):
     plt.plot(fp_r, tp_r)
     plt.ylabel("True Positive Rate")
     plt.xlabel("False Positive Rate")
-    plt.show()
+    plt.title("ROC Curve", size=15)
+    x = np.linspace(0, 1, 5)
+    plt.plot(x, x, "-g")
     return plt
 
 
@@ -142,7 +145,6 @@ def reg_plot(concat_pred):
     ax.set_ylabel("Home Team Winning", fontsize=14)
     plt.title("Home Team Winning Probability vs. Points Visitor", fontsize=16)
     ax.tick_params(labelsize=12)
-    plt.show()
     return plt
 
 
