@@ -23,7 +23,7 @@ To run this project a Python and a LaTex distribution is required. The project w
 To get started, create and activate the environment with
 
 ```console
-$ conda/mamba env create
+$ conda/mamba env create -f environment.yml
 $ conda activate bask
 ```
 
