@@ -8,11 +8,11 @@ def clean_columns(data_info, df):
     """Drop and rename columns.
 
     Args:
-        df (pandas DataFrame): Raw data given from the parser.
         data_info (yaml): Contains a configuration of column names.
+        df (pandas.DataFrame): Raw data given from the parser.
 
     Returns:
-        df (pandas DataFrame): DataFrame has dropped unnecessary data and renamed.
+        df (pandas.DataFrame): DataFrame has dropped unnecessary data and renamed.
 
     """
     df.drop(columns=data_info["columns_to_drop"], inplace=True)
@@ -24,10 +24,10 @@ def _win_col(df):
     """Produce new column.
 
     Args:
-        df (pandas DataFrame): Data manipulated by previous functions.
+        df (pandas.DataFrame): Data manipulated by previous functions.
 
     Returns:
-        df (pandas DataFrame): DataFrame has now a dummy variable column indicating wins and losses.
+        df (pandas.DataFrame): DataFrame has now a dummy variable column indicating wins and losses.
 
     """
     df["homewin"] = np.where(
@@ -42,10 +42,10 @@ def _transform_date(df):
     """Change to more readable datetime.
 
     Args:
-        df (pandas DataFrame): Data manipulated by previous functions.
+        df (pandas.DataFrame): Data manipulated by previous functions.
 
     Returns:
-        df (pandas DataFrame): DataFrame has now changed datetime display.
+        df (pandas.DataFrame): DataFrame has now changed datetime display.
 
     """
     df["date"] = pd.to_datetime(df["date"])
@@ -56,10 +56,10 @@ def _produce_model_data(data):
     """Change to analysis dataset with cutoff date 2023-02-15.
 
     Args:
-        data (pandas DataFrame): Data manipulated by previous functions.
+        data (pandas.DataFrame): Data manipulated by previous functions.
 
     Returns:
-        data (pandas DataFrame): DataFrame has now NaN values from cutoff point.
+        data (pandas.DataFrame): DataFrame has now NaN values from cutoff point.
 
     """
     data.loc[data["date"] >= "2023-02-16", "pts_home"] = np.nan
@@ -73,12 +73,12 @@ def _data_split(df):
     """Split the DataFrame into two parts.
 
     Args:
-        df (pandas DataFrame): Data manipulated by previous functions.
+        df (pandas.DataFrame): Data manipulated by previous functions.
 
     Returns:
         list:
-            df_past (pandas DataFrame): DataFrame that includes all data including the scraping data.
-            df_future(pandas DataFrame): DataFrame that includes all data after the scraping data.
+            df_past (pandas.DataFrame): DataFrame that includes all data including the scraping data.
+            df_future(pandas.DataFrame): DataFrame that includes all data after the scraping data.
 
     """
     # include this line df = df[df["date"] <= "2023-03-09"]
@@ -91,11 +91,12 @@ def _dummy_teams(data_info, df):
     """Create dummy variables for team names.
 
     Args:
-        df (data frame): Data frame with team name columns.
+        data_info (yaml): Contains a configuration of column names.
+        df (pandas.DataFrame): Data frame with team name columns.
 
 
     Return:
-        new_df (pandas DataFrame): df with 2 dummy variables per team (home/visitor).
+        new_df (pandas.DataFrame): df with 2 dummy variables per team (home/visitor).
             We do NOT remove the first dummy, so we have perfect multicollinearity.
 
     """
@@ -110,8 +111,8 @@ def clean_data(data_info, data):
     """Produce 4 DataFrames for analysis.
 
     Args:
-        df (pandas DataFrame): Data given from clean_columns function.
         data_info (yaml): Contains a configuration of column names.
+        data (pandas.DataFrame): Raw data given from the parser.
 
     Returns:
         list:

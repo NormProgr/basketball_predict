@@ -7,7 +7,12 @@ from bask.config import BLD
 
 
 def _remove_old_scrapes(folder_path):
-    """Delete old scrapes to save memory and for overview."""
+    """Delete old scrapes to save memory and for overview.
+
+    Args:
+        folder_path (directory): Directory of the folder containing scrapes.
+
+    """
     folder_contents = os.listdir(folder_path)
     for item in folder_contents:
         item_path = os.path.join(folder_path, item)

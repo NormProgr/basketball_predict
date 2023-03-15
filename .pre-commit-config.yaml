@@ -62,10 +62,10 @@ repos:
           - --wrap-descriptions
           - '88'
           - --blank
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.230
-    hooks:
-      - id: ruff
+  # - repo: https://github.com/charliermarsh/ruff-pre-commit
+  #  rev: v0.0.230
+  #  hooks:
+  #    - id: ruff
       #   args:
       #     - --verbose
   - repo: https://github.com/kynan/nbstripout

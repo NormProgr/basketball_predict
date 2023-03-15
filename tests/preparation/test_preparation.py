@@ -16,7 +16,6 @@ def html_files():
     return pd.read_csv(TEST_DIR / "preparation" / "data_fixture.csv")
 
 
-# Loop over months?
 def test_scraper():
     """Test whether the correct amount of files is generated.
 

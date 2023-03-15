@@ -28,8 +28,7 @@ for i in tables:
     @pytask.mark.produces(BLD / "python" / "tables" / f"basketball_results_{i}.tex")
     def task_create_results_table_python(depends_on, produces, i=i):
         """Store a table in LaTeX format with the estimation results (Python
-        version).
-        """
+        version)."""
         res_pred = pd.read_pickle(depends_on["result_pred"])
         if i == "table":
             model = generate_prediction_table(res_pred=res_pred, playoff=False)
@@ -73,8 +72,7 @@ for pic in pics:
     @pytask.mark.produces(BLD / "python" / "figures" / f"basketball_pics_{pic}.pdf")
     def task_create_results_pics_python(depends_on, produces, pic=pic):
         """Produce multiple descriptive graphs in pdf format based on the basketball
-        data analysis.
-        """
+        data analysis."""
         data_benchmark = pd.read_pickle(depends_on["data_benchmark"])
         concat_pred = pd.read_pickle(depends_on["concat_pred"])
         score = pd.read_pickle(depends_on["scores"])
@@ -88,20 +86,3 @@ for pic in pics:
             reg_plot(concat_pred)
         plt.savefig(produces)
         plt.close()
-
-        """
-        data_benchmark = pd.read_pickle(depends_on["data_benchmark"])
-        concat_pred = pd.read_pickle(depends_on["concat_pred"])
-        score = pd.read_pickle(depends_on["scores"])
-        # old code, keep in case loc problems arise score = score.iloc[0, 1]
-        score = score.loc[score["score_type"] == "fit_score", "score"]
-        if pic == "roc_curve":
-            plot_roc_curve(data_benchmark, concat_pred)
-        elif pic == "heatmap":
-            create_heatmap(concat_pred, data_benchmark, score)
-        elif pic == "reg_plot":
-            reg_plot(concat_pred)
-        with open(produces, "w"):
-            plt.savefig(produces)
-
- # """  # Produce multiple descriptive graphs in pdf format based on the basketball data analysis.

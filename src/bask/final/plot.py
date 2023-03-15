@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn import metrics
 
 
-def confusion_matrix(concat_pred, data_benchmark):
+def _confusion_matrix(concat_pred, data_benchmark):
     """Compute the confusion matrix for a given set of predictions and benchmark data.
 
     Args:
@@ -33,7 +33,6 @@ def create_heatmap(concat_pred, data_benchmark, score):
     """Create a heatmap visualization of a confusion matrix.
 
     Args:
-    Args:
         concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
         data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
         score (float): The benchmark accuracy score for the predictions.
@@ -42,7 +41,7 @@ def create_heatmap(concat_pred, data_benchmark, score):
         plt (matplotlib.pyplot): A heatmap visualization of the confusion matrix.
 
     """
-    cm = confusion_matrix(concat_pred, data_benchmark)
+    cm = _confusion_matrix(concat_pred, data_benchmark)
     plt.figure(figsize=(9, 9))
     sns.heatmap(cm, annot=True, fmt=".3f", linewidths=0.5, square=True, cmap="Blues_r")
     plt.ylabel("Actual values")
@@ -94,38 +93,12 @@ def generate_prediction_table(res_pred, playoff=False):
         final_df (pandas.DataFrame): A DataFrame containing the predicted win probability, total wins, and playoff status for each team in the Eastern and Western conferences.
 
     """
-    res_pred.sort_values(
-        ["conference", "pred_win_prob"],
-        ascending=[True, False],
-        inplace=True,
+    res_pred = res_pred.sort_values(
+        ["conference", "pred_total_wins", "pred_win_prob"],
+        ascending=[True, False, False],
     )
 
-    eastern = res_pred[res_pred["conference"] == "East"].reset_index(drop=True)
-    western = res_pred[res_pred["conference"] == "West"].reset_index(drop=True)
-    df = pd.concat(
-        [
-            eastern[
-                [
-                    "team_name",
-                    "conference",
-                    "pred_win_prob",
-                    "pred_total_wins",
-                    "pred_in_playoffs",
-                ]
-            ].reset_index(drop=True),
-            western[
-                [
-                    "team_name",
-                    "conference",
-                    "pred_win_prob",
-                    "pred_total_wins",
-                    "pred_in_playoffs",
-                ]
-            ].reset_index(drop=True),
-        ],
-        axis=0,
-    )
-    final_df = df.rename(
+    final_df = res_pred.rename(
         columns={
             "team_name": "Team Name",
             "conference": "Conference",
@@ -138,9 +111,6 @@ def generate_prediction_table(res_pred, playoff=False):
         final_df = final_df[final_df["Pred. in Playoffs"]]
         final_df = final_df.drop("Pred. in Playoffs", axis=1)
     return final_df
-
-
-# summary table
 
 
 def reg_plot(concat_pred):
@@ -167,14 +137,14 @@ def reg_plot(concat_pred):
     return plt
 
 
-def naive_inf_table(inferencemodel):
+def naive_inf_table(inference_model):
     """Generate a summary table for the logit model.
 
     Args:
-        inferencemodel (pandas.DataFrame): Fit of the logistic regression.
+        inference_model (pandas.DataFrame): Fit of the logistic regression.
 
     Returns:
         summary_table (pandas.DataFrame): A summary table containing key statistics about the model.
 
     """
-    return inferencemodel.summary()
+    return inference_model.summary()
