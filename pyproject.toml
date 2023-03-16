@@ -1,8 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.0"]
-
-[tool.setuptools_scm]
-write_to = "src/bask/_version.py"
+requires = ["setuptools>=45", "wheel"]
 
 [tool.pytask.ini_options]
 paths = ["./src/bask", "./src/paper"]
