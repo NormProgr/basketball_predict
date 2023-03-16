@@ -34,6 +34,4 @@ dependencies:
       - requests
       - bs4
       - lxml
-      - datetime
-      - os
       - scikit-learn
