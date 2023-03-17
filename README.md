@@ -4,6 +4,7 @@
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![image](https://img.shields.io/badge/pytask-workflow-red)]()
 [![image](https://img.shields.io/badge/python-3.11.0-blue)]()
+[![image](https://img.shields.io/badge/license-MIT-green)]()
 
 ## Authors
 
