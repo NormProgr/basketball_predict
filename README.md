@@ -2,7 +2,7 @@
 
 [![pre-commit.ci passed](https://img.shields.io/badge/pre--commit.ci-passed-brightgreen)](https://results.pre-commit.ci/run/github/274689747/1678058970.SI-lnarDSRqXafVBdLucmg)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![image](https://img.shields.io/badge/pytask-workflow-red)](https://pypi.org/project/pytask/)
+[![image](https://img.shields.io/badge/pytask-v0.3.1-red)](https://pypi.org/project/pytask/)
 [![image](https://img.shields.io/badge/python-3.11.0-blue)](https://www.python.org/)
 [![image](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/license/mit/)
 [![image](https://img.shields.io/badge/LaTeX-TEX-orange)](https://www.tug.org/texlive/)
