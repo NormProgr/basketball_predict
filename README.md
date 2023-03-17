@@ -1,6 +1,6 @@
 # Scraping basketball data to predict future game outcomes
 
-[![pre-commit.ci passed](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://results.pre-commit.ci/latest/github/NormProgr/bask/main)
+[![pre-commit.ci passed](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://img.shields.io/badge/pre--commit.ci-passed-brightgreen)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![image](https://img.shields.io/badge/pytask-workflow-red)](https://img.shields.io/badge/pytask-workflow-red)
 
