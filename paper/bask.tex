@@ -60,7 +60,8 @@
 
 \begin{document}
 
-\title{Scraping basketball data to predict future game outcomes\thanks{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg, University of Bonn. Email: \href{mailto:norman.metzinger@gmx.de}{\nolinkurl{norman [dot] metzinger [at] gmx [dot] de}}.}}
+\title{Scraping basketball data to predict future game outcomes\thanks{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg, University of Bonn. Email:
+\href{mailto:s6nometz@uni-bonn.de}{\nolinkurl{s6nometz [at] uni [minus] bonn [dot] de}}. \href{mailto:rebeccar@uni-bonn.de}{\nolinkurl{rebeccar [at] uni [minus] bonn [dot] de}}}}
 
 \author{Norman Lothar Metzinger, Anne Rebecca Charlotte Ringborg}
 
@@ -72,51 +73,64 @@
 
 
 \begin{abstract}
-    This project utilizes Python to scrape data from Basketball Reference and predict the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression model.
+    This project uses Python to scrape data from \href{www.basketball-reference.com}{www.basketball-reference.com} and predicts the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression model.
     The impact of team quality and location on expected results is evaluated, and the results are summarized in this paper.
-    The implementation uses Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively, and is documented and organized with pytask.
-    The project is replicable by running pytask, provided the url source remains accurate.
-    The predictions and evaluations are displayed by graphics and tables, and the quality of predictions can be evaluated even after the end of the NBA season.\footnote{The content of this abstract was generated with the assistance of OpenAI's ChatGPT language model.}
+    The implementation uses, among others, Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively, and is documented and organized with pytask.
+    The project is replicable by running pytask. The predictions and evaluations are displayed by graphics and tables, and the quality of predictions can be evaluated even after the end of the NBA season.\footnote{The content of this abstract was generated with the assistance of OpenAI's ChatGPT language model.}
 \end{abstract}
 
 \clearpage
 
 
-\section{Introduction} % (fold)
+\section{Introduction}
 \label{sec:introduction}
 
 This project predicts the probability of a team winning or losing a basketball game in the 2022/23 NBA season using a logistic regression. The goal is to provide an overview on the impact of team quality and location (that is, home or visitor) on expected results.\\
 
-The project scrapes data from Basketball Reference (www.basketball-reference.com) to collect the required information for each game such as points, teams, date, etc.
+The project scrapes data from \href{www.basketball-reference.com}{www.basketball-reference.com} to collect the required information for each game such as points, teams, date, etc.
 The collected data is then cleaned, pre-processed, and fed into the logistic regression model for analysis. The results are summarized in this paper.\\
 
-The project is implemented in Python, utilizing various libraries such as Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively.
-The code is documented and organized with pytask for a intuitive and elegant work-flow management.\\
+The project is implemented in Python, using various libraries such as Scikit-learn, Pandas, and BeautifulSoup for data processing, modeling, and web-scraping, respectively.
+The code is documented and organized with pytask for a intuitive and elegant workflow management.\\
 
-The regression uses game results up to the 16th February 2023. The fit is then applied to predict the following games, validating the predictions by comparing it to the actual results up to the current scrape.\\
+The regression uses game results up to the 16th February 2023. The fit is then applied to predict the later games of the season, validating the predictions by comparing it to the actual results up to the current scrape.\\
 In the following, our predictions and evaluations are displayed by graphics and tables, and we make some notes on replicability of the project.
 
 We followed the project template from \citet{GaudeckerEconProjectTemplates}.
+General workflow management of our project was done with \textit{pytask} made by \citet{Raabe2020}, additionally we tested our functions with the help of \textit{pytest} by \citet{pytest7.2.2}. For style control, we used \textit{pre-commit} %\citep{pre-commit}.
+For data management and general transformative tasks, we used the libraries \textit{pandas} \citep{mckinney2010data} and \textit{numpy} \citep{2020NumPy-Array}.
+Our statistical analysis was done with the packages \textit{statsmodels} \citep{seabold2010statsmodels} and \textit{scikit-learn} \citep{scikit-learn}.
+We used the packages \textit{seaborn} \citep{Waskom2021} and \textit{matplotlib} \citep{Hunter:2007} for data visualization.
+Our scraping was conducted with \textit{beautiful soup} \citep{richardson2007beautiful} and \textit{requests} \citep{requests}.
+Finally, we used \textit{PyYAML} %\citep{PyYAML} to read yaml files.
+
 
 
 \section{Notes on Implementation and Reproducibility}
 
 We implemented the project on macOS Ventura 13.0.1 and Windows 11 using Visual Studio Code. The packages required for this project can be found in the file environment.yaml.
 Since the data is scraped within the code, our results are replicable by running pytask, as long as the url source remains accurate.
-After the end of the NBA season (9th April 2023), Wthe project can still be used to evaluate the quality of predictions, even if no future games remain.\\
+After the end of the NBA season (9th April 2023), the project can still be used to evaluate the quality of predictions, even if no future games remain.\\
 To reproduce our project, one can follow these steps:
 \begin{enumerate}
-    \item Install Anaconda and Visual Code Studio (https://docs.anaconda.com/anaconda/install/index.html, https://code.visualstudio.com/download)
-    \item Clone the repository
+    \item Install \href{https://docs.anaconda.com/anaconda/install/index.html}{Anaconda} (python version 3.8 or higher), \href{https://git-scm.com/}{Git} (git version 2.23 or higher), and \href{https://code.visualstudio.com/download}{Visual Code Studio}
+    \item Install a \LaTeX-distribution like  \href{https://www.tug.org/texlive/}{TexLive} (tested by the authors), \href{https://miktex.org/}{MikTex}, or \href{https://tug.org/mactex/}{MacTex}.
+    \item Clone the \href{https://github.com/NormProgr/basketball_predict}{repository}.
     \item Create and activate the project environment with
         \begin{itemize}
-            \item \$ conda env create
+            \item \$ conda env create -f environment.yml
             \item \$ conda activate bask
         \end{itemize}
     \item Run the command \$ pytask in a terminal
 \end{enumerate}
 
+Additionally, when extending the project and using version control with Git, the following steps are advised:
+\begin{itemize}
+    \item Run the command \$ pytest for testing functions
+    \item Install \$ pre-commit install to check for style with every commit
+\end{itemize}
 
+\clearpage
 \section{Information Sheet}
 
 We now introduce our predictions:
@@ -125,19 +139,25 @@ We now introduce our predictions:
 \begin{figure}[H]
 \centering
 \caption{\emph{Python:} The winning probability of the home team by visitor team scoring.}
-\includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_reg_plot}
+\includegraphics[width=1\textwidth]{../python/figures/basketball_pics_reg_plot}
     \label{fig:python-reg_plot}
 
 \end{figure}
+
+In figure \ref{fig:python-reg_plot}, we plot the estimated home team winning probability against the points of the visiting team. One can see that with increasing points of the visiting team, the home team is more likely to loose.
+At approximately 130 points for the visiting team, the home team has a winning probability of less than 50\%. As 130 points is quite a lot in a basketball game, one can assume that home teams have a slightly higher chance of winning compared to visitors.
+
 
 \begin{figure}[H]
 
     \centering
     \caption{\emph{Python:} The probability of the logit model to predict correctly.}
-    \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_heatmap}
+    \includegraphics[width=1\textwidth]{../python/figures/basketball_pics_heatmap}
     \label{fig:python-heatmap}
 
 \end{figure}
+
+To visualize our prediction accuracy, we plot a heatmap (figure \ref{fig:python-heatmap}). One can see that first-order errors occur more frequently than second-order errors. That means that we relatively often predict a 0 (a loss) when there is actually a 1 (a win).
 
 \begin{table}[H]
     \caption{\label{tab:python-inference_model}\emph{Python:} Estimation results of the
@@ -145,32 +165,29 @@ We now introduce our predictions:
     \input{../python/tables/inference_model.tex}
 \end{table}
 
-In the NBA, teams are divied into two conferences, east and west. The best 8 teams from each conference enter the playoff phase, in which the best teams compete within their own conference until the NBA final.
-\ref{tab:python-table_playoffs} shows the 16 teams which are expected to enter the playoffs, based on our prediction. Thus, a naive result prediction would be to assume that the best team from each conference will face each other in the final.
+Table \ref{tab:python-inference_model} gives a very naive inference approach using a logit model. The hypothesis can be formulated as follows: \textit{Given you are a certain team with some number of wins, how high is the chance to win a game at the home stadium?} One can see that the teams \textit{Golden State Warriors}, \textit{Denver Nuggets}, \textit{Memphis Grizzlies}, and \textit{Cleveland Cavaliers} have a significant chance to win a game at their home stadium.\\
 
 \begin{table}[H]
     \caption{\label{tab:python-table_playoffs}\emph{Python:} Predicted winning probabilities for the predicted best 8 teams per conference.}
     \input{../python/tables/basketball_results_table_playoffs.tex}
 \end{table}
 
-
-
-
+In the NBA, teams are divied into two conferences, east and west. The best 8 teams from each conference enter the playoff phase, in which the best teams compete within their own conference until the NBA final.
+Table \ref{tab:python-table_playoffs} shows the 16 teams which are expected to enter the playoffs, based on our prediction. Thus, a naive result prediction would be to assume that the best team from each conference will face each other in the final.
+\clearpage
 \section{Additional Information}
 
-\ref{fig:python-roc_curve} plots the true positive rate to the false positive rate. One can see that the model performs better than 0.5.
+Figure \ref{fig:python-roc_curve} plots the true positive rate to the false positive rate. This plot shows how our binary classifier makes more correct predictions than wrong predictions across all predicted games. One can see that the model performs better than 0.5, which is represented by the green line. Another graphical illustration of this problem was already given in figure \ref{fig:python-heatmap}, where we had more correct than false predictions.
 
 \begin{figure}[H]
    \centering
     \caption{\emph{Python:} ROC Curve to show the true positive to the false positive rate.}
-    \includegraphics[width=0.8\textwidth]{../python/figures/basketball_pics_roc_curve}
+    \includegraphics[width=1\textwidth]{../python/figures/basketball_pics_roc_curve}
     \label{fig:python-roc_curve}
 
 \end{figure}
 \setstretch{1}
-
-Figure \ref{tab:python-results_table} provides an overview over all NBA teams. The top 8 from each conference are expected to enter the playoffs.
-
+Figure \ref{tab:python-results_table} provides an overview over all NBA teams. The top 8 from each conference are expected to enter the playoffs as shown in table \ref{tab:python-table_playoffs}.
 \begin{table}[H]
 
     \caption{\label{tab:python-results_table}\emph{Python:} Predicted winning probabilities for all NBA teams.}
@@ -178,6 +195,7 @@ Figure \ref{tab:python-results_table} provides an overview over all NBA teams. T
     \input{../python/tables/basketball_results_table.tex}
 \end{adjustbox}
 \end{table}
+
 
 
 
