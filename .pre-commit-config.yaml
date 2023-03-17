@@ -63,7 +63,6 @@ repos:
           - '88'
           - --blank
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-  # Ruff version.
     rev: v0.0.245
     hooks:
       - id: ruff
