@@ -1,29 +1,26 @@
 # Scraping basketball data to predict future game outcomes
 
-This project predicts the probability of a team winning or losing a basketball game in
-the 2022/23 NBA season using a logistic regression, web scraping the results of past
-games from www.basketball-reference.com.
-
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://results.pre-commit.ci/latest/github/NormProgr/bask/main)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Authors
 
 - Norman Metzinger
-- Anne Rebecca Ringborg
+- Anne Rebecca Charlotte Ringborg
 
 ## About
 
-This is a project that aims to predict the probability of a team winning or losing a
-game in the 2022/23 NBA season using logistic regression and web scraping. The project
-utilizes data from
+This project predicts the probability of a team winning or losing a game in the 2022/23
+NBA season using logistic regression and web scraping. The project uses data from
 [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2023_games-%7B%7D.html)
 to collect the necessary information for each game such as points, teams, viewer
 attendance, etc. The data is summarized in an information sheet.
 
 To obtain the required data for the analysis, the project utilizes web scraping
 techniques to extract up-to-date information. The collected data is then cleaned,
-pre-processed, and fed into the logistic regression model for analysis.
+pre-processed, and fed into the logistic regression model for analysis. After the end of
+the NBA season (9th April 2023), the project can still be used to evaluate the quality
+of predictions, even if no future games remain.
 
 The project is implemented in Python, utilizing various libraries such as Scikit-learn,
 Pandas, and BeautifulSoup for data processing, modeling, and web scraping respectively.
@@ -37,30 +34,21 @@ the latest and most accurate information when making their predictions.
 
 ## Usage
 
-To run this project a Python and a LaTex distribution is required. The project was
-tested on windows 11 and macOS 10.15.7 with Python 3.11.0. All further dependencies are
-included in the environment.
+To run this project, a Python and a LaTex distribution are required. The project was
+implemented in Python 3.11.0 on macOS Ventura 13.0.1 and Windows 11 using Visual Studio
+Code. All further dependencies are included in the environment. Since the data is
+scraped within the code, our results are replicable by running pytask.
 
-To run this project a Python and a LaTex distribution is required. The project was
-tested on windows 11 and macOS 10.15.7 with Python 3.11.0. All further dependencies are
-included in the environment.
+To reproduce our project, one can follow these steps:
 
-The project was implemented in Python 3.11.0 on macOS Ventura 13.0.1 and Windows 11
-using Visual Studio Code. The packages required for this project can be found in the
-file environment.yaml. Since the data is scraped within the code, our results are
-replicable by running pytask, as long as the url source remains accurate. After the end
-of the NBA season (9th April 2023), the project can still be used to evaluate the
-quality of predictions, even if no future games remain. To reproduce our project, one
-can follow these steps:
-
-1. Install Anaconda and Visual Code Studio
-   (https://docs.anaconda.com/anaconda/install/index.html,
-   https://code.visualstudio.com/download)
+1. Install Anaconda (https://docs.anaconda.com/anaconda/install/index.html), Git
+   (https://git-scm.com/) and Visual Code Studio
+   (https://code.visualstudio.com/download)
 1. Clone the repository
 1. Create and activate the project environment with
 
 ```console
-$ conda env create -f environment.yml
+$ conda/mamba env create
 $ conda activate bask
 ```
 
@@ -69,6 +57,9 @@ $ conda activate bask
 ```console
 $ pytask
 ```
+
+Details on implementation and results can be found in bask.pdf after running the
+project.
 
 ### For code development
 
@@ -109,11 +100,9 @@ structured as follows:
 Additionally the *paper/task_paper.py* is producing the NBA prediction information
 sheet.
 
-Details on implementation and results can be found in bask.pdf after running the
-project.
-
 ## Credits
 
 This project was created with [cookiecutter](https://github.com/audreyr/cookiecutter)
 and the
 [econ-project-templates](https://github.com/OpenSourceEconomics/econ-project-templates).
+This project uses [pytask](https://github.com/pytask-dev/pytask) as workflow management.
