@@ -5,6 +5,7 @@
 [![image](https://img.shields.io/badge/pytask-workflow-red)]()
 [![image](https://img.shields.io/badge/python-3.11.0-blue)]()
 [![image](https://img.shields.io/badge/license-MIT-green)]()
+[![image](https://img.shields.io/badge/LaTeX-TEX-orange)]()
 
 ## Authors
 
