@@ -39,7 +39,7 @@ implemented in Python 3.11.0 on macOS Ventura 13.0.1 and Windows 11 using Visual
 Code. All further dependencies are included in the environment. Since the data is
 scraped within the code, our results are replicable by running pytask.
 
-To reproduce our project, one can follow these steps:
+To reproduce the project, one can follow these steps:
 
 1. Install [Anaconda](https://docs.anaconda.com/anaconda/install/index.html),
    [Git](https://git-scm.com/) and
