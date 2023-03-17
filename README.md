@@ -2,7 +2,7 @@
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://results.pre-commit.ci/latest/github/NormProgr/bask/main)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Conda - License](https://img.shields.io/conda/l/conda-forge/setuptools)
+[![Conda - License](https://img.shields.io/conda/l/conda-forge/setuptools)]
 
 ## Authors
 
