@@ -110,5 +110,5 @@ This project was created with [cookiecutter](https://github.com/audreyr/cookiecu
 and the
 [econ-project-templates](https://github.com/OpenSourceEconomics/econ-project-templates).
 This project uses [pytask](https://github.com/pytask-dev/pytask) as workflow management.
-Some inspiration was taken from OpenAI's [ChatGTP 3.0](https://openai.com/blog/chatgpt)
+Some inspiration was taken from OpenAI's [ChatGTP 3.5](https://openai.com/blog/chatgpt)
 and, obviously, [stackoverflow](https://stackoverflow.com).
