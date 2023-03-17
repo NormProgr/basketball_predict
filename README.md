@@ -7,6 +7,7 @@
 [![image](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/license/mit/)
 [![image](https://img.shields.io/badge/LaTeX-TEX-orange)](https://www.tug.org/texlive/)
 [![image](https://img.shields.io/badge/platform-osx--64%20%20%2F%20win--64-lightgrey)]()
+[![image](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/NormProgr/basketball_predict)
 
 
 
