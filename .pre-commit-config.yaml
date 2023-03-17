@@ -63,11 +63,10 @@ repos:
           - '88'
           - --blank
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.230
+  # Ruff version.
+    rev: v0.0.245
     hooks:
       - id: ruff
-      #   args:
-      #     - --verbose
   - repo: https://github.com/kynan/nbstripout
     rev: 0.6.1
     hooks:

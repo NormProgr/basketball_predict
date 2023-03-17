@@ -11,12 +11,6 @@ from bask.data_management.clean_data import (
     clean_data,
 )
 
-# What to test:
-
-# clean columns:
-# whether dropped columns still exist
-# Whether old names still exist (maybe also if new ones exist)
-
 
 @pytest.fixture()
 def data():
@@ -33,7 +27,7 @@ def test_clean_columns(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises an Error if the dropped column still exists.
@@ -50,7 +44,7 @@ def test_win_col_ex(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises an Error if a necessary column to work with is not created.
@@ -65,7 +59,7 @@ def test_win_col_val(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises an Error if the function produces outcomes in the column home_wins that do not make sense before a certain date.
@@ -82,18 +76,16 @@ def test_transform_date(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises error if there is an entry that cannot be converted to datetime format.
-
-    Maybe do nicer assert in the end!
 
     """
     df = _transform_date(clean_columns(data_info, data))
     assert (
         pd.to_datetime(df["date"], format="%Y-%m-%d", errors="coerce").notnull().all()
-    ), "Error: Wrong date format"
+    ), "Error: Wrong date format, cannot be converted to datetime."
 
 
 def test_produce_model_data(data_info, data):
@@ -101,14 +93,13 @@ def test_produce_model_data(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises an error if there is a NA entry before the cutoff date for model data.
             If the first test passes, raises an error if there is a non-NA entry after that date.
 
     """
-
     processed_data = _transform_date(_win_col(clean_columns(data_info, data)))
     processed_data = _produce_model_data(processed_data)
     assert (
@@ -136,7 +127,7 @@ def test_data_split(data):
     """Test if columns for past and future games match.
 
     Args:
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Raises an error if the column labels of the two output data frames don't match.
@@ -155,7 +146,17 @@ def test_data_split(data):
 
 
 def test_dummy_teams(data_info, data):
-    """Check ..."""
+    """Test if created dummy columns have valid values.
+
+    Args:
+        data_info (yaml): Configuration of column names from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
+
+    Raises:
+        Assert: Raises an error if other values than 0 and 1 are included in dummy columns.
+            If it passes, raises an error if too many or too few dummies are created.
+
+    """
     data = clean_columns(data_info, data)
     df = _dummy_teams(data_info, data)
     home_col = [col for col in df if col.startswith("home_")]
@@ -173,7 +174,7 @@ def test_clean_data(data_info, data):
 
     Args:
         data_info (yaml): Configuration of column names from fixture.
-        data (pandas DataFrame): Data for testing from fixture.
+        data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
         Assert: Asserts an error if the function does not produce a list with 4 entries necessary to produce the analysis.

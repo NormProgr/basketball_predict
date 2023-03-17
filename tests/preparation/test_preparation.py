@@ -3,9 +3,10 @@ from datetime import datetime
 
 import pandas as pd
 import pytest
-from bask.config import TEST_DIR
-from bask.preparation.parser import parser, scrapedate
-from bask.preparation.scraper import months
+import requests as req
+from bask.config import BLD, TEST_DIR
+from bask.preparation.parser import parser
+from bask.preparation.scraper import _check_internet, scrapedate
 
 
 @pytest.fixture()
@@ -15,8 +16,7 @@ def html_files():
     return pd.read_csv(TEST_DIR / "preparation" / "data_fixture.csv")
 
 
-# Loop over months?
-def test_scraper_by_month():
+def test_scraper():
     """Test whether the correct amount of files is generated.
 
     Raises:
@@ -26,7 +26,7 @@ def test_scraper_by_month():
     """
     prefixed = [
         filename
-        for filename in os.listdir("src/bask/preparation/data")
+        for filename in os.listdir("bld/python/scrapes")
         if filename.endswith(".html")
     ]
     assert len(prefixed) == 7, "Error: Not the right number of .html files."
@@ -39,7 +39,17 @@ def test_parser():
         Assert: Raises an error if not the 7 months by name are represented in the data.
 
     """
-    df = parser(months, scrapedate())
+    path = BLD / "python" / "scrapes"
+    months = [
+        "october",
+        "november",
+        "december",
+        "january",
+        "february",
+        "march",
+        "april",
+    ]
+    df = parser(months, scrapedate(), path)
     parts = []
     for date_str in df["Date"]:
         mon = date_str.split(" ")[1]
@@ -63,3 +73,24 @@ def test_scrapedate():
         scrape,
         expected_format,
     ), f"Error: scrapedate {scrape} is not a valid date."
+
+
+def test_check_internet(url="https://github.com/", timeout=5):
+    """Check whether there is an internet connection.
+
+    Args:
+        url (string): The URL to be used for the connectivity test. Default value is "https://github.com/".
+        timeout (integer): The maximum time, in seconds, allowed for the request to complete. Default value is 5 seconds.
+
+
+    Raises:
+        Assert: Raises an error if there is an internet connection to the one url but not to the other.
+
+    """
+    check = _check_internet()
+    try:
+        _ = req.head(url, timeout=timeout)
+        snd_check = True
+    except OSError:
+        snd_check = False
+    assert check == snd_check, "Internet connection is not available."

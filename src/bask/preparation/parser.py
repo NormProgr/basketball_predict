@@ -1,46 +1,24 @@
-import os
-
 import pandas as pd
 from bs4 import BeautifulSoup
 
 
-def scrapedate():
-    """Take the last scraping date as reference date.
-
-    Returns:
-        scrapedate (string): The date of the current scrape.
-
-    """
-    prefixed = [
-        filename
-        for filename in os.listdir("src/bask/preparation/data")
-        if filename.startswith("april_")
-    ]
-    assert (
-        len(prefixed) > 0
-    ), "Error: No data exists, run scraper.py file to generate scrapes."
-    parts = prefixed[0].split("_")
-    scrapedate = parts[1].split(".")[0]
-    return scrapedate
-
-
-def parser(months, scrapedate):
+def parser(months, scrapedate, path):
     """Convert tables from html files to one pandas DataFrame.
 
     Args:
-        months (list): List of months to be added to combined dataframe.
+        months (list): List of months to be added to combined data frame.
         scrapedate (pandas datetime): Date of the last scrape.
 
     Returns:
-        df (pandas DataFrame): Concatenated df with entries from html tables for all months.
+        df (pandas DataFrame): Concatenated df with entries from all months of the season.
 
     """
     dfs = []
     for month in months:
         with open(
-            f"src/bask/preparation/data/{month}_{scrapedate}.html",
+            path / f"{month}_{scrapedate}.html",
             encoding="utf8",
-        ) as f:  # added encoding, does it lead to failure?
+        ) as f:
             page = f.read()
         soup = BeautifulSoup(page, "html.parser")
         table = soup.find(id="schedule")

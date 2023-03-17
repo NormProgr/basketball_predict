@@ -105,7 +105,7 @@ def team_win_prob(data, data_pred):
 
     Args:
         data (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_pred (pandas.DataFrame): DataFrame that includes predicted data.
+        data_pred (pandas.DataFrame): DataFrame with future games for prediction.
 
 
     Returns:
@@ -131,8 +131,8 @@ def playoff_pred(data, data_pred, conferences):
     """Predict which teams are participating the playoffs.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
+        data (pandas.DataFrame): Input dataset that contains the split in training and test.
+        data_pred (pandas.DataFrame): DataFrame with future games for prediction.
         conferences (pandas.DataFrame): DataFrame that contains information to team and conference membership.
 
 
@@ -141,13 +141,17 @@ def playoff_pred(data, data_pred, conferences):
 
     """
     east_teams = conferences[conferences["conference"] == "East"].copy()
-    east_teams["wins"] = (
-        team_win_pred(data, data_pred).loc[east_teams["team_name"]].values
-    )
-    east_teams = east_teams.sort_values("wins", ascending=False)
+    east_teams["wins"] = team_win_pred(data, data_pred)[east_teams["team_name"]].values
+    east_teams["win_prob"] = team_win_prob(data, data_pred)[
+        east_teams["team_name"]
+    ].values
+    east_teams = east_teams.sort_values(["wins", "win_prob"], ascending=[False, False])
     west_teams = conferences[conferences["conference"] == "West"].copy()
     west_teams["wins"] = team_win_pred(data, data_pred)[west_teams["team_name"]].values
-    west_teams.sort_values("wins", ascending=False, inplace=True)
+    west_teams["win_prob"] = team_win_prob(data, data_pred)[
+        west_teams["team_name"]
+    ].values
+    west_teams = west_teams.sort_values(["wins", "win_prob"], ascending=[False, False])
     playoff_teams = pd.concat([east_teams[0:8], west_teams[0:8].reset_index(drop=True)])
     return playoff_teams
 

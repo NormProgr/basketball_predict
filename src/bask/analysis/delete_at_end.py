@@ -45,3 +45,16 @@ def task_produce_data(depends_on, produces):
         data_benchmark_pred,
     )
     predicted_df.to_csv(produces)
+
+
+@pytask.mark.try_first
+@pytask.mark.depends_on(
+    {
+        "scripts": ["scraper.py"],
+    },
+)
+@pytask.mark.task
+# @pytask.mark.produces(BLD / "python" / "scrapes" / f"{month}_{scrapedate()}.html")
+def task_produce_scrape(depends_on):
+    url_start = "https://www.basketball-reference.com/leagues/NBA_2023_games-{}.html"
+    scraper_by_month(months, url_start, date.today())
