@@ -6,6 +6,9 @@
 [![image](https://img.shields.io/badge/python-3.11.0-blue)]()
 [![image](https://img.shields.io/badge/license-MIT-green)]()
 [![image](https://img.shields.io/badge/LaTeX-TEX-orange)]()
+[![image](https://img.shields.io/badge/platform-osx--64%20%20%2F%20win--64-lightgrey)]()
+
+
 
 ## Authors
 
