@@ -1,7 +1,13 @@
 # Scraping basketball data to predict future game outcomes
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/NormProgr/bask/main.svg)](https://results.pre-commit.ci/latest/github/NormProgr/bask/main)
+[![pre-commit.ci passed](https://img.shields.io/badge/pre--commit.ci-passed-brightgreen)](https://results.pre-commit.ci/run/github/274689747/1678058970.SI-lnarDSRqXafVBdLucmg)
 [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![image](https://img.shields.io/badge/pytask-v0.3.1-red)](https://pypi.org/project/pytask/)
+[![image](https://img.shields.io/badge/python-3.11.0-blue)](https://www.python.org/)
+[![image](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/license/mit/)
+[![image](https://img.shields.io/badge/LaTeX-TEX-orange)](https://www.tug.org/texlive/)
+[![image](https://img.shields.io/badge/platform-osx--64%20%20%2F%20win--64-lightgrey)](<>)
+[![image](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/NormProgr/basketball_predict)
 
 ## Authors
 
