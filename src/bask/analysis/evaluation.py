@@ -1,5 +1,4 @@
 """Evaluate the regression model."""
-#####benchmark
 import pandas as pd
 import statsmodels.api as sm
 

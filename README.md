@@ -5,32 +5,29 @@
 
 ## Authors
 
-- Norman Metzinger
-- Anne Rebecca Charlotte Ringborg
+- Norman Lothar Metzinger, 3501090
+- Anne Rebecca Charlotte Ringborg, 3069618
 
 ## About
 
 This project predicts the probability of a team winning or losing a game in the 2022/23
 NBA season using logistic regression and web scraping. The project uses data from
 [Basketball Reference](https://www.basketball-reference.com/leagues/NBA_2023_games-%7B%7D.html)
-to collect the necessary information for each game such as points, teams, viewer
-attendance, etc. The data is summarized in an information sheet.
+to collect the necessary information for each game such as points, teams, etc. The
+results are summarized in an information sheet when running the project.
 
-To obtain the required data for the analysis, the project utilizes web scraping
-techniques to extract up-to-date information. The collected data is then cleaned,
-pre-processed, and fed into the logistic regression model for analysis. After the end of
-the NBA season (9th April 2023), the project can still be used to evaluate the quality
-of predictions, even if no future games remain.
+To obtain the required data for the analysis, the project uses web scraping to extract
+up-to-date information. The collected data is cleaned, pre-processed, and fed into the
+logistic regression model for analysis. Data from games until the 15th February are used
+for the model fit. Game results for after this date are predicted and the results up to
+the current scrape are used to evaluate the prediction quality. After the end of the NBA
+season (9th April 2023), the project can still be used to evaluate the quality of
+predictions, even if no future games remain.
 
-The project is implemented in Python, utilizing various libraries such as Scikit-learn,
+The project is implemented in Python, using various libraries such as Scikit-learn,
 Pandas, and BeautifulSoup for data processing, modeling, and web scraping respectively.
-The code is well documented and organized with Pytask for ease of understanding and
-modification. In the following, we describe how to replicate the whole project.
-
-The goal of this project is to provide an automated prediction tool for NBA fans and
-enthusiasts to make informed decisions when betting or discussing NBA games. The
-predictions are updated every time the code is run, ensuring that users have access to
-the latest and most accurate information when making their predictions.
+The code is documented and organized with Pytask for intuition and easy modification. In
+the following, we describe how to replicate the whole project.
 
 ## Usage
 
@@ -42,13 +39,14 @@ scraped within the code, our results are replicable by running pytask.
 To reproduce the project, one can follow these steps:
 
 1. Install [Anaconda](https://docs.anaconda.com/anaconda/install/index.html),
-   [Git](https://git-scm.com/) and
-   [Visual Code Studio](https://code.visualstudio.com/download)
+   [Git](https://git-scm.com/),
+   [Visual Code Studio](https://code.visualstudio.com/download), and a LaTeX
+   distribution such as [TeX Live](https://www.tug.org/texlive/)
 1. Clone the repository
 1. Create and activate the project environment with
 
 ```console
-$ conda/mamba env create
+$ conda env create -f environment.yml
 $ conda activate bask
 ```
 
@@ -77,25 +75,25 @@ $ pre-commit install
 
 ## Project structure
 
-Within the *src/bask* directory all relevant code files can be found. They are
-structured as follows:
+The relevant code files can be found in the *src/bask* directory. They are structured as
+follows:
 
-- *analysis*: Summary of all analysis files.
+- *analysis*: All analysis code files.
   - *evaluation.py*: Benchmark analysis of NBA games.
   - *model.py*: Build the logistic regression model.
-  - *predict.py*: Predict the future games outcomes.
+  - *predict.py*: Predict the future game outcomes.
   - *task_analysis.py*: Run all analysis files.
-- *data*: all not build source files
-- *data_management*: Summary data pre-processes.
-  - *clean_data.py*: Data pre-processing.
-  - *task_data_management.py*: Run the clean data file.
-- *final*: Summary of data visualizations and tables.
-  - *plot.py*: Produce all plots.
-  - *task_final.py*: Produce final prediciton and model results.
-- *preparation*: Contains the web-scraper.
-  - *parser.py*: Translates html to pickle.
-  - *scraper.py*: Scrapes the data from the website.
-  - *task_preparation.py*: Runs all preparation files.
+- *data*: Source files that are not built.
+- *data_management*: Data pre-processing.
+  - *clean_data.py*: Functions for pre-processing.
+  - *task_data_management.py*: Run the clean_data file.
+- *final*: Data visualizations and tables.
+  - *plot.py*: Functions for plots.
+  - *task_final.py*: Produce final results and plots.
+- *preparation*: Web scraping.
+  - *parser.py*: Translate html to pickle.
+  - *scraper.py*: Scrape the data from the website.
+  - *task_preparation.py*: Run all preparation files.
 
 Additionally the *paper/task_paper.py* is producing the NBA prediction information
 sheet.
