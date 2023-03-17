@@ -41,9 +41,9 @@ scraped within the code, our results are replicable by running pytask.
 
 To reproduce our project, one can follow these steps:
 
-1. Install \[Anaconda\] (https://docs.anaconda.com/anaconda/install/index.html), \[Git\]
-   (https://git-scm.com/) and \[Visual Code Studio\]
-   (https://code.visualstudio.com/download)
+1. Install [Anaconda](https://docs.anaconda.com/anaconda/install/index.html),
+   [Git](https://git-scm.com/) and
+   [Visual Code Studio](https://code.visualstudio.com/download)
 1. Clone the repository
 1. Create and activate the project environment with
 
