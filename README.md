@@ -5,9 +5,11 @@
 [![image](https://img.shields.io/badge/pytask-v0.3.1-red)](https://pypi.org/project/pytask/)
 [![image](https://img.shields.io/badge/python-3.11.0-blue)](https://www.python.org/)
 [![image](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/license/mit/)
-[![image](https://img.shields.io/badge/LaTeX-TEX-orange)](https://www.tug.org/texlive/)
+[![image](https://img.shields.io/badge/LaTeX-v0.3.0-yellowgreen)](https://www.tug.org/texlive/)
 [![image](https://img.shields.io/badge/platform-osx--64%20%20%2F%20win--64-lightgrey)](<>)
 [![image](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/NormProgr/basketball_predict)
+[![image](https://img.shields.io/badge/pytest-v7.2.2-orange)](https://docs.pytest.org/en/7.2.x/)
+
 
 ## Authors
 
