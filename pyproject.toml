@@ -44,3 +44,8 @@ norecursedirs = ["docs"]
 line_length = 88
 flow_style_sequence = false
 none_representation = "null"
+
+[tool.docformatter]
+recursive = true
+wrap-summaries = 88
+blank = true
