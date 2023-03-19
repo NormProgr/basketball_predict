@@ -1,14 +1,17 @@
 """Tasks for managing the data."""
 
+from datetime import date
+
 import pandas as pd
 import pytask
 import yaml
 
 from bask.config import BLD, SRC
 from bask.data_management import clean_data
-from bask.preparation.scraper import scrapedate
+from bask.preparation.scraper import _check_internet, scrapedate
 
 datasets = ["benchmark", "benchmark_pred", "model", "model_pred"]
+date = date.today() if _check_internet() else scrapedate()
 
 for time in datasets:
 
@@ -16,7 +19,7 @@ for time in datasets:
         {
             "scripts": ["clean_data.py"],
             "data_info": SRC / "data_management" / "data_info.yaml",
-            "data": BLD / "python" / "parsed" / f"data_{scrapedate()}.pkl",
+            "data": BLD / "python" / "parsed" / f"data_{date}.pkl",
         },
     )
     @pytask.mark.task
