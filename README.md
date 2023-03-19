@@ -70,7 +70,7 @@ $ conda activate bask
 $ pytask
 ```
 
-Details on implementation and results can be found in bask.pdf after running the
+Details on implementation and results can be found in *bask.pdf* after running the
 project.
 
 ### For code development
