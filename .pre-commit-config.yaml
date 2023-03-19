@@ -110,6 +110,11 @@ repos:
     rev: v2.2.0
     hooks:
       - id: setup-cfg-fmt
+  - repo: https://github.com/pycqa/flake8
+    rev: ''  # pick a git hash / tag to point to
+    hooks:
+      - id: flake8
+
 
 ci:
   autoupdate_schedule: monthly
