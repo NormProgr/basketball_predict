@@ -15,8 +15,8 @@ def clean_columns(data_info, df):
         df (pandas.DataFrame): DataFrame has dropped unnecessary data and renamed.
 
     """
-    df.drop(columns=data_info["columns_to_drop"], inplace=True)
-    df.rename(columns=data_info["column_rename"], inplace=True)
+    df = df.drop(columns=data_info["columns_to_drop"])
+    df = df.rename(columns=data_info["column_rename"])
     return df
 
 
@@ -68,7 +68,6 @@ def _produce_model_data(data):
     return data
 
 
-# remember that there could be issues if there are no NAs anymore
 def _data_split(df):
     """Split the DataFrame into two parts.
 
@@ -81,7 +80,6 @@ def _data_split(df):
             df_future(pandas.DataFrame): DataFrame that includes all data after the scraping data.
 
     """
-    # include this line df = df[df["date"] <= "2023-03-09"]
     df_past = df[df["pts_home"].notna()]
     df_future = df[df["pts_home"].isna()]
     return df_past, df_future
