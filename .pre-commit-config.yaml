@@ -3,7 +3,7 @@ repos:
   - repo: meta
     hooks:
       - id: check-useless-excludes
-      - id: identity  # Prints all files passed to pre-commits. Debugging.
+      - id: identity
   - repo: https://github.com/lyz-code/yamlfix
     rev: 1.2.0
     hooks:
