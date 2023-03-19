@@ -18,13 +18,9 @@ def task_compile_document():
     """Compile the document specified in the latex decorator."""
 
 
-kwargs = {
-    "depends_on": BLD / "latex" / "bask.pdf",
-    "produces": BLD.parent.resolve() / "bask.pdf",
-}
-
-
-@pytask.mark.task(kwargs=kwargs)
+@pytask.mark.depends_on(BLD / "latex" / "bask.pdf")
+@pytask.mark.task
+@pytask.mark.produces(BLD.parent.resolve() / "bask.pdf")
 def task_copy_to_root(depends_on, produces):
     """Copy a document to the root directory for easier retrieval."""
     shutil.copy(depends_on, produces)

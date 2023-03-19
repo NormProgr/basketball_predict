@@ -94,17 +94,23 @@ def test_remove_old_scrapes(tmpdir):
         tmpdir (py.path.local): Pytest fixture providing a temporary directory unique to each test function.
 
     Raises:
-        Assert (excluding 3rd assert): Raises an assert if the html files are existing.
-        Assert (3rd assert): Raises an assert if the txt file does not exist anymore.
+        Assert (1st to 4th assert): Raises an assert if the html files still exist.
+        Assert (5th assert): Raises an assert if the py file does not exist anymore.
 
     """
-    sample_files = ["file1.html", "file2.html", "file3.txt", "file4.html", "file5.html"]
+    sample_files = [
+        "file1.html",
+        "file2.html",
+        "file3.html",
+        "file4.html",
+        "someotherfile.py",
+    ]
     for f in sample_files:
-        open(os.path.join(tmpdir, f), "a").close()
+        open(os.path.join(tmpdir, f), "w").close()
     _remove_old_scrapes(tmpdir)
     remaining_files = os.listdir(tmpdir)
     assert "file1.html" not in remaining_files, "Error: Not all html files deleted."
     assert "file2.html" not in remaining_files, "Error: Not all html files deleted."
-    assert "file3.txt" in remaining_files, "Error: Non-html file deleted."
     assert "file4.html" not in remaining_files, "Error: Not all html files deleted."
     assert "file5.html" not in remaining_files, "Error: Not all html files deleted."
+    assert "someotherfile.py" in remaining_files, "Error: Non-html file deleted."
