@@ -1,19 +1,10 @@
 import os
 from datetime import datetime
 
-import pandas as pd
-import pytest
 import requests as req
-from bask.config import BLD, TEST_DIR
+from bask.config import BLD
 from bask.preparation.parser import parser
-from bask.preparation.scraper import _check_internet, scrapedate
-
-
-@pytest.fixture()
-def html_files():
-    with open(f"src/bask/preparation/data/{month}_{scrapedate()}.html") as f:
-        f.read()
-    return pd.read_csv(TEST_DIR / "preparation" / "data_fixture.csv")
+from bask.preparation.scraper import _check_internet, _remove_old_scrapes, scrapedate
 
 
 def test_scraper():
@@ -36,7 +27,7 @@ def test_parser():
     """Test if the right amount of months is parsed.
 
     Raises:
-        Assert: Raises an error if not the 7 months by name are represented in the data.
+        Assert: Raises an error if not the 7 months are represented in the data.
 
     """
     path = BLD / "python" / "scrapes"
@@ -94,3 +85,26 @@ def test_check_internet(url="https://github.com/", timeout=5):
     except OSError:
         snd_check = False
     assert check == snd_check, "Internet connection is not available."
+
+
+def test_remove_old_scrapes(tmpdir):
+    """Test if html files are removed by function.
+
+    Args:
+        tmpdir (py.path.local): Pytest fixture providing a temporary directory unique to each test function.
+
+    Raises:
+        Assert (excluding 3rd assert): Raises an assert if the html files are existing.
+        Assert (3rd assert): Raises an assert if the txt file does not exist anymore.
+
+    """
+    sample_files = ["file1.html", "file2.html", "file3.txt", "file4.html", "file5.html"]
+    for f in sample_files:
+        open(os.path.join(tmpdir, f), "a").close()
+    _remove_old_scrapes(tmpdir)
+    remaining_files = os.listdir(tmpdir)
+    assert "file1.html" not in remaining_files, "Error: Not all html files deleted."
+    assert "file2.html" not in remaining_files, "Error: Not all html files deleted."
+    assert "file3.txt" in remaining_files, "Error: Non-html file deleted."
+    assert "file4.html" not in remaining_files, "Error: Not all html files deleted."
+    assert "file5.html" not in remaining_files, "Error: Not all html files deleted."

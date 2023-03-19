@@ -62,7 +62,9 @@ def test_win_col_val(data_info, data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Raises an Error if the function produces outcomes in the column home_wins that do not make sense before a certain date.
+        Assert: Raises an error if "home_wins" has values that are not 0 or 1 when
+            there are points and if there are non-NA entries when there are no points
+            yet.
 
     """
     df = _win_col(clean_columns(data_info, data))
@@ -79,7 +81,8 @@ def test_transform_date(data_info, data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Raises error if there is an entry that cannot be converted to datetime format.
+        Assert: Raises error if there is an entry that cannot be converted to datetime
+            format.
 
     """
     df = _transform_date(clean_columns(data_info, data))
@@ -96,8 +99,9 @@ def test_produce_model_data(data_info, data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Raises an error if there is a NA entry before the cutoff date for model data.
-            If the first test passes, raises an error if there is a non-NA entry after that date.
+        Assert: Raises an error if there is a NA entry before the cutoff date for model
+            data. If the first test passes, raises an error if there is a non-NA entry
+            after that date.
 
     """
     processed_data = _transform_date(_win_col(clean_columns(data_info, data)))
@@ -130,9 +134,9 @@ def test_data_split(data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Raises an error if the column labels of the two output data frames don't match.
-            If they match, raises an error if the sum of lengths of the output data frames is not
-            equal to the number of rows in data.
+        Assert: Raises error if the column labels of the two output data frames don't
+        match. If they match, raises an error if the sum of lengths of the output data
+        frames is not equal to the number of rows in data.
 
     """
     data_past = data[data["pts1"].notna()]
@@ -153,8 +157,9 @@ def test_dummy_teams(data_info, data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Raises an error if other values than 0 and 1 are included in dummy columns.
-            If it passes, raises an error if too many or too few dummies are created.
+        Assert: Raises error if other values than 0 and 1 are included in dummy
+        columns. If it passes, raises an error if too many or too few dummies are
+        created.
 
     """
     data = clean_columns(data_info, data)
@@ -177,7 +182,8 @@ def test_clean_data(data_info, data):
         data (pandas.DataFrame): Data for testing from fixture.
 
     Raises:
-        Assert: Asserts an error if the function does not produce a list with 4 entries necessary to produce the analysis.
+        Assert: Raises error if the function does not produce a list with 4 entries
+            necessary to produce the analysis.
 
     """
     assert (
