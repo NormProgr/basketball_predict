@@ -27,7 +27,8 @@ def _win_col(df):
         df (pandas.DataFrame): Data manipulated by previous functions.
 
     Returns:
-        df (pandas.DataFrame): DataFrame has now a dummy variable column indicating wins and losses.
+        df (pandas.DataFrame): DataFrame has now a dummy variable column indicating
+            wins and losses.
 
     """
     df["homewin"] = np.where(
@@ -76,8 +77,10 @@ def _data_split(df):
 
     Returns:
         list:
-            df_past (pandas.DataFrame): DataFrame that includes all data including the scraping data.
-            df_future(pandas.DataFrame): DataFrame that includes all data after the scraping data.
+            df_past (pandas.DataFrame): DataFrame that includes all data including the
+                scraping data.
+            df_future(pandas.DataFrame): DataFrame that includes all data after the
+                scraping data.
 
     """
     df_past = df[df["pts_home"].notna()]
@@ -114,8 +117,10 @@ def clean_data(data_info, data):
 
     Returns:
         list:
-            _data_split(df) (list): List that contains two DataFrames with data before and after the scraping date.
-            _data_split(_produce_model_data(df)) (list): List that contains two DataFrames with data before and after the cutoff date.
+            _data_split(df) (list): List that contains two DataFrames with data before
+                and after the scraping date.
+            _data_split(_produce_model_data(df)) (list): List that contains two
+                DataFrames with data before and after the cutoff date.
 
     """
     df = _transform_date(clean_columns(data_info, data))

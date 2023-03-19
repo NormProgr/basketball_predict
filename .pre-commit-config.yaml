@@ -57,9 +57,9 @@ repos:
         args:
           - --in-place
           - --wrap-summaries
-          - '88'
+          - '90'
           - --wrap-descriptions
-          - '88'
+          - '90'
           - --blank
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.0.245
