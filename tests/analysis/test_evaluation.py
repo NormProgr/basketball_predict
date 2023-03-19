@@ -44,6 +44,7 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
 
     Raises:
         Assert: Raises an error if the shape of the concatenated DataFrames does not match the expected shape.
+        Assert: Raises an error if the original results do not match the ones after concetenating.
 
     """
     data_pred = prediction(data_model=data, data_model_pred=data_pred)

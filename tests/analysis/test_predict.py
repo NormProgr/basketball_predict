@@ -122,7 +122,7 @@ def test_team_win_prob_vis(data, data_pred):
     """
     data_pred = prediction(data, data_pred)
     prob = _team_win_prob_vis(data_pred)
-    assert not data_pred["homewin_pred"].isna().any(), "Error"
+    assert not data_pred["homewin_pred"].isna().any(), "Error: Some NA in the predicted homewin column."
     assert len(prob) == len(
         data_pred["visitor"].unique(),
     ), "Error: Not all teams considered."
@@ -160,14 +160,20 @@ def test_team_win_pred(data, data_pred):
         data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
 
     Raises:
-        Assert: Raises an error if some win entries are not reasonable integers.
+        Assert: Raises an error if some win entries are not integers.
         Assert: Raises an error if there are too many or too few teams in predicted win overview.
+        Assert: Raises an error if there are too many or too few predicted wins.
 
     """
     wins = team_win_pred(data, data_pred)
     teams = set(data["home"]).union(set(data_pred["home"]))
-    # keep this assert wins.values.isdigit() and 0 <= int(x) <= 90, "Error: Invalid win entries."
+    assert all(
+        [int(i) == i for i in wins.values],
+    ), "Error: Some win predictions are not integers."
     assert len(wins) == len(teams), "Error: Not right amount of teams considered."
+    assert sum(wins.values) == len(data) + len(
+        data_pred,
+    ), "Error: Too many or too few wins."
 
 
 def test_playoff_pred(data_model, data_model_pred, conferences):
@@ -202,7 +208,7 @@ def test_df_pred_results(data_model, data_model_pred, conferences):
         Assert: Raises an error if the function produces not the right playoff teams.
 
     ------------------
-    Note: This is tested with the real data to see if the concetanation of results works.
+    Note: This is tested with the real data to see if the concatenation of results works.
 
     """
     df = playoff_pred(data_model, data_model_pred, conferences)

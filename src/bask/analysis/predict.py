@@ -48,22 +48,25 @@ def team_win_pred(data, data_pred):
         data_model_pred (pandas.DataFrame): DataFrame for prediction that does not contain any data for points and wins of basketball games.
 
     Returns:
-        wins (pandas.DataFrame): DataFrame that contains the predicted wins per team.
+        wins (GroupBy object): Contains the predicted total wins per team.
 
     """
     data_pred = prediction(data, data_pred)
-    past_wins = (
-        data.groupby("home")["homewin"].sum()
-        + data.groupby("visitor").size()
-        - data.groupby("visitor")["homewin"].sum()
-    )
-    pred_wins = (
-        data_pred.groupby("home")["homewin_pred"].sum()
-        + data_pred.groupby("visitor").size()
+
+    homewins = data.groupby("home")["homewin"].sum()
+    viswins = data.groupby("visitor").size() - data.groupby("visitor")["homewin"].sum()
+    past_wins = homewins.add(viswins, fill_value=0)
+
+    homewins_pred = data_pred.groupby("home")["homewin_pred"].sum()
+    viswins_pred = (
+        data_pred.groupby("visitor").size()
         - data_pred.groupby("visitor")["homewin_pred"].sum()
     )
-    wins = past_wins + pred_wins
+    pred_wins = homewins_pred.add(viswins_pred, fill_value=0)
+
+    wins = past_wins.add(pred_wins, fill_value=0)
     return wins
+
 
 
 def _team_win_prob_home(data_pred):
