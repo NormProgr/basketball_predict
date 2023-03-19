@@ -30,17 +30,23 @@ the current scrape are used to evaluate the prediction quality. After the end of
 season (9th April 2023), the project can still be used to evaluate the quality of
 predictions, even if no future games remain.
 
+In the absence of a internet connection, the code uses old scrapes for prediction, if
+they exist. Thus, an active connection is not necessary to run the project after the
+initial setup and first run.
+
 The project is implemented in Python, using various libraries such as Scikit-learn,
 Pandas, and BeautifulSoup for data processing, modeling, and web scraping respectively.
-The code is documented and organized with Pytask for intuition and easy modification. In
-the following, we describe how to replicate the whole project.
+The code is documented and organized with [pytask](https://github.com/pytask-dev/pytask)
+for intuition and easy modification. In the following, we describe how to replicate the
+whole project.
 
 ## Usage
 
 To run this project, a Python and a LaTex distribution are required. The project was
 implemented in Python 3.11.0 on macOS Ventura 13.0.1 and Windows 11 using Visual Studio
 Code. All further dependencies are included in the environment. Since the data is
-scraped within the code, our results are replicable by running pytask.
+scraped within the code, our results are replicable by running
+[pytask](https://github.com/pytask-dev/pytask).
 
 To reproduce the project, one can follow these steps:
 

@@ -107,7 +107,9 @@ Finally, we used \textit{PyYAML} \citep{PyYAML} to read yaml files.
 
 We implemented the project on macOS Ventura 13.0.1 and Windows 11 using Visual Studio Code. The packages required for this project can be found in the file environment.yaml.
 Since the data is scraped within the code, our results are replicable by running pytask, as long as the url source remains accurate.
-After the end of the NBA season (9th April 2023), the project can still be used to evaluate the quality of predictions, even if no future games remain.\\
+After the end of the NBA season (9th April 2023), the project can still be used to evaluate the quality of predictions, even if no future games remain.
+In the absence of a internet connection, the code uses old scrapes for prediction, if they exist.
+\\
 To reproduce our project, one can follow these steps:
 \begin{enumerate}
     \item Install \href{https://docs.anaconda.com/anaconda/install/index.html}{Anaconda} (python version 3.8 or higher), \href{https://git-scm.com/}{Git} (git version 2.23 or higher), and \href{https://code.visualstudio.com/download}{Visual Code Studio}
