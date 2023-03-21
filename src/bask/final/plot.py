@@ -51,15 +51,16 @@ def create_heatmap(concat_pred, data_benchmark, score):
     return plt
 
 
-def plot_roc_curve(data_benchmark, concat_pred):
-    """Create a ROC curve visualization.
+def prep_roc_curve(data_benchmark, concat_pred):
+    """Calculate the data needed for a ROC curve visualization.
 
     Args:
         concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
         data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
 
     Returns:
-        plt (matplotlib.pyplot): A ROC (receiver operating characteristic) curve visualization
+        fp_r (numpy.ndarray): False positive rate for ROC curve.
+        tp_r (numpy.ndarray): True positive rate for ROC curve.
 
     """
     latest_date_bm = data_benchmark["date"].max()
@@ -71,7 +72,21 @@ def plot_roc_curve(data_benchmark, concat_pred):
     subset["homewin_pred"]
     true_val = subset["homewin"]
     y_pred_proba = subset["homewin_pred_prob"]
-    fp_r, tp_r, _ = metrics.roc_curve(true_val, y_pred_proba)
+    return metrics.roc_curve(true_val, y_pred_proba)
+
+
+def plot_roc_curve(data_benchmark, concat_pred):
+    """Create a ROC curve visualization.
+
+    Args:
+        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
+        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
+
+    Returns:
+        plt (matplotlib.pyplot): A ROC (receiver operating characteristic) curve visualization
+
+    """
+    fp_r, tp_r, _ = prep_roc_curve(data_benchmark, concat_pred)
     plt.plot(fp_r, tp_r)
     plt.ylabel("True Positive Rate")
     plt.xlabel("False Positive Rate")

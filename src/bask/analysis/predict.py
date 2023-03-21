@@ -68,7 +68,6 @@ def team_win_pred(data, data_pred):
     return wins
 
 
-
 def _team_win_prob_home(data_pred):
     """Predict win probability for home games.
 
