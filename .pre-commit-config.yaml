@@ -26,3 +26,14 @@ repos:
           '--ignore=E203,E402,E501,E800,W503,F401',
           '--select=B,C,E,F,W,T4,B9'
         ]
+- repo: https://github.com/PyCQA/docformatter
+  rev: v1.5.0
+  hooks:
+    - id: docformatter
+      args:
+        - --in-place
+        - --wrap-summaries
+        - '88'
+        - --wrap-descriptions
+        - '88'
+        - --blank
