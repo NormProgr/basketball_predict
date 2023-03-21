@@ -10,9 +10,12 @@ def concatenate_dfs(data_model, data_model_pred, data_benchmark, data_benchmark_
     """Concatenate the given DataFrames into a single DataFrame.
 
     Args:
-        data_model (pandas DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data_model (pandas DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
+        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
         data_benchmark_pred (pandas.DataFrame): Remaining basketball games DataFrame.
 
     Returns:
@@ -32,12 +35,16 @@ def pred_accuracy(data_model, data_model_pred, data_benchmark):
     """Calculate the score to evaluate prediction precision.
 
     Args:
-        data_model (pandas DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data_model (pandas DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
+        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Returns:
-        hpercent (float): Is an evaluation score between 0/1 to show the prediction accuracy.
+        hpercent (float): Is an evaluation score between 0/1 to show the prediction
+            accuracy.
 
     """
     data_pred = prediction(data_model, data_model_pred)
@@ -60,12 +67,16 @@ def score_df(data_model, data_model_pred, data_benchmark):
     """Put the accuracy measures into one DataFrame.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
+        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Returns:
-        df (pandas.DataFrame): A DataFrame containing two columns with accuracy measure results.
+        df (pandas.DataFrame): A DataFrame containing two columns with accuracy measure
+            results.
 
     """
     names = ["fit_score", "pred_accuracy_benchmark"]
@@ -82,7 +93,8 @@ def naive_inference(data_benchmark):
     """Perform logistic regression on the scores of each team.
 
     Args:
-        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data_benchmark (pandas.DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Returns:
         statsmodels.iolib.summary.Summary: A summary of the logistic regression model.

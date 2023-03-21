@@ -8,7 +8,8 @@ def _pred_cols(data_model_pred):
     """Append all predictors into one DataFrame.
 
     Args:
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
 
     Returns:
         predictors (pandas.DataFrame): Appended DataFrame containing all predictors.
@@ -24,11 +25,14 @@ def prediction(data_model, data_model_pred):
     """Predict new data from 16th february basketball games outcomes.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
 
     Returns:
-        data_model_pred (pandas.DataFrame): DataFrame that contains predictors and predicted data.
+        data_model_pred (pandas.DataFrame): DataFrame that contains predictors and
+            predicted data.
 
     """
     df = data_model_pred[_pred_cols(data_model_pred)]
@@ -44,8 +48,10 @@ def team_win_pred(data, data_pred):
     """Predict total number of wins per team.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not contain any data for points and wins of basketball games.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not
+            contain any data for points and wins of basketball games.
 
     Returns:
         wins (GroupBy object): Contains the predicted total wins per team.
@@ -76,7 +82,8 @@ def _team_win_prob_home(data_pred):
 
 
     Returns:
-        win_prob_home (pandas.DataFrame): DataFrame with winning probabilities for the home team.
+        win_prob_home (pandas.DataFrame): DataFrame with winning probabilities for the
+            home team.
 
     """
     if "homewin_pred" not in data_pred.columns:
@@ -93,7 +100,8 @@ def _team_win_prob_vis(data_pred):
 
 
     Returns:
-        win_prob_vis (pandas.DataFrame): DataFrame with winning probabilities for the visiting team.
+        win_prob_vis (pandas.DataFrame): DataFrame with winning probabilities for the
+            visiting team.
 
     """
     if "homewin_pred" not in data_pred.columns:
@@ -106,12 +114,14 @@ def team_win_prob(data, data_pred):
     """Predict winning probability for each team playing in home and visiting stadium.
 
     Args:
-        data (pandas.DataFrame): Input dataset that contains the split in training and test.
+        data (pandas.DataFrame): Input dataset that contains the split in training and
+            test.
         data_pred (pandas.DataFrame): DataFrame with future games for prediction.
 
 
     Returns:
-        win_prob (pandas.DataFrame): DataFrame with winning probabilities for the visiting and home team.
+        win_prob (pandas.DataFrame): DataFrame with winning probabilities for the
+            visiting and home team.
 
     """
     data_pred = prediction(data, data_pred)
@@ -133,13 +143,16 @@ def playoff_pred(data, data_pred, conferences):
     """Predict which teams are participating the playoffs.
 
     Args:
-        data (pandas.DataFrame): Input dataset that contains the split in training and test.
+        data (pandas.DataFrame): Input dataset that contains the split in training and
+            test.
         data_pred (pandas.DataFrame): DataFrame with future games for prediction.
-        conferences (pandas.DataFrame): DataFrame that contains information to team and conference membership.
+        conferences (pandas.DataFrame): DataFrame that contains information to team and
+            conference membership.
 
 
     Returns:
-        playoff_teams (pandas.DataFrame): DataFrame with winning probabilities for each team in each conference.
+        playoff_teams (pandas.DataFrame): DataFrame with winning probabilities for each
+            team in each conference.
 
     """
     east_teams = conferences[conferences["conference"] == "East"].copy()
@@ -162,13 +175,17 @@ def df_pred_results(data, data_pred, conferences):
     """Concatenate the prediction results.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not contain any data for points and wins of basketball games.
-        conferences (pandas.DataFrame): DataFrame that contains information to team and conference membership.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction  that does not
+            contain any data for points and wins of basketball games.
+        conferences (pandas.DataFrame): DataFrame that contains information to team and
+            conference membership.
 
 
     Returns:
-        df (pandas.DataFrame): DataFrame of concatenated winning prediction and the playoff prediction data.
+        df (pandas.DataFrame): DataFrame of concatenated winning prediction and the
+            playoff prediction data.
 
     """
     names = playoff_pred(data, data_pred, conferences)["team_name"]

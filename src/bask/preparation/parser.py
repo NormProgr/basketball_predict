@@ -10,7 +10,8 @@ def parser(months, scrapedate, path):
         scrapedate (pandas datetime): Date of the last scrape.
 
     Returns:
-        df (pandas DataFrame): Concatenated df with entries from all months of the season.
+        df (pandas DataFrame): Concatenated df with entries from all months of the
+            season.
 
     """
     dfs = []

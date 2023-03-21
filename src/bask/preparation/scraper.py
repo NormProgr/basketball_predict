@@ -24,8 +24,10 @@ def _check_internet(url="https://github.com/", timeout=5):
     """Check whether or not there is a internet connection.
 
     Args:
-        url (string): The URL to be used for the connectivity test. Default value is "https://github.com/".
-        timeout (integer): The maximum time, in seconds, allowed for the request to complete. Default value is 5 seconds.
+        url (string): The URL to be used for the connectivity test. Default value is
+            "https://github.com/".
+        timeout (integer): The maximum time, in seconds, allowed for the request to
+            complete. Default value is 5 seconds.
 
     Return:
         True (boolean): There is a internet connection.

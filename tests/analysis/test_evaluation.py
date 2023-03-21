@@ -37,14 +37,19 @@ def test_concatenate_dfs(data, data_pred, data_benchmark, data_benchmark_pred):
     """Test if concatenated data frame has correct dimensions.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
         data_benchmark_pred(pandas DataFrame): Remaining basketball games DataFrame.
 
     Raises:
-        Assert: Raises an error if the shape of the concatenated DataFrames does not match the expected shape.
-        Assert: Raises an error if the original results do not match the ones after concetenating.
+        Assert: Raises an error if the shape of the concatenated DataFrames does not
+            match the expected shape.
+        Assert: Raises an error if the original results do not match the ones after
+            concetenating.
 
     """
     data_pred = prediction(data_model=data, data_model_pred=data_pred)
@@ -67,9 +72,12 @@ def test_pred_accuracy(data, data_pred, data_benchmark):
     """Test if concatenated data frame has correct dimensions.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Raises:
         Assert: Raises an error if the score is outside the 0/1 boundaries.
@@ -83,9 +91,12 @@ def test_score_df(data, data_pred, data_benchmark):
     """Test if the correct length of columns is returned.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
-        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Raises:
         Assert: Raises an error if the wrong amount of columns is returned.
@@ -99,7 +110,8 @@ def test_naive_inference(data_benchmark):
     """Test if the inference function produces correct results and is the correct type.
 
     Args:
-        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more data than the data DataFrame.
+        data_benchmark (pandas DataFrame): Current scrape DataFrame that contains more
+            data than the data DataFrame.
 
     Raises:
         Assert: Raises an error if the p-values are out of the possible values.

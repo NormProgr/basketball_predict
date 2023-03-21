@@ -10,8 +10,10 @@ def _confusion_matrix(concat_pred, data_benchmark):
     """Compute the confusion matrix for a given set of predictions and benchmark data.
 
     Args:
-        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
-        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
+        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions
+            for basketball games.
+        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for
+            basketball games.
 
     Returns:
         cm (array): A 2D array representing the confusion matrix of the predictions.
@@ -33,8 +35,10 @@ def create_heatmap(concat_pred, data_benchmark, score):
     """Create a heatmap visualization of a confusion matrix.
 
     Args:
-        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
-        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
+        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions
+            for basketball games.
+        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for
+            basketball games.
         score (float): The benchmark accuracy score for the predictions.
 
     Returns:
@@ -55,8 +59,10 @@ def prep_roc_curve(data_benchmark, concat_pred):
     """Calculate the data needed for a ROC curve visualization.
 
     Args:
-        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
-        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
+        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions
+            for basketball games.
+        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for
+            basketball games.
 
     Returns:
         fp_r (numpy.ndarray): False positive rate for ROC curve.
@@ -79,11 +85,14 @@ def plot_roc_curve(data_benchmark, concat_pred):
     """Create a ROC curve visualization.
 
     Args:
-        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions for basketball games.
-        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for basketball games.
+        concat_pred (pandas.DataFrame): A DataFrame containing concatenated predictions
+            for basketball games.
+        data_benchmark (pandas.DataFrame): A DataFrame containing benchmark data for
+            basketball games.
 
     Returns:
-        plt (matplotlib.pyplot): A ROC (receiver operating characteristic) curve visualization
+        plt (matplotlib.pyplot): A ROC (receiver operating characteristic) curve
+            visualization
 
     """
     fp_r, tp_r, _ = prep_roc_curve(data_benchmark, concat_pred)
@@ -101,11 +110,15 @@ def generate_prediction_table(res_pred, playoff=False):
     prediction model.
 
     Args:
-        res_pred (pandas.DataFrame): A DataFrame containing the prediction results for each team.
-        playoff (bool, optional): A flag indicating whether to include only teams predicted to be in the playoffs. Defaults to False.
+        res_pred (pandas.DataFrame): A DataFrame containing the prediction results for
+            each team.
+        playoff (bool, optional): A flag indicating whether to include only teams
+            predicted to be in the playoffs. Defaults to False.
 
     Returns:
-        final_df (pandas.DataFrame): A DataFrame containing the predicted win probability, total wins, and playoff status for each team in the Eastern and Western conferences.
+        final_df (pandas.DataFrame): A DataFrame containing the predicted win
+            probability, total wins, and playoff status for each team in the Eastern
+            and Western conferences.
 
     """
     res_pred = res_pred.sort_values(
@@ -133,10 +146,12 @@ def reg_plot(concat_pred):
     points scored by the visiting team.
 
     Args:
-        concat_pred (pandas.DataFrame): A DataFrame containing predictions for basketball games.
+        concat_pred (pandas.DataFrame): A DataFrame containing predictions for
+            basketball games.
 
     Returns:
-        plt (matplotlib.pyplot): A scatter plot of the home team winning probability against the points scored by the visiting team.
+        plt (matplotlib.pyplot): A scatter plot of the home team winning probability
+            against the points scored by the visiting team.
 
     """
     data = concat_pred
@@ -159,7 +174,8 @@ def naive_inf_table(inference_model):
         inference_model (pandas.DataFrame): Fit of the logistic regression.
 
     Returns:
-        summary_table (pandas.DataFrame): A summary table containing key statistics about the model.
+        summary_table (pandas.DataFrame): A summary table containing key statistics
+            about the model.
 
     """
     return inference_model.summary()

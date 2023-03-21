@@ -11,8 +11,9 @@ def test_scraper():
     """Test whether the correct amount of files is generated.
 
     Raises:
-        Assert: Raises an error if the 7 months long basketball season is not represented by 7 html files.
-        If not, the function scraper_by_month or _remove_old_scrapes does not work as intended.
+        Assert: Raises an error if the 7 months long basketball season is not
+            represented by 7 html files. If not, the function scraper_by_month or
+            _remove_old_scrapes does not work as intended.
 
     """
     prefixed = [
@@ -55,7 +56,8 @@ def test_scrapedate():
     """Check whether scrapedate function returns the right format.
 
     Raises:
-        Assert: Raises an error if the expected format of date and the used format are different.
+        Assert: Raises an error if the expected format of date and the used format are
+            different.
 
     """
     expected_format = "%Y-%m-%d"
@@ -70,12 +72,15 @@ def test_check_internet(url="https://github.com/", timeout=5):
     """Check whether there is an internet connection.
 
     Args:
-        url (string): The URL to be used for the connectivity test. Default value is "https://github.com/".
-        timeout (integer): The maximum time, in seconds, allowed for the request to complete. Default value is 5 seconds.
+        url (string): The URL to be used for the connectivity test. Default value is
+            "https://github.com/".
+        timeout (integer): The maximum time, in seconds, allowed for the request to
+            complete. Default value is 5 seconds.
 
 
     Raises:
-        Assert: Raises an error if there is an internet connection to the one url but not to the other.
+        Assert: Raises an error if there is an internet connection to the one url but
+            not to the other.
 
     """
     check = _check_internet()
@@ -91,7 +96,8 @@ def test_remove_old_scrapes(tmpdir):
     """Test if html files are removed by function.
 
     Args:
-        tmpdir (py.path.local): Pytest fixture providing a temporary directory unique to each test function.
+        tmpdir (py.path.local): Pytest fixture providing a temporary directory unique
+            to each test function.
 
     Raises:
         Assert (1st to 4th assert): Raises an assert if the html files still exist.

@@ -44,11 +44,13 @@ def test_pred_cols(data):
     """Test the correct type of predictors.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
 
 
     Raises:
-        Assert: Raises an error if any of the columns in the predictors DataFrame contains values other than 0 or 1.
+        Assert: Raises an error if any of the columns in the predictors DataFrame
+            contains values other than 0 or 1.
 
     """
     predictors = _pred_cols(data)
@@ -64,12 +66,15 @@ def test_prediction(data, data_pred):
     """Test if the produced columns have the correct data types.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
 
 
     Raises:
-        Assert: Raises an error if homewin_pred and homewin_pred_prob have the wrong datatype.
+        Assert: Raises an error if homewin_pred and homewin_pred_prob have the wrong
+            datatype.
 
     """
     df = prediction(data, data_pred)
@@ -85,8 +90,10 @@ def test_team_win_prob_home(data, data_pred):
     """Test that homewin_pred column has no NAs and that the probabilities are valid.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
 
     Raises:
         Assert: Raises an error if there are NAs in the homewin_pred column.
@@ -111,8 +118,10 @@ def test_team_win_prob_vis(data, data_pred):
     """Test that homewin_pred column has no NAs and that the probabilities are valid.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
 
     Raises:
         Assert: Raises an error if there are NAs in the homewin_pred column.
@@ -122,7 +131,10 @@ def test_team_win_prob_vis(data, data_pred):
     """
     data_pred = prediction(data, data_pred)
     prob = _team_win_prob_vis(data_pred)
-    assert not data_pred["homewin_pred"].isna().any(), "Error: Some NA in the predicted homewin column."
+    assert (
+        not data_pred["homewin_pred"].isna().any()
+    ), "Error: Some NA in the \
+    predicted homewin column."
     assert len(prob) == len(
         data_pred["visitor"].unique(),
     ), "Error: Not all teams considered."
@@ -135,8 +147,10 @@ def test_team_win_prob(data, data_pred):
     """Test if all teams are considered and the probability numbers are valid.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
 
     Raises:
         Assert: Raises an error when not all teams are considered.
@@ -156,12 +170,15 @@ def test_team_win_pred(data, data_pred):
     """Test if win entries have right format and if all teams are considered.
 
     Args:
-        data (pandas DataFrame): Small test DataFrame that works essentially like the main DataFrame.
-        data_pred (pandas DataFrame): Small test DataFrame that does not contain any data for points and wins of basketball games.
+        data (pandas DataFrame): Small test DataFrame that works essentially like the
+            main DataFrame.
+        data_pred (pandas DataFrame): Small test DataFrame that does not contain any
+            data for points and wins of basketball games.
 
     Raises:
         Assert: Raises an error if some win entries are not integers.
-        Assert: Raises an error if there are too many or too few teams in predicted win overview.
+        Assert: Raises an error if there are too many or too few teams in predicted win
+            overview.
         Assert: Raises an error if there are too many or too few predicted wins.
 
     """
@@ -180,15 +197,20 @@ def test_playoff_pred(data_model, data_model_pred, conferences):
     """Test if win entries have right format and if all teams are considered.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not contain any data for points and wins of basketball games.
-        conferences (pandas.DataFrame): DataFrame that contains information to team and conference membership.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not
+            contain any data for points and wins of basketball games.
+        conferences (pandas.DataFrame): DataFrame that contains information to team and
+            conference membership.
 
     Raises:
-        Assert: Raises an error if the wrong number of teams participating the playoffs.
+        Assert: Raises an error if the wrong number of teams participating the
+            playoffs.
 
     ------------------
-    Note: This must be tested with the real data because it is key to have the correct number of playoff teams.
+    Note: This must be tested with the real data because it is key to have the correct
+        number of playoff teams.
 
     """
     pred = playoff_pred(data_model, data_model_pred, conferences)
@@ -199,16 +221,20 @@ def test_df_pred_results(data_model, data_model_pred, conferences):
     """Test if all model results are concetanated.
 
     Args:
-        data_model (pandas.DataFrame): Input dataset that contains the split in training and test.
-        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not contain any data for points and wins of basketball games.
-        conferences (pandas.DataFrame): DataFrame that contains information to team and conference membership.
+        data_model (pandas.DataFrame): Input dataset that contains the split in
+            training and test.
+        data_model_pred (pandas.DataFrame): DataFrame for prediction that does not
+            contain any data for points and wins of basketball games.
+        conferences (pandas.DataFrame): DataFrame that contains information to team and
+            conference membership.
 
 
     Raises:
         Assert: Raises an error if the function produces not the right playoff teams.
 
     ------------------
-    Note: This is tested with the real data to see if the concatenation of results works.
+    Note: This is tested with the real data to see if the concatenation of results
+        works.
 
     """
     df = playoff_pred(data_model, data_model_pred, conferences)

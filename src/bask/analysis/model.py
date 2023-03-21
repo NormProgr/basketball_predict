@@ -37,7 +37,8 @@ def _model_fit(data):
     """Fit the logistic regression on training data.
 
     Args:
-        data (pandas DataFrame): Input dataset that contains the split in training and test.
+        data (pandas DataFrame): Input dataset that contains the split in training
+            and test.
 
     Return:
         fit (LogisticRegression): Fitted logit regression model to predict new data.
@@ -53,7 +54,8 @@ def _model_test(data):
     """Test the logistic regression model on test data.
 
     Args:
-        data (pandas DataFrame): Input dataset that contains the split in training and test.
+        data (pandas DataFrame): Input dataset that contains the split in training and
+            test.
 
     Returns:
         score (float): The accuracy score of the trained logistic regression model.
@@ -69,12 +71,15 @@ def model(data):
     """Test the logistic regression model on test data.
 
     Args:
-        data (pandas DataFrame): Input dataset that contains the split in training and test.
+        data (pandas DataFrame): Input dataset that contains the split in training and
+            test.
 
     Returns:
         Tuple:
-            _model_fit(data) (function): Returns a fitted logit regression model to predict new data.
-            _model_test(data) (function): Returns accuracy score of the trained logistic regression model.
+            _model_fit(data) (function): Returns a fitted logit regression model to
+                predict new data.
+            _model_test(data) (function): Returns accuracy score of the trained
+                logistic regression model.
 
     """
     return _model_fit(data), _model_test(data)
