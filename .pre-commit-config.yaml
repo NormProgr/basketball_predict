@@ -1,116 +1,28 @@
----
+exclude: ^\.
 repos:
-  - repo: meta
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
     hooks:
-      - id: check-useless-excludes
-      - id: identity
-  - repo: https://github.com/lyz-code/yamlfix
-    rev: 1.2.0
+    -   id: check-yaml
+    -   id: check-merge-conflict
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+
+-   repo: https://github.com/PyCQA/flake8
+    rev: 5.0.4
     hooks:
-      - id: yamlfix
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
-    hooks:
-      - id: check-added-large-files
-        args:
-          - --maxkb=25
-      - id: check-case-conflict
-      - id: check-merge-conflict
-      - id: check-vcs-permalinks
-      - id: check-yaml
-      - id: check-toml
-      - id: debug-statements
-      - id: end-of-file-fixer
-        exclude_types:
-          - html
-      - id: fix-byte-order-marker
-        types:
-          - text
-      - id: forbid-submodules
-      - id: mixed-line-ending
-        exclude_types:
-          - html
-        args:
-          - --fix=lf
-        description: Forces to replace line ending by the UNIX 'lf' character.
-      - id: name-tests-test
-        args:
-          - --pytest-test-first
-      - id: trailing-whitespace
-        exclude_types:
-          - html
-      - id: check-ast
-      - id: check-docstring-first
-  - repo: https://github.com/psf/black
-    rev: 22.12.0
-    hooks:
-      - id: black
-        language_version: python3.11
-  - repo: https://github.com/asottile/blacken-docs
-    rev: 1.13.0
-    hooks:
-      - id: blacken-docs
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.0
-    hooks:
-      - id: docformatter
-        args:
-          - --in-place
-          - --wrap-summaries
-          - '88'
-          - --wrap-descriptions
-          - '88'
-          - --blank
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.245
-    hooks:
-      - id: ruff
-  - repo: https://github.com/kynan/nbstripout
-    rev: 0.6.1
-    hooks:
-      - id: nbstripout
-        args:
-          - --extra-keys
-          - metadata.kernelspec metadata.language_info.version metadata.vscode
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.6.1
-    hooks:
-      - id: nbqa-black
-      - id: nbqa-ruff
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
-    hooks:
-      - id: mdformat
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-black
-        args:
-          - --wrap
-          - '88'
-        files: (README\.md)
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
-    hooks:
-      - id: mdformat
-        additional_dependencies:
-          - mdformat-myst
-          - mdformat-black
-        args:
-          - --wrap
-          - '88'
-        files: (docs/.)
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.2
-    hooks:
-      - id: codespell
-        exclude_types:
-          - html
-        args:
-          - --skip="**.ipynb"
-          - --skip="**.html"
-  - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v2.2.0
-    hooks:
-      - id: setup-cfg-fmt
-ci:
-  autoupdate_schedule: monthly
+    -   id: flake8
+        types: [python]
+        exclude: estimagic/parameters/kernel_transformations.py
+        additional_dependencies: [
+            flake8-alfred, flake8-bugbear, flake8-builtins, flake8-comprehensions,
+            flake8-docstrings, flake8-eradicate, flake8-print, flake8-rst-docstrings,
+            flake8-todo, pep8-naming, pydocstyle,
+        ]
+        # Harmonizing flake8 and black
+        args: [
+          '--max-line-length=88',
+          '--ignore=E203,E402,E501,E800,W503,F401',
+          '--select=B,C,E,F,W,T4,B9'
+        ]

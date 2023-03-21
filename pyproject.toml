@@ -1,6 +1,8 @@
 [build-system]
 requires = ["setuptools>=45", "wheel"]
 
+
+
 [tool.pytask.ini_options]
 paths = ["./src/bask", "./paper"]
 infer_latex_dependencies = true
@@ -48,4 +50,6 @@ none_representation = "null"
 [tool.docformatter]
 recursive = true
 wrap-summaries = 88
+wrap-descriptions = 88
 blank = true
+in-place = true
