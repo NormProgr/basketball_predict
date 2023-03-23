@@ -20,7 +20,7 @@ def task_compile_document():
 
 @pytask.mark.depends_on(BLD / "latex" / "bask.pdf")
 @pytask.mark.task
-@pytask.mark.produces(BLD.parent.resolve() / "bask.pdf")
+@pytask.mark.produces(BLD.parent.resolve() / "basketball_info_sheet.pdf")
 def task_copy_to_root(depends_on, produces):
     """Copy a document to the root directory for easier retrieval."""
     shutil.copy(depends_on, produces)

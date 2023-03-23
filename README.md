@@ -10,7 +10,6 @@
 [![image](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/NormProgr/basketball_predict)
 [![image](https://img.shields.io/badge/pytest-v7.2.2-orange)](https://docs.pytest.org/en/7.2.x/)
 
-
 ## Authors
 
 - Norman Lothar Metzinger, 3501090
@@ -70,8 +69,8 @@ $ conda activate bask
 $ pytask
 ```
 
-Details on implementation and results can be found in *bask.pdf* after running the
-project.
+Details on implementation and results can be found in *basketball_info_sheet.pdf* in the
+parent folder after running the project.
 
 ### For code development
 
