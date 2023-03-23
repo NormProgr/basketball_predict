@@ -26,8 +26,8 @@ results are summarized in an information sheet when running the project.
 To obtain the required data for the analysis, the project uses web scraping to extract
 up-to-date information. The collected data is cleaned, pre-processed, and fed into the
 logistic regression model for analysis. Data from games until the 15th February are used
-for the model fit. Game results for after this date are predicted and the results up to
-the current scrape are used to evaluate the prediction quality. After the end of the NBA
+for the model fit. Game results after this date are predicted and the results up to the
+current scrape are used to evaluate the prediction quality. After the end of the NBA
 season (9th April 2023), the project can still be used to evaluate the quality of
 predictions, even if no future games remain.
 
