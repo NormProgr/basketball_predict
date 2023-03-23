@@ -28,10 +28,11 @@ dependencies:
   - scikit-learn
   - seaborn
   - matplotlib
+  - lxml
   - pip:
       - -e .
       - kaleido
       - requests
       - bs4
-      - lxml
+      #- lxml
       - scikit-learn
