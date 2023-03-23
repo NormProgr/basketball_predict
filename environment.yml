@@ -34,5 +34,4 @@ dependencies:
       - kaleido
       - requests
       - bs4
-      #- lxml
       - scikit-learn
